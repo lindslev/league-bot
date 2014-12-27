@@ -1,0 +1,7 @@
+<h1>{{teams[idx].name}} Roster</h1>
+<ul>
+  <li>{{teams[idx].captain}}</li>
+  <li ng-repeat="player in teams[idx].roster">{{player}}</li>
+</ul>
+
+<!--incorporate ng-hide if routeParams doesnt match anything i want -->
