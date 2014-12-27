@@ -3,27 +3,27 @@
 angular.module('mltpApp')
   .controller('HomeCtrl', function ($http, $scope) {
 
-    $scope.pubbers = [];
+    $scope.teams = [];
 
-    // $http.post('/api/scorekeeper', {})
-    //   .success(function(pubbers){
-    //     $scope.pubbers = pubbers;
-    //     // $scope.redscore = gem.redScore;
-    //     // $scope.bluescore = gem.blueScore;
-    //     // $scope.gemscore = gem.captures;
-    //     // $scope.gemTags = gem.tags || 0;
-    //     // if(gem.team == '1') {
-    //     //   $scope.gemTeam = 'red';
-    //     // } else {
-    //     //   $scope.gemTeam = 'blue';
-    //     // }
-    //   })
-    //   .error(function(err){
-    //     if(err) console.log(err);
-    //   })
+    $http.post('/api/scorekeeper', {})
+      .success(function(teams){
+        $scope.teams = teams;
+        // $scope.redscore = gem.redScore;
+        // $scope.bluescore = gem.blueScore;
+        // $scope.gemscore = gem.captures;
+        // $scope.gemTags = gem.tags || 0;
+        // if(gem.team == '1') {
+        //   $scope.gemTeam = 'red';
+        // } else {
+        //   $scope.gemTeam = 'blue';
+        // }
+      })
+      .error(function(err){
+        if(err) console.log(err);
+      })
 
-    socket.on('pubber', function(info) {
-      $scope.pubbers = info;
+    socket.on('newGameUpdate', function(info) {
+      $scope.teams = info;
         // var playerTeam, gameState;
         // info.team == '1' ? playerTeam = 'red' : playerTeam = 'blue';
         // if(info.state == '1') {

@@ -1,4 +1,8 @@
 <style>
+  a, a:hover {
+    text-decoration: none;
+    color: black;
+  }
   h4, h3, p {
     font-family: Dosis;
     font-size: 30px;
@@ -39,18 +43,5 @@
     margin: 0 auto;
   }
 </style>
-<h4>LIVE PUB TRACKING</h4>
-{{pubbers}}
-<!-- <div class='container'>
-  <div class="pub" ng-repeat="pubber in pubbers">
-    <h3>{{pubber.player}}'s current pub activity:</h3>
-    <p id="red">red: <span>{{pubber.redScore}}</span></p>
-    <p id="blue">blue: <span>{{pubber.blueScore}}</span></p>
-    <p>most recently on the <span> {{pubber.team}}</span> team</p>
-    <p>on<span> {{pubber.server}}</span></p>
-    <p>on<span> {{pubber.map}}</span></p>
-    <p>{{pubber.player}}'s caps this game: <span>{{pubber.captures}}</span></p>
-    <p>{{pubber.player}}'s tags this game: <span>{{pubber.tags}}</span></p>
-    <p>game is now: <span> {{pubber.state}}</span></p>
-  </div>
-</div> -->
+<h4><a href="http://reddit.com/r/mltp" target="_blank">MAJOR LEAGUE TAGPRO</a></h4>
+{{teams}}
