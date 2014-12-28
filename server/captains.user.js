@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name           tagpro-mltpstats
+// @name           tagpro-leaguestats
 // @version        1.0
 // @include        http://tagpro-*.koalabeast.com*
 // @include        http://tangent.jukejuice.com*
@@ -9,6 +9,10 @@
 // ==/UserScript==
 
 (function(window, document, undefined) {
+
+    // Links to post data for 1) score updates, and 2) final stats
+    UPDATEURL = 'http://44e20bdf.ngrok.com/api/game/scorekeeper'
+    FINALURL  = 'http://44e20bdf.ngrok.com/api/teams/game/stats'
 
     // User ID for identification purposes
     KEY = 1234567;
@@ -121,7 +125,6 @@
                 if (currentStatusString == null) {
                     currentStatus = false;
                 } else {
-                    //currentStatusString = currentStatusString.toLowerCase();
                     currentStatus = (currentStatusString === "true");
                 }
 
@@ -148,7 +151,12 @@
             // Listen for player updates
             tagpro.socket.on('p', function(data) { _this.onPlayerUpdate.call(_this, data); });
             // Listen for score updates
-            tagpro.socket.on('score', function(data) { _this.onScoreUpdate.call(_this, data); });
+            tagpro.socket.on('score', function(data) {
+                _this.onScoreUpdate.call(_this, data);
+                setTimeout(function() {
+                    catstats.updateExport();
+                }, 50);
+            });
             // Listen for player quits
             tagpro.socket.on('playerLeft', function(data) { _this.onPlayerLeftUpdate.call(_this, data); });
             // Listen for time and game state changes
@@ -243,7 +251,7 @@
      */
         catstats.onEnd = function onEnd() {
             if(this.wantsStats && !this.downloaded) {
-                this.exportStats();
+                this.exportStats(true);
             }
         }
 
@@ -296,20 +304,32 @@
             // put in user key value
             stats.push({userkey: KEY});
 
+            // add current score by team
+            var redScore = tagpro.score['r'];
+            var blueScore = tagpro.score['b'];
+            var thisTeam = tagpro.players[tagpro.playerId].team;
+            if(thisTeam == 1) {
+                var thisTeamScore = redScore;
+                var otherTeamScore = blueScore;
+            } else {
+                var thisTeamScore = blueScore;
+                var otherTeamScore = redScore;
+            }
+            stats.push({score: {thisTeamScore: thisTeamScore, otherTeamScore: otherTeamScore}});
+
+            // add current state of game
+            stats.push({state: tagpro.state});
+
             return stats;
         }
 
 
         /**
-     * Called when the player wants to export the statsboard
-     * This can be called at anytime during the game and the stats
-     * will be saved before leaving the page
+     * Called when a cap occurs. It exports data as an update, not as a final stats export
      */
-        catstats.registerExport = function registerExport() {
-            //this.wantsStats = $("#" + linkId).is(":checked") ? true : false;
-            //writeCookie(tsvCookieName + "=" + this.wantsStats);
-            if (this.wantsStats && tagpro.state == 2) {
-                this.exportStats();
+        catstats.updateExport = function updateExport() {
+            if ( this.wantsStats ) {
+                this.exportStats(false);
             }
         };
 
@@ -408,14 +428,20 @@
         /**
      * Create the document and trigger a download
      */
-        catstats.exportStats = function exportStats() {
+        catstats.exportStats = function exportStats(final) {
             var data = this.prepareStats();
 
             console.log(JSON.stringify(data))
-            $.post('http://44e20bdf.ngrok.com/api/pub/test', JSON.stringify(data), function(e) {
-                console.log(e);
-            });
-            this.downloaded = true;
+            if(final) {
+                $.post(FINALURL, JSON.stringify(data), function(e) {
+                    console.log(e);
+                });
+                this.downloaded = true;
+            } else {
+                $.post(UPDATEURL, JSON.stringify(data), function(e) {
+                    console.log(e);
+                });
+            }
         }
 
         $(function() {

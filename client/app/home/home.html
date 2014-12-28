@@ -1,47 +1,38 @@
 <style>
+  body {
+    background-image: url('http://d.thumbs.redditmedia.com/jgUPuqyGTpG0gtsQ.png');
+    }
   a, a:hover {
     text-decoration: none;
     color: black;
   }
-  h4, h3, p {
-    font-family: Dosis;
-    font-size: 30px;
-    color: #333;
+  h2, h3, .gameTitle {
     text-align: center;
-  }
-  h4 {
     font-family: Poiret One;
     background: white;
     color: #333;
   }
-  h3 {
-    font-family: Bangers;
-    color: purple;
-    margin: 0 auto;
-    width: 500px;
-    border-bottom: 3px solid #333;
-    padding: 10px;
+  .gameTitle {
+    font-family: Dosis;
+    color: white;
+    background: black;
+    font-size: 20px;
   }
-  #red {
-    color: red;
-  }
-  #blue {
-    color: blue;
-  }
-  p span {
-    color: #333;
-    font-family: Bangers;
-  }
-  body {
-    background-image: url('http://d.thumbs.redditmedia.com/jgUPuqyGTpG0gtsQ.png');
-  }
-  .pub {
-
-  }
-  .container {
-    width: 100%;
-    margin: 0 auto;
+  .score {
+    /*border: 3px solid black;*/
+    height: 180px;
   }
 </style>
-<h4><a href="http://reddit.com/r/mltp" target="_blank">MAJOR LEAGUE TAGPRO</a></h4>
-{{teams}}
+<h2><a href="http://reddit.com/r/mltp" target="_blank">MAJOR LEAGUE TAGPRO: LIVE</a></h2>
+
+<div class="container">
+  <div class="row">
+    <h3> WEEK {{thisWeek}} </h3>
+    <div class="score col-lg-4" ng-repeat="game in games">
+      <p class='gameTitle'> {{game.team1}} vs {{game.team2}} </p>
+    </div>
+  </div>
+</div>
+
+<div>first: {{teams}}</div>
+<div>second: {{scorestuff}}</div>

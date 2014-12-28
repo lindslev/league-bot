@@ -4,65 +4,83 @@ angular.module('mltpApp')
   .controller('HomeCtrl', function ($http, $scope) {
 
     $scope.teams = [];
+    $scope.scorestuff = [];
 
-    $http.post('/api/scorekeeper', {})
-      .success(function(teams){
-        $scope.teams = teams;
-        // $scope.redscore = gem.redScore;
-        // $scope.bluescore = gem.blueScore;
-        // $scope.gemscore = gem.captures;
-        // $scope.gemTags = gem.tags || 0;
-        // if(gem.team == '1') {
-        //   $scope.gemTeam = 'red';
-        // } else {
-        //   $scope.gemTeam = 'blue';
-        // }
+    var teams;
+    $scope.games = [];
+    $scope.thisWeek = getWeekNum();
+
+    function getWeekNum() {
+     var weekMS = 604800000;
+      var compareMS = new Date(2014, 11, 21).getTime();
+      var todayMS = new Date().getTime();
+      var whichWeek = Math.round((todayMS - compareMS) / weekMS);
+      return whichWeek;
+    }
+
+    //gets team data from db and constructs arr of teams and opponents for building scoreboards
+    $http.post('/api/teams', {})
+      .success(function(teamdata){
+        teams = teamdata.map(function(team){
+          var thisTeamSchedule = team.schedule;
+          // console.log('team...', team.name, team.schedule);
+          var thisTeamOpponent = thisTeamSchedule[getWeekNum() - 1] || 'none';
+          return { name: team.name, chosen: false, opponent: thisTeamOpponent};
+        })
+        // console.log('teams in api/teams', teams);
+        constructScoreboards();
       })
       .error(function(err){
         if(err) console.log(err);
       })
 
-    socket.on('newGameUpdate', function(info) {
-      $scope.teams = info;
-        // var playerTeam, gameState;
-        // info.team == '1' ? playerTeam = 'red' : playerTeam = 'blue';
-        // if(info.state == '1') {
-        //   gameState = 'in progress';
-        // } else if(info.state == '2') {
-        //   gameState = 'complete';
-        // } else {
-        //   gameState = 'about to begin';
-        // }
-        // console.log('gameState in controller socket', gameState);
-        // var playerObj = {
-        //   player: info.name,
-        //   redScore: info.red,
-        //   blueScore: info.blue,
-        //   captures: info.caps,
-        //   tags: info.tags,
-        //   team: playerTeam,
-        //   state: gameState,
-        //   server: info.server,
-        //   map: info.map
-        // }
+    function findTeamIndex(teamToFind) {
+      var idx;
+      teams.forEach(function(team, i){
+        // console.log('teamName and teamTofind', team.name, teamToFind);
+        if(team.name == teamToFind) {
+          console.log('foudn it', i);
+          idx = i;
+        }
+      })
+      return idx;
+    }
 
-        // var notAlreadyInPubbers = true;
-        // $scope.pubbers.forEach(function(pubber, idx){
-        //   if(pubber.player == info.name) {
-        //     $scope.pubbers[idx] = playerObj;
-        //     notAlreadyInPubbers = false;
-        //   }
-        // });
-        // if(notAlreadyInPubbers) $scope.pubbers.push(playerObj);
-        // $scope.redscore = message.red;
-        // $scope.bluescore = message.blue;
-        // $scope.gemscore = message.caps;
-        // $scope.gemTags = message.tags;
-        // if(message.team == '1') {
-        //   $scope.gemTeam = 'red';
-        // } else {
-        //   $scope.gemTeam = 'blue';
-        // }
+    function constructScoreboards() {
+        for(var i=0; i < teams.length; i++) {
+          if(!teams[i].chosen) {
+            $scope.games.push({
+              team1: teams[i].name,
+              team2: teams[i].opponent
+            });
+            teams[i].chosen = true;
+            var oppIdx = findTeamIndex(teams[i].opponent);
+            teams[oppIdx].chosen = true;
+            console.log('team[i]...', teams[i]);
+            // console.log('scope.games', $scope.games);
+          }
+        }
+        // if(i >= teams.length && $scope.games.length <= 10) i=0;
+      // }
+      console.log('scope.games in construct scoreboard', $scope.games);
+    }
+
+    // $http.post('/api/scorekeeper', {})
+    //   .success(function(teams){
+    //     $scope.teams = teams;
+    //   })
+    //   .error(function(err){
+    //     if(err) console.log(err);
+    //   })
+
+    socket.on('newGameUpdate', function(info) {
+        $scope.teams = info;
+        console.log('about to apply to scope....');
+        $scope.$apply();
+    });
+
+    socket.on('newScoreUpdate', function(info) {
+        $scope.scorestuff = info;
         console.log('about to apply to scope....');
         $scope.$apply();
     });

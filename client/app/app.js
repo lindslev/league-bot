@@ -1,10 +1,6 @@
 'use strict';
 
 angular.module('mltpApp', ['ngRoute'])
-  .controller('MainCtrl', function($scope){
-    $scope.test = "hello";
-  })
-
  .config(function ($routeProvider, $locationProvider) {
     $routeProvider
       .when('/', {
