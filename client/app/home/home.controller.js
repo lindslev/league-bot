@@ -36,68 +36,13 @@ angular.module('mltpApp')
         if(err) console.log(err);
       })
 
-    function findTeamIndex(teamToFind) {
-      var idx;
-      teams.forEach(function(team, i){
-        // console.log('teamName and teamTofind', team.name, teamToFind);
-        if(team.name == teamToFind) {
-          // console.log('foudn it', i);
-          idx = i;
-        }
-      })
-      return idx;
-    }
-
-    function constructScoreboards() {
-        for(var i=0; i < teams.length; i++) {
-          if(!teams[i].chosen) {
-            var gameID = $scope.games.length + 1;
-            $scope.games.push({
-              team1: teams[i].name,
-              team2: teams[i].opponent,
-              team1score: null,
-              team2score: null,
-              gameId: gameID,
-              stats: null
-            });
-            teams[i].chosen = true;
-            var oppIdx = findTeamIndex(teams[i].opponent);
-            teams[oppIdx].chosen = true;
-            // console.log('team[i]...', teams[i]);
-            // console.log('scope.games', $scope.games);
-          }
-        }
-        // if(i >= teams.length && $scope.games.length <= 10) i=0;
-      // }
-      console.log('scope.games in construct scoreboard', $scope.games);
-    }
-
     $http.post('/api/scorekeeper', {})
-      .success(function(allGames){
-        $scope.tempGameInfo = allGames;
-        $scope.games = allGames;
-        // $scope.games.forEach(function(game){
-        //   if(game.gameId == scoreUpdateObj.gameId) {
-        //     game.stats = scoreUpdateObj.body;
-
-        //     //find which team these stats were sent by, by the key, then update team1
-        //     var thisTeam;
-        //     teamdatacopy.forEach(function(team){
-        //       if(team.key == scoreUpdateObj.body[5]) {
-        //         thisTeam = team.name;
-        //       }
-        //     })
-        //     if(thisTeam == game.team1) {
-        //       game.team1score = game.stats[6].thisTeamScore;
-        //       game.team2score = game.stats[6].otherTeamScore;
-        //     } else {
-        //       game.team2score = game.stats[6].thisTeamScore;
-        //       game.team1score = game.stats[6].otherTeamScore;
-        //     }
-        //     // if(scoreUpdateObj.body[5] == )
-        //     //   game.team1score
-        //   }
-        // })
+      .success(function(thisWeeksGames){
+        // $scope.games = thisWeeksGames;
+        for(var game in thisWeeksGames) {
+          if(game !== 'week' && game !== '_id') $scope.games.push(thisWeeksGames[game]);
+        }
+        $scope.tempGameInfo = $scope.games;
       })
       .error(function(err){
         if(err) console.log(err);
@@ -109,34 +54,13 @@ angular.module('mltpApp')
         $scope.$apply();
     });
 
-    socket.on('newScoreUpdate', function(scoreUpdateObj) {
-        $scope.scorestuff = scoreUpdateObj;
+    socket.on('newScoreUpdate', function(objFromServer) {
+        $scope.serverobj = objFromServer;
         $scope.games.forEach(function(game){
-          if(game.gameId == scoreUpdateObj.gameId) {
-            game.stats = scoreUpdateObj.body;
-
-            //find which team these stats were sent by, by the key, then update team1
-            var thisTeam;
-            teamdatacopy.forEach(function(team){
-              if(team.key == scoreUpdateObj.body[5]) {
-                thisTeam = team.name;
-              }
-            })
-            console.log('WTFFFFFFFFF game.stats[6]', game.stats[6]);
-            if(thisTeam == game.team1) {
-              game.team1score = game.stats[6].score.thisTeamScore;
-              game.team2score = game.stats[6].score.otherTeamScore;
-              // console.log('game after updating', game);
-            } else {
-              game.team2score = game.stats[6].score.thisTeamScore;
-              game.team1score = game.stats[6].score.otherTeamScore;
-              console.log('game after updating', game);
-            }
-            // if(scoreUpdateObj.body[5] == )
-            //   game.team1score
+          if(game.gameId == objFromServer.gameId) {
+            game[objFromServer.halfToUpdate] = objFromServer.scoreObj;
           }
-          // return game;
-        })
+        });
         console.log('about to apply to sc0000pe');
         $scope.$apply();
     });

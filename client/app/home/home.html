@@ -20,7 +20,18 @@
   }
   .score {
     /*border: 3px solid black;*/
-    height: 180px;
+    height: 200px;
+  }
+  table {
+    text-align: center;
+    font-family: Dosis;
+  }
+  .teamName {
+    font-family: Bangers;
+  }
+  table td {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 </style>
 <h2><a href="http://reddit.com/r/mltp" target="_blank">MAJOR LEAGUE TAGPRO: LIVE</a></h2>
@@ -31,15 +42,45 @@
     <div class="score col-lg-6 col-md-6 col-xs-12" ng-repeat="game in games">
       <p class='gameTitle'> {{game.team1}} vs {{game.team2}} </p>
       <div>
-        <p>Game {{ game.stats[3].game }}</p>
-        <p>Half {{ game.stats[4].half }}</p>
-        <p>{{game.team1}}: {{game.team1score}}</p>
-        <p>{{game.team2}}: {{game.team2score}}</p>
+        <table style="width:100%">
+          <tr>
+            <td>Teams</td>
+            <td>G1H1</td>
+            <td>G1H2</td>
+            <td>Game 1</td>
+            <td>G2H1</td>
+            <td>G2H2</td>
+            <td>Game 2</td>
+          </tr>
+          <tr>
+            <td class="teamName">{{game.team1}}</td>
+            <td>{{ game.g1h1[game.team1] }}</td>
+            <td>{{ game.g1h2[game.team1] }}</td>
+            <td>{{ game.g1h1[game.team1] + game.g1h2[game.team1]}}</td>
+            <td>{{ game.g2h1[game.team1] }}</td>
+            <td>{{ game.g2h2[game.team1] }}</td>
+            <td>{{ game.g2h1[game.team1] + game.g2h2[game.team1]}}</td>
+          </tr>
+          <tr>
+            <td class="teamName">{{game.team2}}</td>
+            <td>{{ game.g1h1[game.team2] }}</td>
+            <td>{{ game.g1h2[game.team2] }}</td>
+            <td>{{ game.g1h1[game.team2] + game.g1h2[game.team2]}}</td>
+            <td>{{ game.g2h1[game.team2] }}</td>
+            <td>{{ game.g2h2[game.team2] }}</td>
+            <td>{{ game.g2h1[game.team2] + game.g2h2[game.team2]}}</td>
+          </tr>
+        </table>
+        <!-- <p>G1H1 <br> {{game.team1}} : {{ game.g1h1[game.team1] }} <br> {{game.team2}} : {{ game.g1h1[game.team2] }} </p>
+        <p>G1H2: </p>
+        <p>G1: </p>
+        <p>G2H1: </p>
+        <p>G2H2: </p>
+        <p>G2: </p> -->
       </div>
     </div>
   </div>
 </div>
 
-<div>first: {{teams}}</div>
-<div>second: {{scorestuff}}</div>
+<div>objfromserver: {{serverobj}}</div>
 <div>tempGameInfo: {{tempGameInfo}}</div>
