@@ -3,7 +3,7 @@
     text-decoration: none;
     color: black;
   }
-  h1, h2, h3, .divisionTitle {
+  h2, h3, .divisionTitle {
     text-align: center;
     font-family: Poiret One;
     background: white;
@@ -14,20 +14,16 @@
     font-family: Dosis;
     margin: 0px 30px 0px 30px;
   }
-  h1 {
-    font-family: Bangers;
-    background: black;
+  .divisionTitle {
     color: white;
+    background: black;
   }
-  li {
-    font-family: Bangers;
-    font-size: 20px;
-  }
-  li span {
+  .teamName {
+    font-size: 30px;
     font-family: Dosis;
-  }
-  ul {
-    list-style-type: none;
+    color: black;
+    text-align: center;
+    display: block;
   }
   footer {
     background: black;
@@ -42,26 +38,11 @@
 </style>
 <h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="/#/">MAJOR LEAGUE TAGPRO: LIVE</a><a class="subhead" href="/#/schedule">schedule</a></h2>
 
-<h1>{{teams[idx].name}}</h1>
 <div class="container">
   <div class="row">
-    <div class="col-lg-6 col-md-6 col-xs-12">
-      <h2>Roster</h2>
-      <ul>
-        <li><span>Captain:</span> {{teams[idx].captain}}</li>
-        <li ng-repeat="player in teams[idx].roster">{{player}}</li>
-      </ul>
-    </div>
-    <div class="col-lg-6 col-md-6 col-xs-12">
-      <h2>Schedule</h2>
-      <ul>
-        <li ng-repeat="team in teams[idx].schedule"><span>Week {{$index + 1}}:</span> {{team}}</li>
-      </ul>
-    </div>
   </div>
 </div>
 
-<!--incorporate ng-hide if routeParams doesnt match anything i want -->
-<footer>
+ <footer>
   copyright Gem 2014 huehuehue
 </footer>

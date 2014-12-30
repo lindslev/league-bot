@@ -15,9 +15,9 @@ angular.module('mltpApp', ['ngRoute'])
         templateUrl: '/client/app/teams/team.html',
         controller: 'TeamsCtrl'
       })
-      .when('/players/:name', {
-        templateUrl: '/client/app/players/player.html',
-        controller: 'PlayersCtrl'
+      .when('/schedule', {
+        templateUrl: '/client/app/schedule/schedule.html',
+        controller: 'ScheduleCtrl'
       })
       .otherwise({
         redirectTo: '/'
