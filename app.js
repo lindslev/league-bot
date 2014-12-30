@@ -153,8 +153,13 @@ function *updateTeamsDB(teamId, gameStats) {
   var weekStr = "week" + whichWeek;
   //stats, map, server,game,half,key,score,state
   //0      1     2      3    4    5   6     7
-  var gameNum = "game" + gameStats[3].game;
-  var halfNum = "half" + gameStats[4].half;
+  //old ^^^
+
+  //new :
+  //map, server, game, half, key, score, state, stats...
+  // 0     1      2      3    4    5      7
+  var gameNum = "game" + gameStats[2].game;
+  var halfNum = "half" + gameStats[3].half;
   ((thisTeam[weekStr])[gameNum])[halfNum].push(gameStats);
   yield teams.update({key: teamId}, thisTeam);
   yield db.close();
@@ -165,7 +170,7 @@ app.post('/api/teams/game/stats', cors({origin:true}), function*(){
   var body = this.request.body;
   body = JSON.parse('[' + Object.keys(body)[0] + ']'); //this is the stats parsing thign
   console.log('info from tp userscript', body);
-  var teamId = (body[5]).userkey;
+  var teamId = (body[4]).userkey;
   var completed = yield updateTeamsDB(teamId, body);
   io.sockets.emit('newGameUpdate', body);
   this.body = 'SUCCESS';
@@ -200,8 +205,8 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
   var body = this.request.body;
   console.log('before parsing', body);
   body = JSON.parse('[' + Object.keys(body)[0] + ']'); //this is the stats parsing thign
-  console.log('from scorekeeper and body[5]', body, body[5]);
-  var teamId = (body[5]).userkey;
+  console.log('from scorekeeper', body);
+  var teamId = (body[4]).userkey;
 
   var teamInfo = yield db.collection('teams');
   var team = yield teamInfo.findOne({key: teamId});
@@ -209,8 +214,8 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
   var teamName = team.name;
 
   //create g1h1 g1h2 g2h1 or g2h2 string
-  var gameNum = body[3].game;
-  var halfNum = body[4].half;
+  var gameNum = body[2].game;
+  var halfNum = body[3].half;
   var halfToUpdate = "g" + gameNum + "h" + halfNum;
 
   //find which gameId to update
@@ -222,11 +227,11 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
 
   var tempScoreObj = { };
   if(thisWeekFromDB[gameIDToUpdate].team1 == teamName) {
-    tempScoreObj[thisWeekFromDB[gameIDToUpdate].team1] = body[6].score.thisTeamScore;
-    tempScoreObj[thisWeekFromDB[gameIDToUpdate].team2] = body[6].score.otherTeamScore;
+    tempScoreObj[thisWeekFromDB[gameIDToUpdate].team1] = body[5].score.thisTeamScore;
+    tempScoreObj[thisWeekFromDB[gameIDToUpdate].team2] = body[5].score.otherTeamScore;
   } else {
-    tempScoreObj[thisWeekFromDB[gameIDToUpdate].team2] = body[6].score.thisTeamScore;
-    tempScoreObj[thisWeekFromDB[gameIDToUpdate].team1] = body[6].score.otherTeamScore;
+    tempScoreObj[thisWeekFromDB[gameIDToUpdate].team2] = body[5].score.thisTeamScore;
+    tempScoreObj[thisWeekFromDB[gameIDToUpdate].team1] = body[5].score.otherTeamScore;
   }
 
   (thisWeekFromDB[gameIDToUpdate])[halfToUpdate] = tempScoreObj;

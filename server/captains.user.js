@@ -6,9 +6,14 @@
 // @include        http://maptest*.newcompte.fr*
 // @grant          GM_setValue
 // @grant          GM_getValue
+// @require        https://raw.githubusercontent.com/ballparts/pubstats/master/ClassyWiggle.min.js
 // ==/UserScript==
 
 (function(window, document, undefined) {
+
+    //--------------------------------------//
+    // THESE VALUES MIGHT NEED TO BE EDITED //
+    //--------------------------------------//
 
     // Links to post data for 1) score updates, and 2) final stats
     UPDATEURL = 'http://44e20bdf.ngrok.com/api/game/scorekeeper'
@@ -17,7 +22,18 @@
     // User ID for identification purposes
     KEY = 1234567;
 
-    // IF WE ARE ON THE GROUP PAGE, CREATE A CHECK BOX TO TURN ON STATS COLLECTION
+    //------------------------//
+    // END OF EDITABLE VALUES //
+    //------------------------//
+
+
+
+
+
+    //-----------------------------------------------------------------------------//
+    // IF WE ARE ON THE GROUP PAGE, CREATE A CHECK BOX TO TURN ON STATS COLLECTION //
+    //-----------------------------------------------------------------------------//
+
     if( document.URL.search('groups') > 0 ) {
 
         // make sure cookie to send stats is false
@@ -27,8 +43,19 @@
         $('#leaveButton').after('<input id=sendStatsCheckbox type=checkbox>')
         $('#sendStatsCheckbox')[0].style.marginLeft='20px'
 
-        // make checkbox label
-        $('#sendStatsCheckbox').after('<txt>Send Stats to Server')
+        // make checkbox label (actually a button so it will wiggle)
+        //$('#sendStatsCheckbox').after('<txt id=sendStatsLabel>Send Stats to Server')
+        $('#sendStatsCheckbox').after('<button id=sendStatsLabel>Send Stats to Server');
+        $('#sendStatsLabel')[0].style.backgroundColor = 'transparent';
+        $('#sendStatsLabel')[0].style.border = 'none';
+        $('#sendStatsLabel')[0].style.color = 'white';
+        $('#sendStatsLabel')[0].style.cursor = 'default';
+        $('#sendStatsLabel')[0].style.fontSize = '16px';
+
+        // If it is Sunday night (5:00 PM or later), make the checkbox label wiggle in the group page as a reminder
+        if( new Date().getDay() == 0 & new Date().getHours() >= 17 ) {
+            $('#sendStatsLabel').ClassyWiggle();
+        }
 
         // If the box is checked, make a prompt to get game and half info
         promptFunction = function() {
@@ -61,8 +88,26 @@
         $('#sendStatsCheckbox')[0].onchange = promptFunction
 
     }
-    // END OF GROUP PAGE CODE
 
+    //------------------------//
+    // END OF GROUP PAGE CODE //
+    //------------------------//
+
+
+    // If we are on the main Tagpro site, set 'save stats' cookie to false.
+    //   This is to prevent a bug in which a captain leaves a game for which she or he
+    //   is saving stats WITHOUT going back to the groups page (by closing the tab or whatever).
+    //   if that captain were to then play a pub, the userscript would try to send stats to the server
+    //   because it hasn't been told not to.
+    if( document.URL.search(".com/$") > 0 ) {
+        GM_setValue("post_tagpro_stats_status","false");
+    }
+
+
+
+    //-----------------------------------------------------------------//
+    // NOW STARTS THE MAIN CODE FOR SAVING STATS AND SENDING TO SERVER //
+    //-----------------------------------------------------------------//
 
     window.catstats = (function(catstats) {
 
@@ -292,17 +337,10 @@
 
                 return columns;
             })
+
+
             var mapName = catstats.mapName || "Unknown";
             var serverName = tagpro.serverHost;
-            stats.push({map: mapName});
-            stats.push({server: serverName});
-
-            // put in game and half info
-            stats.push({game: GM_getValue("post_tagpro_stats_game")});
-            stats.push({half: GM_getValue("post_tagpro_stats_half")});
-
-            // put in user key value
-            stats.push({userkey: KEY});
 
             // add current score by team
             var redScore = tagpro.score['r'];
@@ -315,10 +353,15 @@
                 var thisTeamScore = blueScore;
                 var otherTeamScore = redScore;
             }
-            stats.push({score: {thisTeamScore: thisTeamScore, otherTeamScore: otherTeamScore}});
 
-            // add current state of game
-            stats.push({state: tagpro.state});
+            // add map, server, game, half, key, and score objects to stats array
+            stats.unshift({map : mapName},
+                          {server : serverName},
+                          {game: GM_getValue("post_tagpro_stats_game")},
+                          {half: GM_getValue("post_tagpro_stats_half")},
+                          {userkey: KEY},
+                          {score: {thisTeamScore: thisTeamScore, otherTeamScore: otherTeamScore}}
+                         );
 
             return stats;
         }
@@ -430,18 +473,10 @@
      */
         catstats.exportStats = function exportStats(final) {
             var data = this.prepareStats();
-
             console.log(JSON.stringify(data))
-            if(final) {
-                $.post(FINALURL, JSON.stringify(data), function(e) {
-                    console.log(e);
-                });
-                this.downloaded = true;
-            } else {
-                $.post(UPDATEURL, JSON.stringify(data), function(e) {
-                    console.log(e);
-                });
-            }
+            $.post(final ? FINALURL : UPDATEURL, JSON.stringify(data), function(e) {
+                console.log(e);
+            });
         }
 
         $(function() {
