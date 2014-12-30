@@ -3,10 +3,6 @@
 angular.module('mltpApp')
   .controller('HomeCtrl', function ($http, $scope) {
 
-    $scope.teams = [];
-    $scope.scorestuff = [];
-    $scope.tempGameInfo = [];
-
     var teams, teamdatacopy;
     $scope.games = [];
     $scope.thisWeek = getWeekNum();

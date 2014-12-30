@@ -28,10 +28,26 @@
   }
   .teamName {
     font-family: Bangers;
+    font-size: 16px;
   }
   table td {
     padding-top: 10px;
     padding-bottom: 10px;
+  }
+  .scoreNum {
+    font-size: 18px;
+    font-family: Oswald;
+  }
+  .leftMostTD {
+    text-align: left;
+  }
+  footer {
+    background: black;
+    height: 20px;
+    width: 100%;
+    text-align: center;
+    font-family: Dosis;
+    color: white;
   }
 </style>
 <h2><a href="http://reddit.com/r/mltp" target="_blank">MAJOR LEAGUE TAGPRO: LIVE</a></h2>
@@ -44,7 +60,7 @@
       <div>
         <table style="width:100%">
           <tr>
-            <td>Teams</td>
+            <td class="leftMostTD">Teams</td>
             <td>G1H1</td>
             <td>G1H2</td>
             <td>Game 1</td>
@@ -53,34 +69,32 @@
             <td>Game 2</td>
           </tr>
           <tr>
-            <td class="teamName">{{game.team1}}</td>
-            <td>{{ game.g1h1[game.team1] }}</td>
-            <td>{{ game.g1h2[game.team1] }}</td>
-            <td>{{ game.g1h1[game.team1] + game.g1h2[game.team1]}}</td>
-            <td>{{ game.g2h1[game.team1] }}</td>
-            <td>{{ game.g2h2[game.team1] }}</td>
-            <td>{{ game.g2h1[game.team1] + game.g2h2[game.team1]}}</td>
+            <td class="teamName leftMostTD">{{game.team1}}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g1h2[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team1] + game.g1h2[game.team1]}}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g2h2[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team1] + game.g2h2[game.team1]}}</td>
           </tr>
           <tr>
-            <td class="teamName">{{game.team2}}</td>
-            <td>{{ game.g1h1[game.team2] }}</td>
-            <td>{{ game.g1h2[game.team2] }}</td>
-            <td>{{ game.g1h1[game.team2] + game.g1h2[game.team2]}}</td>
-            <td>{{ game.g2h1[game.team2] }}</td>
-            <td>{{ game.g2h2[game.team2] }}</td>
-            <td>{{ game.g2h1[game.team2] + game.g2h2[game.team2]}}</td>
+            <td class="teamName leftMostTD">{{game.team2}}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g1h2[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team2] + game.g1h2[game.team2]}}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g2h2[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team2] + game.g2h2[game.team2]}}</td>
           </tr>
         </table>
-        <!-- <p>G1H1 <br> {{game.team1}} : {{ game.g1h1[game.team1] }} <br> {{game.team2}} : {{ game.g1h1[game.team2] }} </p>
-        <p>G1H2: </p>
-        <p>G1: </p>
-        <p>G2H1: </p>
-        <p>G2H2: </p>
-        <p>G2: </p> -->
       </div>
     </div>
   </div>
 </div>
 
-<div>objfromserver: {{serverobj}}</div>
+<!-- <div>objfromserver: {{serverobj}}</div>
 <div>tempGameInfo: {{tempGameInfo}}</div>
+ -->
+ <footer>
+  copyright Gem 2014 huehuehue
+</footer>

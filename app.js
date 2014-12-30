@@ -15,7 +15,6 @@ app.use(cors());
 app.use(serve('./client/bower_components'));
 app.use(serve('./client/app'));
 
-/*** populating teams in the db ***/
 var comongo = require('co-mongo');
 var co = require('co');
 var cjson = require('cjson');
@@ -31,6 +30,7 @@ co(function *() {
   var gamesColl = yield db.collection('games');
   var gameCount = yield gamesColl.count();
 
+/*** populating teams in the db ***/
   if(count == 0) {
     for(var conference in teams.teams.conferences) {
       for(var division in teams.teams.conferences[conference]) {
@@ -141,6 +141,7 @@ io.on('connection', function(socket){
   console.log('usr cnnct 0mg');
 });
 
+/** function called when post request is made at the end of games **/
 function *updateTeamsDB(teamId, gameStats) {
   var db = yield comongo.connect('mongodb://localhost/mltp');
   var teams = yield db.collection('teams');
@@ -159,6 +160,7 @@ function *updateTeamsDB(teamId, gameStats) {
   yield db.close();
 }
 
+/* request made at the end of games (or when games are ended early) */
 app.post('/api/teams/game/stats', cors({origin:true}), function*(){
   var body = this.request.body;
   body = JSON.parse('[' + Object.keys(body)[0] + ']'); //this is the stats parsing thign
@@ -166,12 +168,13 @@ app.post('/api/teams/game/stats', cors({origin:true}), function*(){
   var teamId = (body[5]).userkey;
   var completed = yield updateTeamsDB(teamId, body);
   io.sockets.emit('newGameUpdate', body);
-  this.body = 'made it';
+  this.body = 'SUCCESS';
 });
 
 function getWeekNum() {
   var weekMS = 604800000;
   var compareMS = new Date(2014, 11, 21).getTime();
+  /*REMEMBER TO CHANGE THIS TO WEEK 1 DATE*/
   var todayMS = new Date().getTime();
   var whichWeek = Math.round((todayMS - compareMS) / weekMS);
   return whichWeek;
@@ -183,26 +186,26 @@ app.post('/api/scorekeeper', function*(){
   var gamesColl = yield db.collection('games');
   var thisWeek = getWeekNum();
   var thisWeekFromDB = yield gamesColl.findOne({week: thisWeek});
-  console.log('games from this week from db on pg refresh', thisWeekFromDB);
   this.body = thisWeekFromDB;
   yield db.close();
 });
 
 /** for contact with captain's userscript **/
 app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
-  //1. construct some sort of
   var db = yield comongo.connect('mongodb://localhost/mltp');
   var games = yield db.collection('games');
   var thisWeek = getWeekNum();
   var thisWeekFromDB = yield games.findOne({week: thisWeek});
 
   var body = this.request.body;
+  console.log('before parsing', body);
   body = JSON.parse('[' + Object.keys(body)[0] + ']'); //this is the stats parsing thign
+  console.log('from scorekeeper and body[5]', body, body[5]);
   var teamId = (body[5]).userkey;
-  console.log('from scorekeeper', body);
 
   var teamInfo = yield db.collection('teams');
   var team = yield teamInfo.findOne({key: teamId});
+  console.log('team found?', team, teamId)
   var teamName = team.name;
 
   //create g1h1 g1h2 g2h1 or g2h2 string
@@ -216,8 +219,6 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
       var gameIDToUpdate = game;
     }
   }
-
-  console.log('gameIDToUpdate after finding it', gameIDToUpdate);
 
   var tempScoreObj = { };
   if(thisWeekFromDB[gameIDToUpdate].team1 == teamName) {
@@ -233,13 +234,12 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
 
   yield games.update({week: thisWeek}, thisWeekFromDB);
 
-  // var objForClient = {body: body, gameId: gameIDToUpdate};
   var objForClient = {
                         gameId: gameIDToUpdate,
                         halfToUpdate: halfToUpdate,
                         scoreObj: tempScoreObj
                     };
   io.sockets.emit('newScoreUpdate', objForClient);
-  this.body = 'hello...';
+  this.body = 'SUCCESS';
   yield db.close();
 });
