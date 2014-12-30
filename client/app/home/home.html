@@ -41,6 +41,9 @@
   .leftMostTD {
     text-align: left;
   }
+  .green {
+    background: green;
+  }
   footer {
     background: black;
     height: 20px;
@@ -55,7 +58,7 @@
 <div class="container">
   <div class="row">
     <h3> WEEK {{thisWeek}} </h3>
-    <div class="score col-lg-6 col-md-6 col-xs-12" ng-repeat="game in games">
+    <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games">
       <p class='gameTitle'> {{game.team1}} vs {{game.team2}} </p>
       <div>
         <table style="width:100%">
@@ -92,9 +95,6 @@
   </div>
 </div>
 
-<!-- <div>objfromserver: {{serverobj}}</div>
-<div>tempGameInfo: {{tempGameInfo}}</div>
- -->
  <footer>
   copyright Gem 2014 huehuehue
 </footer>

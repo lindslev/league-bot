@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('mltpApp')
-  .controller('HomeCtrl', function ($http, $scope) {
+  .controller('HomeCtrl', function ($http, $scope, $timeout) {
 
     var teams, teamdatacopy;
     $scope.games = [];
@@ -55,6 +55,11 @@ angular.module('mltpApp')
         $scope.games.forEach(function(game){
           if(game.gameId == objFromServer.gameId) {
             game[objFromServer.halfToUpdate] = objFromServer.scoreObj;
+            var idForCSS = "#" + objFromServer.gameId + " .gameTitle";
+            angular.element(idForCSS).addClass('green');
+            $timeout(function(){
+              angular.element(idForCSS).removeClass('green');
+            }, 5000)
           }
         });
         console.log('about to apply to sc0000pe');
