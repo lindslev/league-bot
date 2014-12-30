@@ -1,9 +1,66 @@
-<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-    NORTHEAST
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li ng-repeat="team in teams" role="presentation"><a role="menuitem" tabindex="-1" href="/#/teams/{{team.name}}">{{team.name}}</a></li>
-  </ul>
+<style>
+  a, a:hover {
+    text-decoration: none;
+    color: black;
+  }
+  h2, h3, .divisionTitle {
+    text-align: center;
+    font-family: Poiret One;
+    background: white;
+    color: #333;
+  }
+  .subhead {
+    font-size: 18px;
+    font-family: Dosis;
+    margin: 0px 30px 0px 30px;
+  }
+  .divisionTitle {
+    color: white;
+    background: black;
+  }
+  .teamName {
+    font-size: 30px;
+    font-family: Dosis;
+    color: black;
+    text-align: center;
+    display: block;
+  }
+  footer {
+    background: black;
+    height: 20px;
+    width: 100%;
+    text-align: center;
+    font-family: Dosis;
+    color: white;
+    position: fixed;
+    bottom: 0;
+  }
+</style>
+<h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="http://reddit.com/r/mltp" target="_blank">MAJOR LEAGUE TAGPRO: LIVE</a><a class="subhead" href="">schedule</a></h2>
+
+<div class="container">
+  <div class="row">
+      <div class="col-lg-6">
+        <h2 class="divisionTitle">NORTHEAST TEAMS</h2>
+        <a href="/#/teams/{{team.name}}" class='teamName' ng-repeat="team in northeast">{{team.name}}</a>
+      </div>
+      <div class="col-lg-6">
+        <h2 class="divisionTitle">ATLANTIC TEAMS</h2>
+        <a href="/#/teams/{{team.name}}" class='teamName' ng-repeat="team in atlantic">{{team.name}}</a>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <h2 class="divisionTitle">MIDWEST TEAMS</h2>
+      <a href="/#/teams/{{team.name}}" class='teamName' ng-repeat="team in midwest">{{team.name}}</a>
+    </div>
+    <div class="col-lg-6">
+      <h2 class="divisionTitle">PACIFIC TEAMS</h2>
+      <a href="/#/teams/{{team.name}}" class='teamName' ng-repeat="team in pacific">{{team.name}}</a>
+    </div>
+  </div>
 </div>
+
+ <footer>
+  copyright Gem 2014 huehuehue
+</footer>

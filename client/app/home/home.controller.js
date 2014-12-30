@@ -15,18 +15,20 @@ angular.module('mltpApp')
       return whichWeek;
     }
 
+    $scope.onSeeMoreClick = function(game) {
+      var idToShow = "#moreInfo" + game.gameId;
+      angular.element(idToShow).slideToggle();
+    }
+
     //gets team data from db and constructs arr of teams and opponents for building scoreboards
     $http.post('/api/teams', {})
       .success(function(teamdata){
         teamdatacopy = teamdata.map(function(team){ return team; });
         teams = teamdata.map(function(team){
           var thisTeamSchedule = team.schedule;
-          // console.log('team...', team.name, team.schedule);
           var thisTeamOpponent = thisTeamSchedule[getWeekNum() - 1] || 'none';
           return { name: team.name, chosen: false, opponent: thisTeamOpponent};
         })
-        // console.log('teams in api/teams', teams);
-        // constructScoreboards();
       })
       .error(function(err){
         if(err) console.log(err);
@@ -34,11 +36,17 @@ angular.module('mltpApp')
 
     $http.post('/api/scorekeeper', {})
       .success(function(thisWeeksGames){
-        // $scope.games = thisWeeksGames;
         for(var game in thisWeeksGames) {
           if(game !== 'week' && game !== '_id') $scope.games.push(thisWeeksGames[game]);
         }
-        $scope.tempGameInfo = $scope.games;
+        $scope.games.forEach(function(game){
+          game.playerObjArr = [];
+          for(var j=6; j < game.stats.length; j++) { //start at first player obj in stats arr
+            game.playerObjArr.push(game.stats[j]);
+          }
+          j=0;
+        })
+        console.log('!!!!', $scope.games);
       })
       .error(function(err){
         if(err) console.log(err);
@@ -59,7 +67,7 @@ angular.module('mltpApp')
             angular.element(idForCSS).addClass('green');
             $timeout(function(){
               angular.element(idForCSS).removeClass('green');
-            }, 5000)
+            }, 5000);
           }
         });
         console.log('about to apply to sc0000pe');

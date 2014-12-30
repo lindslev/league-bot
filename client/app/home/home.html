@@ -12,15 +12,27 @@
     background: white;
     color: #333;
   }
+  .subhead {
+    font-size: 18px;
+    font-family: Dosis;
+    margin: 0px 30px 0px 30px;
+  }
   .gameTitle {
     font-family: Dosis;
     color: white;
     background: black;
     font-size: 20px;
   }
+  .gameTitle span {
+    cursor: pointer;
+    font-size: 12px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
   .score {
     /*border: 3px solid black;*/
-    height: 200px;
+    /*height: 200px;*/
   }
   table {
     text-align: center;
@@ -44,6 +56,10 @@
   .green {
     background: green;
   }
+  .moreInfo {
+    background: white;
+    display: none;
+  }
   footer {
     background: black;
     height: 20px;
@@ -52,14 +68,22 @@
     font-family: Dosis;
     color: white;
   }
+  .cleartry {
+     clear: both;
+  }
+  @media (max-width: 600px) {
+    #mainBanner a {
+      display: block;
+    }
+  }
 </style>
-<h2><a href="http://reddit.com/r/mltp" target="_blank">MAJOR LEAGUE TAGPRO: LIVE</a></h2>
+<h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="http://reddit.com/r/mltp" target="_blank">MAJOR LEAGUE TAGPRO: LIVE</a><a class="subhead" href="">schedule</a></h2>
 
 <div class="container">
   <div class="row">
     <h3> WEEK {{thisWeek}} </h3>
-    <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games">
-      <p class='gameTitle'> {{game.team1}} vs {{game.team2}} </p>
+    <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
+      <p class='gameTitle'> {{game.team1}} vs {{game.team2}} <span ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">See More</span></p>
       <div>
         <table style="width:100%">
           <tr>
@@ -90,6 +114,38 @@
             <td class="scoreNum">{{ game.g2h1[game.team2] + game.g2h2[game.team2]}}</td>
           </tr>
         </table>
+        <div class="moreInfo" id="moreInfo{{$index+1}}">
+          <div>
+            <table style="width: 100%">
+              <tr>
+                <td>Player</td>
+                <td>Score</td>
+                <td>Minutes</td>
+                <td>Tags</td>
+                <td>Returns</td>
+                <td>Captures</td>
+                <td>Grabs</td>
+                <td>Drops</td>
+                <td>Hold</td>
+                <td>Prevent</td>
+                <td>Pops</td>
+              </tr>
+              <tr ng-repeat="player in game.playerObjArr">
+                <td>{{player.name}}</td>
+                <td>{{player.score}}</td>
+                <td>{{player.minutes}}</td>
+                <td>{{player.tags}}</td>
+                <td>{{player.returns}}</td>
+                <td>{{player.captures}}</td>
+                <td>{{player.grabs}}</td>
+                <td>{{player.drops}}</td>
+                <td>{{player.hold}}</td>
+                <td>{{player.prevent}}</td>
+                <td>{{player.pops}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
