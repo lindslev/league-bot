@@ -9,7 +9,7 @@ angular.module('mltpApp')
 
     function getWeekNum() {
       var weekMS = 604800000;
-      var compareMS = new Date(2014, 11, 21).getTime();
+      var compareMS = new Date(2014, 11, 25).getTime();
       var todayMS = new Date().getTime();
       var whichWeek = Math.round((todayMS - compareMS) / weekMS);
       return whichWeek;
@@ -41,12 +41,12 @@ angular.module('mltpApp')
         }
         $scope.games.forEach(function(game){
           game.playerObjArr = [];
-          for(var j=6; j < game.stats.length; j++) { //start at first player obj in stats arr
+          for(var j=7; j < game.stats.length; j++) { //start at first player obj in stats arr
             game.playerObjArr.push(game.stats[j]);
           }
           j=0;
         })
-        console.log('!!!!', $scope.games);
+        // console.log('!!!!', $scope.games);
       })
       .error(function(err){
         if(err) console.log(err);

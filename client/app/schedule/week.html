@@ -25,6 +25,81 @@
     text-align: center;
     display: block;
   }
+    body {
+    color: black;
+  }
+  a, a:hover {
+    text-decoration: none;
+    color: black;
+  }
+  h2, h3, .gameTitle {
+    text-align: center;
+    font-family: Poiret One;
+    background: white;
+    color: #333;
+  }
+  h3 span {
+    font-family: Dosis;
+  }
+  .subhead {
+    font-size: 18px;
+    font-family: Dosis;
+    margin: 0px 30px 0px 30px;
+  }
+  .gameTitle {
+    font-family: Dosis;
+    color: white;
+    background: black;
+    font-size: 20px;
+  }
+  .gameTitle span {
+    cursor: pointer;
+    font-size: 12px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+  .score {
+    /*border: 3px solid black;*/
+    /*height: 200px;*/
+  }
+  table {
+    text-align: center;
+    font-family: Dosis;
+  }
+  .teamName {
+    font-family: Bangers;
+    letter-spacing: .75px;
+    font-size: 16px;
+  }
+  table td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .scoreNum {
+    font-size: 18px;
+    font-family: Oswald;
+  }
+  .leftMostTD {
+    text-align: left;
+    padding-left: 5px;
+  }
+  .green {
+    background: green;
+  }
+  .moreInfo {
+    background: white;
+    display: none;
+  }
+  .scoreboard {
+    /*background: rgba(250,250,250,.8);*/
+  }
+  .cleartry {
+     clear: both;
+  }
+  .container {
+    padding-bottom: 80px;
+  }
   footer {
     background: black;
     height: 20px;
@@ -40,6 +115,73 @@
 
 <div class="container">
   <div class="row">
+    <h3> WEEK {{weekId}} - <span>{{ weekarr[weekId-1] }}</span></h3>
+    <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
+      <p class='gameTitle'> {{game.team1}} vs {{game.team2}} <span ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">See More</span></p>
+      <div>
+        <table class='scoreboard' style="width:100%">
+          <tr>
+            <td class="leftMostTD">Teams</td>
+            <td>G1H1</td>
+            <td>G1H2</td>
+            <td>Game 1</td>
+            <td>G2H1</td>
+            <td>G2H2</td>
+            <td>Game 2</td>
+          </tr>
+          <tr>
+            <td class="teamName leftMostTD">{{game.team1}}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g1h2[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team1] + game.g1h2[game.team1]}}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g2h2[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team1] + game.g2h2[game.team1]}}</td>
+          </tr>
+          <tr>
+            <td class="teamName leftMostTD">{{game.team2}}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g1h2[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team2] + game.g1h2[game.team2]}}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g2h2[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team2] + game.g2h2[game.team2]}}</td>
+          </tr>
+        </table>
+        <div class="moreInfo" id="moreInfo{{$index+1}}">
+          <div>
+            <table style="width: 100%">
+              <tr>
+                <td>Player</td>
+                <td>Score</td>
+                <td>Minutes</td>
+                <td>Tags</td>
+                <td>Returns</td>
+                <td>Captures</td>
+                <td>Grabs</td>
+                <td>Drops</td>
+                <td>Hold</td>
+                <td>Prevent</td>
+                <td>Pops</td>
+              </tr>
+              <tr ng-repeat="player in game.playerObjArr">
+                <td>{{player.name}}</td>
+                <td>{{player.score}}</td>
+                <td>{{player.minutes}}</td>
+                <td>{{player.tags}}</td>
+                <td>{{player.returns}}</td>
+                <td>{{player.captures}}</td>
+                <td>{{player.grabs}}</td>
+                <td>{{player.drops}}</td>
+                <td>{{player.hold}}</td>
+                <td>{{player.prevent}}</td>
+                <td>{{player.pops}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

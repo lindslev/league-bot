@@ -9,10 +9,21 @@
     background: white;
     color: #333;
   }
+  .container {
+    padding-bottom: 80px;
+  }
   .subhead {
     font-size: 18px;
     font-family: Dosis;
     margin: 0px 30px 0px 30px;
+  }
+  .weekTitle {
+    background: black;
+    color: white;
+    font-family: Dosis;
+  }
+  .weekTitle a {
+    color: white;
   }
   .divisionTitle {
     color: white;
@@ -24,6 +35,34 @@
     color: black;
     text-align: center;
     display: block;
+  }
+  .week {
+    height: 380px;
+  }
+  .week table {
+    font-size: 17.5px;
+    font-family: Dosis;
+    background: white;
+  }
+  td {
+    text-align: center;
+    font-family: Dosis;
+    border: 1px solid black;
+  }
+  .northeast {
+    background: #80CC80;
+  }
+  .atlantic {
+    background: #66A3FF;
+  }
+  .midwest {
+    /*background: #FF704D;*/
+    background: #FFFF66;
+  }
+  .pacific {
+    /*background: #C299EB;*/
+    /*background: #FF704D; */
+    background: #FF6666; /*nqoba's pref lol*/
   }
   footer {
     background: black;
@@ -40,9 +79,34 @@
 
 <div class="container">
   <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-12">
+      <table style="width: 100%">
+        <tr><td class="northeast">Northeast</td><td class="atlantic">Atlantic</td><td class="midwest">Midwest</td><td class="pacific">Pacific</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+      <div class="week col-lg-4" ng-repeat="week in sched">
+        <h2 class="weekTitle"><a href="/#/schedule/week/{{$index+1}}">Week {{$index + 1}} - {{weekarr[$index]}}</a></h2>
+        <table style="width: 100%">
+  <!--         <tr>
+            <td class='leftData'>Team 1</td>
+            <td class='rightData'>Team 2</td>
+          </tr> -->
+          <tr ng-repeat="game in week">
+            <td ng-class="{ 'atlantic' : game.team1division == 1, 'northeast' : game.team1division == 2,
+                            'midwest' : game.team1division == 3, 'pacific' : game.team1division == 5 }">
+                <a href="/#/teams/{{game.team1}}">{{game.team1}}</a>
+            </td>
+            <td ng-class="{ 'atlantic' : game.team2division == 1, 'northeast' : game.team2division == 2,
+                            'midwest' : game.team2division == 3, 'pacific' : game.team2division == 5 }">
+                <a href="/#/teams/{{game.team2}}">{{game.team2}}</a></td>
+          </tr>
+        </table>
+      </div>
   </div>
 </div>
 
- <footer>
+<footer>
   copyright Gem 2014 huehuehue
 </footer>

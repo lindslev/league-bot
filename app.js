@@ -7,6 +7,8 @@ var send = require('koa-send');
 var serve = require('koa-static-folder');
 var cors = require('koa-cors');
 var mount = require('koa-mount');
+var mandrill = require('mandrill-api/mandrill');
+var mandrill_client = new mandrill.Mandrill('r7WRzIXqZC2ZNXcaq_KF0A');
 var app = koa();
 app.use(bodyParser());
 app.use(router(app));
@@ -145,10 +147,7 @@ io.on('connection', function(socket){
 function *updateTeamsDB(teamId, gameStats) {
   var db = yield comongo.connect('mongodb://localhost/mltp');
   var teams = yield db.collection('teams');
-  var weekMS = 604800000;
-  var compareMS = new Date(2014, 11, 21).getTime();
-  var todayMS = new Date().getTime();
-  var whichWeek = Math.round((todayMS - compareMS) / weekMS);
+  var whichWeek = getWeekNum();
   var thisTeam = yield teams.findOne({key: teamId});
   var weekStr = "week" + whichWeek;
   //stats, map, server,game,half,key,score,state
@@ -157,7 +156,7 @@ function *updateTeamsDB(teamId, gameStats) {
 
   //new :
   //map, server, game, half, key, score, state, stats...
-  // 0     1      2      3    4    5      7
+  // 0     1      2      3    4    5      6
   var gameNum = "game" + gameStats[2].game;
   var halfNum = "half" + gameStats[3].half;
   ((thisTeam[weekStr])[gameNum])[halfNum].push(gameStats);
@@ -169,23 +168,153 @@ function *updateTeamsDB(teamId, gameStats) {
 app.post('/api/teams/game/stats', cors({origin:true}), function*(){
   var body = this.request.body;
   body = JSON.parse('[' + Object.keys(body)[0] + ']'); //this is the stats parsing thign
-  console.log('info from tp userscript', body);
+  console.log('game end stats: ', body);
   var teamId = (body[4]).userkey;
   var completed = yield updateTeamsDB(teamId, body);
   io.sockets.emit('newGameUpdate', body);
+  console.log('body[2],3,6', body[2], body[3], body[6]);
+  if(body[2].game == 2 && body[3].half == 2 && body[6].state == 2) { //if g2h2 and state is over
+    console.log('sentstatscheck??', sentStatsCheck(teamId));
+    var sent = yield sentStatsCheck(teamId); //check if stats for this game have already been sent
+    if(!sent){
+      yield mandrillTSVs(teamId);
+      console.log('did i mandrill??')
+    }
+  }
   this.body = 'SUCCESS';
 });
 
+function *sentStatsCheck(teamId) { //checks to see if already mandrill'd opponent's stats
+  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var teams = yield db.collection('teams');
+  var team = yield teams.findOne({key:teamId});
+  var weekNum = getWeekNum();
+  var opponentName = team.schedule[weekNum - 1];
+  var opponent = yield teams.findOne({name:opponentName});
+  var weekStr = "week" + weekNum;
+  if(opponent[weekStr].hasOwnProperty('sent')) {
+    return true;
+  } else {
+    return false;
+  }
+  yield db.close();
+}
+
+function makeTSV(statsData) {
+  var result = '';
+  statsData.forEach(function(player, i) {
+      if(i == 0)
+          result += Object.keys(player).join('\t') + '\r\n';
+      var values = [];
+      for(key in player) {
+          values.push(player[key]);
+      };
+      result += values.join('\t') + '\r\n';
+  });
+  // this will take the resulting string and base64 encode it.
+  var encodedResult = new Buffer(result).toString('base64');
+  return(encodedResult);
+}
+
+function *mandrillTSVs(teamId) {
+  var tsvArr = [];
+  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var teams = yield db.collection('teams');
+  var team = yield teams.findOne({key:teamId});
+  var weekStr = "week" + getWeekNum();
+  var game1 = team[weekStr].game1;
+  var game2 = team[weekStr].game2;
+  for(var half in game1) {
+    for(var i=0; i < game1[half].length; i++) {
+      var currentStatsArr = (game1[half])[i];
+      var statsData = currentStatsArr.slice(7,currentStatsArr.length);
+      var thisTsv = makeTSV(statsData);
+      var fileName = "" + team.name + "game1" + half;
+      var objToPush = {
+        "type": "data:text/tsv;charset=utf-8",
+        "name": fileName,
+        "content": thisTsv
+      }
+      tsvArr.push(objToPush)
+    }
+  }
+  for(var half in game2) {
+    for(var i=0; i < game2[half].length; i++) {
+      var currentStatsArr = (game2[half])[i];
+      console.log('currnet stats arr', currentStatsArr)
+      var statsData = currentStatsArr.slice(7,currentStatsArr.length);
+      var thisTsv = makeTSV(statsData);
+      var fileName = "" + team.name + "game2" + half + ".tsv";
+      var objToPush = {
+        "type": "data:text/tsv;charset=utf-8",
+        "name": fileName,
+        "content": thisTsv
+      }
+      tsvArr.push(objToPush);
+    }
+  }
+  console.log('tsvarr after building', tsvArr)
+  var message = {
+      "subject": team.name,
+      "from_email": "geminycrickett@gmail.com",
+      "from_name": "Gem",
+      "to": [{
+              "email": "lindslev.ll@gmail.com",
+              "name": "Lindsay"
+          }],
+      "important": false,
+      "track_opens": true,
+      "auto_html": false,
+      "preserve_recipients": true,
+      "merge": false,
+      "attachments": tsvArr
+  };
+  var async = false;
+  var ip_pool = "Main Pool";
+  mandrill_client.messages.send({"message": message, "async": async, "ip_pool": ip_pool}, function(result) {
+      // console.log(message);
+      // console.log(result);
+  }, function(e) {
+      // Mandrill returns the error as an object with name and message keys
+      console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+      // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+  });
+  (team[weekStr])['sent'] = true;
+  console.log('team aftr setting sent', team)
+  yield teams.update({key:teamId}, team);
+  yield db.close();
+}
+
+
 function getWeekNum() {
   var weekMS = 604800000;
-  var compareMS = new Date(2014, 11, 21).getTime();
+  var compareMS = new Date(2014, 11, 25).getTime();
   /*REMEMBER TO CHANGE THIS TO WEEK 1 DATE*/
   var todayMS = new Date().getTime();
   var whichWeek = Math.round((todayMS - compareMS) / weekMS);
   return whichWeek;
 }
 
-/** for client to get game data from db **/
+/** for client to get a SPECIFIC week on pg load **/
+app.post('/api/schedule/week/:id', function*(){
+  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var gamesColl = yield db.collection('games');
+  var weekId = Number(this.params.id);
+  var thisWeek = yield gamesColl.findOne({week: weekId});
+  this.body = thisWeek;
+  yield db.close();
+});
+
+/** for client to get ALL weeks from db for schedule **/
+app.post('/api/schedule', function*(){
+  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var gamesColl = yield db.collection('games');
+  var weeks = yield gamesColl.find().toArray();
+  this.body = weeks;
+  yield db.close();
+});
+
+/** for client to get THIS WEEK from db on.score **/
 app.post('/api/scorekeeper', function*(){
   var db = yield comongo.connect('mongodb://localhost/mltp');
   var gamesColl = yield db.collection('games');
@@ -203,14 +332,14 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
   var thisWeekFromDB = yield games.findOne({week: thisWeek});
 
   var body = this.request.body;
-  console.log('before parsing', body);
+  // console.log('before parsing', body);
   body = JSON.parse('[' + Object.keys(body)[0] + ']'); //this is the stats parsing thign
-  console.log('from scorekeeper', body);
+  // console.log('from scorekeeper', body);
   var teamId = (body[4]).userkey;
 
   var teamInfo = yield db.collection('teams');
   var team = yield teamInfo.findOne({key: teamId});
-  console.log('team found?', team, teamId)
+  // console.log('team found?', team, teamId)
   var teamName = team.name;
 
   //create g1h1 g1h2 g2h1 or g2h2 string

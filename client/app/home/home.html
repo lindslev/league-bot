@@ -1,7 +1,7 @@
 <style>
-  /*body {
-    background-image: url('http://d.thumbs.redditmedia.com/jgUPuqyGTpG0gtsQ.png');
-    }*/
+  body {
+    color: black;
+  }
   a, a:hover {
     text-decoration: none;
     color: black;
@@ -40,6 +40,7 @@
   }
   .teamName {
     font-family: Bangers;
+    letter-spacing: .75px;
     font-size: 16px;
   }
   table td {
@@ -52,6 +53,7 @@
   }
   .leftMostTD {
     text-align: left;
+    padding-left: 5px;
   }
   .green {
     background: green;
@@ -60,6 +62,9 @@
     background: white;
     display: none;
   }
+  .scoreboard {
+    /*background: rgba(250,250,250,.8);*/
+  }
   footer {
     background: black;
     height: 20px;
@@ -67,9 +72,14 @@
     text-align: center;
     font-family: Dosis;
     color: white;
+    bottom: 0;
+    position: fixed;
   }
   .cleartry {
      clear: both;
+  }
+  .container {
+    padding-bottom: 80px;
   }
   @media (max-width: 600px) {
     #mainBanner a {
@@ -77,7 +87,7 @@
     }
   }
 </style>
-<h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="/#/" target="_blank">MAJOR LEAGUE TAGPRO: LIVE</a><a class="subhead" href="/#/schedule">schedule</a></h2>
+<h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="/#/">MAJOR LEAGUE TAGPRO: LIVE</a><a class="subhead" href="/#/schedule">schedule</a></h2>
 
 <div class="container">
   <div class="row">
@@ -85,7 +95,7 @@
     <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
       <p class='gameTitle'> {{game.team1}} vs {{game.team2}} <span ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">See More</span></p>
       <div>
-        <table style="width:100%">
+        <table class='scoreboard' style="width:100%">
           <tr>
             <td class="leftMostTD">Teams</td>
             <td>G1H1</td>
