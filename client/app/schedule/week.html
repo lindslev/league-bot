@@ -112,7 +112,7 @@
     bottom: 0;
   }
 </style>
-<h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="/#/">MAJOR LEAGUE TAGPRO: LIVE</a><a class="subhead" href="/#/schedule">schedule</a></h2>
+<h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="/#/">MAJOR LEAGUE TAGPRO</a><a class="subhead" href="/#/schedule">schedule</a></h2>
 
 <div class="container">
   <div class="row">
@@ -155,7 +155,7 @@
               <tr>
                 <td>Player</td>
                 <td>Score</td>
-                <td>Minutes</td>
+                <!-- <td>Minutes</td> -->
                 <td>Tags</td>
                 <td>Returns</td>
                 <td>Captures</td>
@@ -168,7 +168,7 @@
               <tr ng-repeat="player in game.playerObjArr | orderBy:'score':'reverse'">
                 <td>{{player.name}}</td>
                 <td>{{player.score}}</td>
-                <td>{{player.minutes}}</td>
+                <!-- <td>{{player.minutes}}</td> -->
                 <td>{{player.tags}}</td>
                 <td>{{player.returns}}</td>
                 <td>{{player.captures}}</td>

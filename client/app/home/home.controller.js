@@ -65,8 +65,13 @@ angular.module('mltpApp')
             game[objFromServer.halfToUpdate] = objFromServer.scoreObj;
             $scope.$apply();
             var idForCSS = "#" + objFromServer.gameId + " .gameTitle";
-            angular.element(idForCSS).addClass('green');
+            if(objFromServer.stats[6].state == 2) {
+              angular.element(idForCSS).addClass('red');
+            } else {
+              angular.element(idForCSS).addClass('green');
+            }
             $timeout(function(){
+              angular.element(idForCSS).removeClass('red');
               angular.element(idForCSS).removeClass('green');
             }, 5000);
 
