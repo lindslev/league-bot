@@ -164,6 +164,7 @@ function *updateTeamsDB(teamId, gameStats) {
   yield db.close();
 }
 
+var globalSent = false;
 /* request made at the end of games (or when games are ended early) */
 app.post('/api/teams/game/stats', cors({origin:true}), function*(){
   var body = this.request.body;
@@ -172,13 +173,12 @@ app.post('/api/teams/game/stats', cors({origin:true}), function*(){
   var teamId = (body[4]).userkey;
   var completed = yield updateTeamsDB(teamId, body);
   io.sockets.emit('newGameUpdate', body);
-  console.log('body[2],3,6', body[2], body[3], body[6]);
   if(body[2].game == 2 && body[3].half == 2 && body[6].state == 2) { //if g2h2 and state is over
-    console.log('sentstatscheck??', sentStatsCheck(teamId));
-    var sent = yield sentStatsCheck(teamId); //check if stats for this game have already been sent
-    if(!sent){
+    yield sentStatsCheck(teamId); //check if stats for this game have already been sent
+    console.log('globalsent after sentStatsCheck', globalSent);
+    if(!globalSent){
       yield mandrillTSVs(teamId);
-      console.log('did i mandrill??')
+      console.log('mandrilling for teamId', teamId);
     }
   }
   this.body = 'SUCCESS';
@@ -192,10 +192,14 @@ function *sentStatsCheck(teamId) { //checks to see if already mandrill'd opponen
   var opponentName = team.schedule[weekNum - 1];
   var opponent = yield teams.findOne({name:opponentName});
   var weekStr = "week" + weekNum;
+  console.log('hasownproperty check', opponent[weekStr].hasOwnProperty('game1'));
   if(opponent[weekStr].hasOwnProperty('sent')) {
-    return true;
+    // return true;
+    console.log('globalSent is true?')
+    globalSent = true;
   } else {
-    return false;
+    console.log('globalSent is false?')
+    globalSent = false;
   }
   yield db.close();
 }
@@ -253,7 +257,6 @@ function *mandrillTSVs(teamId) {
       tsvArr.push(objToPush);
     }
   }
-  console.log('tsvarr after building', tsvArr)
   var message = {
       "subject": team.name,
       "from_email": "geminycrickett@gmail.com",
@@ -280,7 +283,6 @@ function *mandrillTSVs(teamId) {
       // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
   });
   (team[weekStr])['sent'] = true;
-  console.log('team aftr setting sent', team)
   yield teams.update({key:teamId}, team);
   yield db.close();
 }

@@ -49,10 +49,10 @@ angular.module('mltpApp')
       return div;
     }
 
-    $scope.onSeeMoreClick = function(game) {
-      var idToShow = "#moreInfo" + game.gameId;
-      angular.element(idToShow).slideToggle();
-    }
+    // $scope.onSeeMoreClick = function(game) {
+    //   var idToShow = "#moreInfo" + game.gameId;
+    //   angular.element(idToShow).slideToggle();
+    // }
 
     $scope.weekId = $routeParams.id || 1;
     if($scope.weekId) {

@@ -118,7 +118,8 @@
   <div class="row">
     <h3> WEEK {{weekId}} - <span>{{ weekarr[weekId-1] }}</span></h3>
     <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
-      <p class='gameTitle'> {{game.team1}} vs {{game.team2}} <span ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">See More</span></p>
+      <!-- <p class='gameTitle'> {{game.team1}} vs {{game.team2}} <span ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">See More</span></p> -->
+      <p class='gameTitle'> {{game.team1}} vs {{game.team2}}</p>
       <div>
         <table class='scoreboard' style="width:100%">
           <tr>
