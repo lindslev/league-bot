@@ -40,13 +40,14 @@ angular.module('mltpApp')
           if(game !== 'week' && game !== '_id') $scope.games.push(thisWeeksGames[game]);
         }
         $scope.games.forEach(function(game){
-          game.playerObjArr = [];
-          for(var j=7; j < game.stats.length; j++) { //start at first player obj in stats arr
-            game.playerObjArr.push(game.stats[j]);
+          if(game.stats) {
+            game.playerObjArr = [];
+            for(var j=7; j < game.stats.length; j++) { //start at first player obj in stats arr
+              game.playerObjArr.push(game.stats[j]);
+            }
+            j=0;
           }
-          j=0;
         })
-        // console.log('!!!!', $scope.games);
       })
       .error(function(err){
         if(err) console.log(err);
@@ -54,7 +55,6 @@ angular.module('mltpApp')
 
     socket.on('newGameUpdate', function(info) {
         $scope.teams = info;
-        console.log('about to apply to scope....');
         $scope.$apply();
     });
 
@@ -63,14 +63,23 @@ angular.module('mltpApp')
         $scope.games.forEach(function(game){
           if(game.gameId == objFromServer.gameId) {
             game[objFromServer.halfToUpdate] = objFromServer.scoreObj;
+            $scope.$apply();
             var idForCSS = "#" + objFromServer.gameId + " .gameTitle";
             angular.element(idForCSS).addClass('green');
             $timeout(function(){
               angular.element(idForCSS).removeClass('green');
             }, 5000);
+
+            //adding part to deal w. live stats?
+            if(objFromServer.stats) {
+              game.playerObjArr = [];
+              for(var j=7; j < objFromServer.stats.length; j++) { //start at first player obj in stats arr
+                game.playerObjArr.push(objFromServer.stats[j]);
+              }
+              j=0;
+            }
           }
         });
-        console.log('about to apply to sc0000pe');
         $scope.$apply();
     });
   });

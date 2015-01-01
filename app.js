@@ -229,7 +229,7 @@ function *mandrillTSVs(teamId) {
       var currentStatsArr = (game1[half])[i];
       var statsData = currentStatsArr.slice(7,currentStatsArr.length);
       var thisTsv = makeTSV(statsData);
-      var fileName = "" + team.name + "game1" + half;
+      var fileName = "" + team.name + "game1" + half + ".tsv";
       var objToPush = {
         "type": "data:text/tsv;charset=utf-8",
         "name": fileName,
@@ -371,7 +371,8 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
   var objForClient = {
                         gameId: gameIDToUpdate,
                         halfToUpdate: halfToUpdate,
-                        scoreObj: tempScoreObj
+                        scoreObj: tempScoreObj,
+                        stats: body
                     };
   io.sockets.emit('newScoreUpdate', objForClient);
   this.body = 'SUCCESS';

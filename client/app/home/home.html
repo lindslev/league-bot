@@ -54,6 +54,7 @@
   .leftMostTD {
     text-align: left;
     padding-left: 5px;
+    width: 100px;
   }
   .green {
     background: green;
@@ -140,7 +141,7 @@
                 <td>Prevent</td>
                 <td>Pops</td>
               </tr>
-              <tr ng-repeat="player in game.playerObjArr">
+              <tr ng-repeat="player in game.playerObjArr | orderBy:'score':'reverse'">
                 <td>{{player.name}}</td>
                 <td>{{player.score}}</td>
                 <td>{{player.minutes}}</td>
