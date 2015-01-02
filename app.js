@@ -29,8 +29,9 @@ var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp';
 console.log('hello?????????????????!!!?!?!?!?*****')
 
 co(function *() {
-  var teams = cjson.load('./server/db/teams.json');
-  console.log('entering co after cjson???', teams)
+  // var teams = cjson.load('./server/db/teams.json');
+  var teams = require('./server/db/teams.json');
+  console.log('entering co after requiring teams.json???', teams)
   var db = yield comongo.connect(DB);
   var collection = yield db.collection('teams');
   var count = yield collection.count();
