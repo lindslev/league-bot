@@ -29,6 +29,7 @@ var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp';
 console.log('hello?????????????????!!!?!?!?!?*****')
 
 co(function *() {
+  console.log('entering co???')
   var teams = cjson.load('./server/db/teams.json');
   var db = yield comongo.connect(DB);
   var collection = yield db.collection('teams');
@@ -130,7 +131,7 @@ co(function *() {
   }
 
   yield db.close();
-})();
+});
 /***/
 
 /*** serving index.html client side for angular ***/
