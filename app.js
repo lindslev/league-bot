@@ -130,7 +130,7 @@ co(function *() {
   }
 
   yield db.close();
-});
+})();
 /***/
 
 /*** serving index.html client side for angular ***/
