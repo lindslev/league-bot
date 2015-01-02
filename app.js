@@ -34,6 +34,8 @@ co(function *() {
   var gamesColl = yield db.collection('games');
   var gameCount = yield gamesColl.count();
 
+  console.log('count, teams', count, teams)
+
 /*** populating teams in the db ***/
   if(count == 0) {
     console.log('teams- am i adding heroku??')
