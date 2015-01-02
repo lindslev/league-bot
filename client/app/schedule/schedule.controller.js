@@ -13,7 +13,7 @@ angular.module('mltpApp')
 
           $http.post('/api/schedule', {})
             .success(function(sched){
-              sched.sort(function(a,b){
+              sched.sort(function(a,b){ //because db doesnt give weeks back in order, for some reason
                 if(a.week < b.week) return -1;
                 if(a.week > b.week) return 1;
                 return 0;
@@ -57,10 +57,8 @@ angular.module('mltpApp')
     $scope.weekId = $routeParams.id || 1;
     if($scope.weekId) {
       var strToPost = '/api/schedule/week/' + $scope.weekId;
-      console.log('strtopost', strToPost);
       $http.post(strToPost, {})
         .success(function(week){
-        console.log('inside post success', week);
         $scope.games = [];
           for(var game in week) {
             if(game !== 'week' && game !== '_id') $scope.games.push(week[game]);

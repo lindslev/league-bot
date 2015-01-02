@@ -66,13 +66,22 @@
   }
   footer {
     background: black;
-    height: 20px;
+    height: 25px;
     width: 100%;
     text-align: center;
     font-family: Dosis;
     color: white;
     position: fixed;
     bottom: 0;
+  }
+  i {
+    color: white;
+  }
+  footer a {
+    color: white;
+  }
+  footer p {
+    display: inline;
   }
 </style>
 <h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="/#/">MAJOR LEAGUE TAGPRO</a><a class="subhead" href="/#/schedule">schedule</a></h2>
@@ -89,10 +98,6 @@
       <div class="week col-lg-4" ng-repeat="week in sched">
         <h2 class="weekTitle"><a href="/#/schedule/week/{{$index+1}}">Week {{$index + 1}} - {{weekarr[$index]}}</a></h2>
         <table style="width: 100%">
-  <!--         <tr>
-            <td class='leftData'>Team 1</td>
-            <td class='rightData'>Team 2</td>
-          </tr> -->
           <tr ng-repeat="game in week">
             <td ng-class="{ 'atlantic' : game.team1division == 1, 'northeast' : game.team1division == 2,
                             'midwest' : game.team1division == 3, 'pacific' : game.team1division == 5 }">
@@ -107,6 +112,7 @@
   </div>
 </div>
 
-<footer>
-  copyright Gem 2014 huehuehue
+
+ <footer>
+  <a href="http://reddit.com/r/tagpro" target="_blank"><i class="fa fa-reddit"></i></a><p> &copy; Gem </p><a href="http://tagpro.gg" target="_blank"><i class="fa fa-gamepad"></i>
 </footer>

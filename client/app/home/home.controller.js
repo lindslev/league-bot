@@ -9,7 +9,7 @@ angular.module('mltpApp')
 
     function getWeekNum() {
       var weekMS = 604800000;
-      var compareMS = new Date(2014, 11, 25).getTime();
+      var compareMS = new Date(2014, 11, 25).getTime(); //will need to change this to 1/18
       var todayMS = new Date().getTime();
       var whichWeek = Math.round((todayMS - compareMS) / weekMS);
       return whichWeek;

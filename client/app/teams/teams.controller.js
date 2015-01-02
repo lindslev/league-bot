@@ -9,7 +9,6 @@ angular.module('mltpApp')
 
     $http.post('/api/teams', {})
       .success(function(list){
-            console.log('list', list);
             $scope.teams = list;
             $scope.idx;
             if($scope.teamName) { //if :/team/name - doesnt happen on /teams route

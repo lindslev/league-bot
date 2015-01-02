@@ -26,24 +26,17 @@ var teams = [];
 
 var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp';
 
-console.log('hello?????????????????!!!?!?!?!?*****')
-
 co(function *() {
   console.log('wait were still getting in co right', process.cwd())
   var teams = yield cjson.load('./server/db/teams.json');
-  // var teams = require('./teams.js');
-  // console.log('entering co after requiring teams.json???', teams)
   var db = yield comongo.connect(DB);
   var collection = yield db.collection('teams');
   var count = yield collection.count();
   var gamesColl = yield db.collection('games');
   var gameCount = yield gamesColl.count();
 
-  console.log('count, teams', count, teams)
-
-/*** populating teams in the db ***/
+  /*** populating teams in the db ***/
   if(count == 0) {
-    console.log('teams- am i adding heroku??')
     for(var conference in teams.teams.conferences) {
       for(var division in teams.teams.conferences[conference]) {
         var conf = teams.teams.conferences[conference];
@@ -84,7 +77,6 @@ co(function *() {
   }
 
   if(gameCount == 0) { //needs to only be run at the start of a new season
-    console.log('games- am i adding heroku??')
     var x = 1;
     while(x < 10) {
       teams = teamdata.map(function(team){
@@ -151,8 +143,12 @@ var server = require('http').createServer(app.callback());
 var io = require('socket.io').listen(app.listen(process.env.PORT || 4000));
 
 io.on('connection', function(socket){
-  console.log('usr cnnct 0mg');
+  console.log('User connected.');
 });
+
+// expected req format from userscript:
+//  map, server, game, half, key, score, state, stats...
+  // 0     1      2      3    4    5      6
 
 /** function called when post request is made at the end of games **/
 function *updateTeamsDB(teamId, gameStats) {
@@ -161,13 +157,6 @@ function *updateTeamsDB(teamId, gameStats) {
   var whichWeek = getWeekNum();
   var thisTeam = yield teams.findOne({key: teamId});
   var weekStr = "week" + whichWeek;
-  //stats, map, server,game,half,key,score,state
-  //0      1     2      3    4    5   6     7
-  //old ^^^
-
-  //new :
-  //map, server, game, half, key, score, state, stats...
-  // 0     1      2      3    4    5      6
   var gameNum = "game" + gameStats[2].game;
   var halfNum = "half" + gameStats[3].half;
   ((thisTeam[weekStr])[gameNum])[halfNum].push(gameStats);
@@ -203,13 +192,9 @@ function *sentStatsCheck(teamId) { //checks to see if already mandrill'd opponen
   var opponentName = team.schedule[weekNum - 1];
   var opponent = yield teams.findOne({name:opponentName});
   var weekStr = "week" + weekNum;
-  console.log('hasownproperty check', opponent[weekStr].hasOwnProperty('game1'));
   if(opponent[weekStr].hasOwnProperty('sent')) {
-    // return true;
-    console.log('globalSent is true?')
     globalSent = true;
   } else {
-    console.log('globalSent is false?')
     globalSent = false;
   }
   yield db.close();
@@ -345,14 +330,11 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
   var thisWeekFromDB = yield games.findOne({week: thisWeek});
 
   var body = this.request.body;
-  // console.log('before parsing', body);
   body = JSON.parse('[' + Object.keys(body)[0] + ']'); //this is the stats parsing thign
-  // console.log('from scorekeeper', body);
   var teamId = (body[4]).userkey;
 
   var teamInfo = yield db.collection('teams');
   var team = yield teamInfo.findOne({key: teamId});
-  // console.log('team found?', team, teamId)
   var teamName = team.name;
 
   //create g1h1 g1h2 g2h1 or g2h2 string
