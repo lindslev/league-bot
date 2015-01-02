@@ -44,13 +44,21 @@
         $('#sendStatsCheckbox')[0].style.marginLeft='20px'
 
         // make checkbox label (actually a button so it will wiggle)
-        //$('#sendStatsCheckbox').after('<txt id=sendStatsLabel>Send Stats to Server')
         $('#sendStatsCheckbox').after('<button id=sendStatsLabel>Send Stats to Server');
         $('#sendStatsLabel')[0].style.backgroundColor = 'transparent';
         $('#sendStatsLabel')[0].style.border = 'none';
         $('#sendStatsLabel')[0].style.color = 'white';
         $('#sendStatsLabel')[0].style.cursor = 'default';
         $('#sendStatsLabel')[0].style.fontSize = '16px';
+        $('#sendStatsLabel')[0].style.cssText += ' outline: none;';
+        $('#sendStatsLabel')[0].onclick = function() {
+            var cmd = $('#sendStatsLabel')[0].className == 'wiggling' ? 'stop' : 'start'
+            $('#sendStatsLabel').ClassyWiggle(cmd);
+        }
+
+        // add reminder not to set the score if sending stats
+        $('#sendStatsLabel').after('<txt id=sendStatsReminder>Reminder: Don\'t set scores if you\'re sending stats!');
+        $('#sendStatsReminder')[0].style.fontSize = '10px';
 
         // If it is Sunday night (5:00 PM or later), make the checkbox label wiggle in the group page as a reminder
         if( new Date().getDay() == 0 & new Date().getHours() >= 17 ) {
@@ -76,6 +84,11 @@
                     // Also save cookies for game and half info
                     GM_setValue("post_tagpro_stats_game", input[1])
                     GM_setValue("post_tagpro_stats_half", input[3])
+
+                    // if label was wiggling, stop it
+                    if($('#sendStatsLabel')[0].className == 'wiggling') {
+                        $('#sendStatsLabel').ClassyWiggle('stop');
+                    }
                 }
 
 
@@ -264,7 +277,7 @@
         catstats.onPlayerLeftUpdate = function onPlayerLeftUpdate(playerId) {
             // Player leaves mid-game
             if(tagpro.state == 1) {
-                this.updatePlayerAfterDeparture(this.players[playerId]);
+                this.updatePlayerAfterDeparture(this.players[playerId], Date.now(), false, true);
             }
 
             // Player leaves before the game
@@ -296,6 +309,7 @@
      */
         catstats.onEnd = function onEnd() {
             if(this.wantsStats && !this.downloaded) {
+                this.exportStats(false);
                 this.exportStats(true);
             }
         }
@@ -303,12 +317,12 @@
         /**
      * Prepare the local player record for export
      */
-        catstats.prepareStats = function prepareStats() {
+        catstats.prepareStats = function prepareStats(final) {
             var now = Date.now();
             var _this = this;
             var stats = Object.keys(this.players).map(function(id) {
                 var player = _this.players[id];
-                _this.updatePlayerAfterDeparture(player, now);
+                _this.updatePlayerAfterDeparture(player, now, final, false);
 
                 // Record every column for the spreadsheet
                 var columns = {};
@@ -360,7 +374,8 @@
                           {game: GM_getValue("post_tagpro_stats_game")},
                           {half: GM_getValue("post_tagpro_stats_half")},
                           {userkey: KEY},
-                          {score: {thisTeamScore: thisTeamScore, otherTeamScore: otherTeamScore}}
+                          {score: {thisTeamScore: thisTeamScore, otherTeamScore: otherTeamScore}},
+                          {state: tagpro.state}
                          );
 
             return stats;
@@ -392,6 +407,7 @@
             player['griptr']      = false;
             player['speedtr']     = false;
             player['diftotal']    = 0;
+            player['departed']    = false;
             return player;
         };
 
@@ -448,12 +464,26 @@
      * @param {Object} player - reference to local player record
      * @param {Number} [now] - unix timestamp representing current time
      */
-        catstats.updatePlayerAfterDeparture = function updatePlayerAfterDeparture (player, now) {
+        catstats.updatePlayerAfterDeparture = function updatePlayerAfterDeparture (player, now, final, playerLeft) {
             var now = now || Date.now();
 
             // ignore players who have already departed
-            if(player['departure'] !== undefined)
+            if(player['departed']) {
+                return
+            }
+
+            // if player left game early, set departed flag
+            if(playerLeft) {
+                player['departed'] = true;
+            }
+
+            // update minutes in non-final updates
+            if(!final && !player['departed']) {
+                var seconds  = (player['arrival'] - (tagpro.gameEndsAt - now)) / 1e3;
+                player['minutes'] = Math.round(seconds/60);
                 return;
+            }
+
 
             player['departure'] = tagpro.gameEndsAt - now;
 
@@ -472,11 +502,14 @@
      * Create the document and trigger a download
      */
         catstats.exportStats = function exportStats(final) {
-            var data = this.prepareStats();
+            var data = this.prepareStats(final);
             console.log(JSON.stringify(data))
             $.post(final ? FINALURL : UPDATEURL, JSON.stringify(data), function(e) {
                 console.log(e);
             });
+            if(final) {
+                this.downloaded = true;
+            }
         }
 
         $(function() {
