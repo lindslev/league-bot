@@ -36,6 +36,7 @@ co(function *() {
 
 /*** populating teams in the db ***/
   if(count == 0) {
+    console.log('teams- am i adding heroku??')
     for(var conference in teams.teams.conferences) {
       for(var division in teams.teams.conferences[conference]) {
         var conf = teams.teams.conferences[conference];
@@ -76,6 +77,7 @@ co(function *() {
   }
 
   if(gameCount == 0) { //needs to only be run at the start of a new season
+    console.log('games- am i adding heroku??')
     var x = 1;
     while(x < 10) {
       teams = teamdata.map(function(team){
