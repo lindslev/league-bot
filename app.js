@@ -24,9 +24,11 @@ var teamdata = [];
 var games = [];
 var teams = [];
 
+var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp';
+
 co(function *() {
   var teams = cjson.load('./server/db/teams.json');
-  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var db = yield comongo.connect(DB);
   var collection = yield db.collection('teams');
   var count = yield collection.count();
   var gamesColl = yield db.collection('games');
@@ -145,7 +147,7 @@ io.on('connection', function(socket){
 
 /** function called when post request is made at the end of games **/
 function *updateTeamsDB(teamId, gameStats) {
-  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var db = yield comongo.connect(DB);
   var teams = yield db.collection('teams');
   var whichWeek = getWeekNum();
   var thisTeam = yield teams.findOne({key: teamId});
@@ -185,7 +187,7 @@ app.post('/api/teams/game/stats', cors({origin:true}), function*(){
 });
 
 function *sentStatsCheck(teamId) { //checks to see if already mandrill'd opponent's stats
-  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var db = yield comongo.connect(DB);
   var teams = yield db.collection('teams');
   var team = yield teams.findOne({key:teamId});
   var weekNum = getWeekNum();
@@ -222,7 +224,7 @@ function makeTSV(statsData) {
 
 function *mandrillTSVs(teamId) {
   var tsvArr = [];
-  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var db = yield comongo.connect(DB);
   var teams = yield db.collection('teams');
   var team = yield teams.findOne({key:teamId});
   var weekStr = "week" + getWeekNum();
@@ -299,7 +301,7 @@ function getWeekNum() {
 
 /** for client to get a SPECIFIC week on pg load **/
 app.post('/api/schedule/week/:id', function*(){
-  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var db = yield comongo.connect(DB);
   var gamesColl = yield db.collection('games');
   var weekId = Number(this.params.id);
   var thisWeek = yield gamesColl.findOne({week: weekId});
@@ -309,7 +311,7 @@ app.post('/api/schedule/week/:id', function*(){
 
 /** for client to get ALL weeks from db for schedule **/
 app.post('/api/schedule', function*(){
-  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var db = yield comongo.connect(DB);
   var gamesColl = yield db.collection('games');
   var weeks = yield gamesColl.find().toArray();
   this.body = weeks;
@@ -318,7 +320,7 @@ app.post('/api/schedule', function*(){
 
 /** for client to get THIS WEEK from db on.score **/
 app.post('/api/scorekeeper', function*(){
-  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var db = yield comongo.connect(DB);
   var gamesColl = yield db.collection('games');
   var thisWeek = getWeekNum();
   var thisWeekFromDB = yield gamesColl.findOne({week: thisWeek});
@@ -328,7 +330,7 @@ app.post('/api/scorekeeper', function*(){
 
 /** for contact with captain's userscript **/
 app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
-  var db = yield comongo.connect('mongodb://localhost/mltp');
+  var db = yield comongo.connect(DB);
   var games = yield db.collection('games');
   var thisWeek = getWeekNum();
   var thisWeekFromDB = yield games.findOne({week: thisWeek});
