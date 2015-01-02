@@ -30,7 +30,7 @@ console.log('hello?????????????????!!!?!?!?!?*****')
 
 co(function *() {
   console.log('wait were still getting in co right', process.cwd())
-  // var teams = yield cjson.load('./server/db/teams.json');
+  var teams = yield cjson.load('./server/db/teams.json');
   // var teams = require('./teams.js');
   // console.log('entering co after requiring teams.json???', teams)
   var db = yield comongo.connect(DB);
