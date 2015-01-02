@@ -26,6 +26,8 @@ var teams = [];
 
 var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp';
 
+console.log('hello?????????????????!!!?!?!?!?*****')
+
 co(function *() {
   var teams = cjson.load('./server/db/teams.json');
   var db = yield comongo.connect(DB);
