@@ -1,1 +1,1 @@
- console.log('teams1...', require('./server/db/teams.json'));
+ console.log('teams1...', require('teams.json'));
