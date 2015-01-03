@@ -25,9 +25,12 @@ var games = [];
 var teams = [];
 
 var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp';
+var keys = ['11abc','12def','13ghi','14jkl','15mno',
+            '21abc','22def','23ghi','24jki','25mno',
+            '31abc','32def','33ghi','34jkl','35mno',
+            '51abc','52def','53ghi','54jkl','55mno'];
 
 co(function *() {
-  console.log('wait were still getting in co right', process.cwd())
   var teams = yield cjson.load('./server/db/teams.json');
   var db = yield comongo.connect(DB);
   var collection = yield db.collection('teams');
@@ -171,11 +174,14 @@ app.post('/api/teams/game/stats', cors({origin:true}), function*(){
   body = JSON.parse('[' + Object.keys(body)[0] + ']'); //this is the stats parsing thign
   console.log('game end stats: ', body);
   var teamId = (body[4]).userkey;
+  if(keys.indexOf(teamId) < 0) {
+    this.body = "Not a valid API key.";
+    throw new Error('Not a valid API key.');
+  }
   var completed = yield updateTeamsDB(teamId, body);
   io.sockets.emit('newGameUpdate', body);
   if(body[2].game == 2 && body[3].half == 2 && body[6].state == 2) { //if g2h2 and state is over
     yield sentStatsCheck(teamId); //check if stats for this game have already been sent
-    console.log('globalsent after sentStatsCheck', globalSent);
     if(!globalSent){
       yield mandrillTSVs(teamId);
       console.log('mandrilling for teamId', teamId);
@@ -332,6 +338,10 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
   var body = this.request.body;
   body = JSON.parse('[' + Object.keys(body)[0] + ']'); //this is the stats parsing thign
   var teamId = (body[4]).userkey;
+  if(keys.indexOf(teamId) < 0) {
+    this.body = "Not a valid API key.";
+    throw new Error('Not a valid API key.');
+  }
 
   var teamInfo = yield db.collection('teams');
   var team = yield teamInfo.findOne({key: teamId});
