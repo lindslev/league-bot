@@ -292,7 +292,7 @@ function *mandrillTSVs(teamId) {
 
 function getWeekNum() {
   var weekMS = 604800000;
-  var compareMS = new Date(2014, 11, 25).getTime();
+  var compareMS = new Date(2014, 11, 27).getTime();
   /*REMEMBER TO CHANGE THIS TO WEEK 1 DATE*/
   var todayMS = new Date().getTime();
   var whichWeek = Math.round((todayMS - compareMS) / weekMS);
