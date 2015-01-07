@@ -12,7 +12,7 @@ angular.module('mltpApp')
       var compareMS = new Date(2014, 11, 27).getTime(); //will need to change this to 1/18
       var todayMS = new Date().getTime();
       var whichWeek = Math.round((todayMS - compareMS) / weekMS);
-      return whichWeek;
+      return 1;
     }
 
     $scope.onSeeMoreClick = function(game) {

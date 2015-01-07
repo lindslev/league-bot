@@ -296,7 +296,7 @@ function getWeekNum() {
   /*REMEMBER TO CHANGE THIS TO WEEK 1 DATE*/
   var todayMS = new Date().getTime();
   var whichWeek = Math.round((todayMS - compareMS) / weekMS);
-  return whichWeek;
+  return 1;
 }
 
 /** for client to get a SPECIFIC week on pg load **/
