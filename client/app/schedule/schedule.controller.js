@@ -11,6 +11,8 @@ angular.module('mltpApp')
                     ['http://i.imgur.com/VixChXZ.png#map-boombox','Boombox'],['http://i.imgur.com/xgoaXJy.png#map-star','Star'],['/#/schedule','Community Vote'],['http://i.imgur.com/CDcTbs0.png#map-smirk','Smirk']];
 
     var teamsdata, scheddata;
+    $scope.seeMoreOpen = false;
+
     $http.post('/api/teams', {})
       .success(function(teams){
         teamsdata = teams;
@@ -53,10 +55,90 @@ angular.module('mltpApp')
       return div;
     }
 
-    // $scope.onSeeMoreClick = function(game) {
-    //   var idToShow = "#moreInfo" + game.gameId;
-    //   angular.element(idToShow).slideToggle();
-    // }
+    $scope.toggleAbout = function() {
+      angular.element('#aboutWeek').slideToggle();
+    }
+
+    $scope.closeStats = function(game) {
+      var idToShow = "#moreInfo" + game.gameId;
+      $scope.games.forEach(function(g){
+        if(g.gameId == game.gameId) {
+          g.close = "";
+        }
+      })
+      angular.element(idToShow).slideToggle();
+      $scope.seeMoreOpen = false;
+    }
+
+    $scope.onSeeMoreClick = function(game, halfOrGame) {
+      var playerObjArr = [];
+      var statsToCompile = [];
+      var team1 = game.team1;
+      var week = 'week' + $routeParams.id;
+      teamsdata.forEach(function(team){
+        if(team1 == team.name) {
+          if(halfOrGame.length == 2) { //if G1 or G2
+            var whichGame = (halfOrGame.split(''))[1];
+            var halvesToCheck = 'game' + whichGame;
+            for(var half in (team[week])[halvesToCheck]) {
+              var game = (team[week])[halvesToCheck];
+              var halfStats = game[half];
+              halfStats.forEach(function(stat){ //bc this is an array of stats arrays, loop thru
+               statsToCompile.push(stat);
+              })
+            }
+          } else { //if just one half
+            var whichGame = (halfOrGame.split(''))[1];
+            var whichHalf = (halfOrGame.split(''))[3];
+            var gameToCheck = 'game' + whichGame;
+            var halfToCheck = 'half' + whichHalf;
+            var stats = ((team[week])[gameToCheck])[halfToCheck]; //bc this is an array of stats arrays, loop thru
+            stats.forEach(function(stat){
+              statsToCompile.push(stat);
+            })
+          }
+        }
+      });
+
+      statsToCompile.forEach(function(statArr){
+        for(var i=7; i < statArr.length; i++) {
+          if(checkPlayerObjArr(statArr[i].name, playerObjArr)) { //if player not already in there
+            playerObjArr.push(statArr[i]);
+          } else { //if player in there
+            // playerObjArr.forEach(function(p){
+            //   if(statArr[i].name == p.name) {
+            //     //combine stats???
+            //   }
+            // })
+            playerObjArr.push(statArr[i]);
+          }
+        }
+      })
+
+      function checkPlayerObjArr(player, playerObjArr) {
+        playerObjArr.forEach(function(p){
+          if(p.name == player) {
+            return false;
+          }
+        })
+        return true;
+      }
+
+      function combineStats() { }
+
+      $scope.games.forEach(function(tempGame){
+        if(tempGame.gameId == game.gameId) {
+          //push statsToCompile (organized) to tempGame.playerObjArr
+          tempGame.playerObjArr = playerObjArr;
+          tempGame.close = 'Close Stats';
+        }
+      })
+      var idToShow = "#moreInfo" + game.gameId;
+      if(!$scope.seeMoreOpen) {
+        angular.element(idToShow).slideToggle();
+        $scope.seeMoreOpen = true;
+      }
+    }
 
     $scope.weekId = $routeParams.id || 1;
     if($scope.weekId) {
@@ -67,15 +149,6 @@ angular.module('mltpApp')
           for(var game in week) {
             if(game !== 'week' && game !== '_id') $scope.games.push(week[game]);
           }
-          $scope.games.forEach(function(game){
-            if(game.stats) {
-              game.playerObjArr = [];
-              for(var j=6; j < game.stats.length; j++) { //start at first player obj in stats arr
-                game.playerObjArr.push(game.stats[j]);
-              }
-              j=0;
-            }
-          })
         })
         .error(function(err){
           if(err) console.log(err);

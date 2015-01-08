@@ -101,6 +101,9 @@
   .container {
     padding-bottom: 80px;
   }
+  .seeMore {
+    cursor: pointer;
+  }
   footer {
     background: black;
     height: 25px;
@@ -113,6 +116,23 @@
   }
   i {
     color: white;
+  }
+  #infoCircle {
+    text-align: center;
+  }
+  #infoCircle i {
+    color: black;
+    cursor: pointer;
+  }
+  #aboutWeek p {
+    color: white;
+    font-family: Dosis;
+    text-align: center;
+  }
+  #aboutWeek {
+    display: none;
+    background: #666;
+    padding: 5px;
   }
   footer a {
     padding-left: 10px;
@@ -127,20 +147,26 @@
 
 <div class="container">
   <div class="row">
+    <p id="infoCircle"><i ng-click="toggleAbout()" class="fa fa-info-circle fa-2x"></i></p>
+    <div id="aboutWeek">
+      <p>Game 1: {{maparr[weekId-1][1]}}</p>
+      <p>Game 2: {{maparr[weekId][1]}}</p>
+      <p>You can click on the G1H1/G1H2/Game 1/G2H1/G2H2/Game 2 table headers, when the game is over, to see stats for that respective half or game.</p>
+    </div>
     <h3> WEEK {{weekId}} - <span>{{ weekarr[weekId-1] }}</span></h3>
     <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
       <!-- <p class='gameTitle'> {{game.team1}} vs {{game.team2}} <span ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">See More</span></p> -->
-      <p class='gameTitle'> {{game.team1}} vs {{game.team2}}</p>
+      <p class='gameTitle'> {{game.team1}} vs {{game.team2}} <span ng-click="closeStats(game)">{{game.close}}</span></p>
       <div>
         <table class='scoreboard' style="width:100%">
           <tr>
             <td class="leftMostTD">Teams</td>
-            <td>G1H1</td>
-            <td>G1H2</td>
-            <td>Game 1</td>
-            <td>G2H1</td>
-            <td>G2H2</td>
-            <td>Game 2</td>
+            <td ng-click="onSeeMoreClick(game, 'G1H1')"><span class='seeMore'>G1H1</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G1H2')"><span class='seeMore'>G1H2</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G1')"><span class='seeMore'>Game 1</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G2H1')"><span class='seeMore'>G2H1</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G2H2')"><span class='seeMore'>G2H2</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G2')"><span class='seeMore'>Game 2</span></td>
           </tr>
           <tr>
             <td class="teamName leftMostTD">{{game.team1}}</td>
@@ -167,7 +193,7 @@
               <tr>
                 <td>Player</td>
                 <td>Score</td>
-                <!-- <td>Minutes</td> -->
+                <td>Minutes</td>
                 <td>Tags</td>
                 <td>Returns</td>
                 <td>Captures</td>
@@ -180,7 +206,7 @@
               <tr ng-repeat="player in game.playerObjArr | orderBy:'score':'reverse'">
                 <td>{{player.name}}</td>
                 <td>{{player.score}}</td>
-                <!-- <td>{{player.minutes}}</td> -->
+                <td>{{player.minutes}}</td>
                 <td>{{player.tags}}</td>
                 <td>{{player.returns}}</td>
                 <td>{{player.captures}}</td>
