@@ -11,7 +11,6 @@ angular.module('mltpApp')
                     ['http://i.imgur.com/VixChXZ.png#map-boombox','Boombox'],['http://i.imgur.com/xgoaXJy.png#map-star','Star'],['/#/schedule','Community Vote'],['http://i.imgur.com/CDcTbs0.png#map-smirk','Smirk']];
 
     var teamsdata, scheddata;
-    $scope.seeMoreOpen = false;
 
     $http.post('/api/teams', {})
       .success(function(teams){
@@ -64,10 +63,10 @@ angular.module('mltpApp')
       $scope.games.forEach(function(g){
         if(g.gameId == game.gameId) {
           g.close = "";
+          g.open = false;
         }
       })
       angular.element(idToShow).slideToggle();
-      $scope.seeMoreOpen = false;
     }
 
     $scope.onSeeMoreClick = function(game, halfOrGame) {
@@ -105,39 +104,52 @@ angular.module('mltpApp')
           if(checkPlayerObjArr(statArr[i].name, playerObjArr)) { //if player not already in there
             playerObjArr.push(statArr[i]);
           } else { //if player in there
-            // playerObjArr.forEach(function(p){
-            //   if(statArr[i].name == p.name) {
-            //     //combine stats???
-            //   }
-            // })
-            playerObjArr.push(statArr[i]);
+            var playerObjArrCopy = playerObjArr.map(function(thing){ return thing; });
+            playerObjArrCopy.forEach(function(p, idx){
+              if(statArr[i].name == p.name) {
+                var newObj = {};
+                newObj.minutes = p.minutes + statArr[i].minutes;
+                newObj.score = p.score + statArr[i].score;
+                newObj.tags = p.tags + statArr[i].tags;
+                newObj.pops = p.pops + statArr[i].pops;
+                newObj.grabs = p.grabs + statArr[i].grabs;
+                newObj.drops = p.drops + statArr[i].drops;
+                newObj.hold = p.hold + statArr[i].hold;
+                newObj.captures = p.captures + statArr[i].captures;
+                newObj.prevent = p.prevent + statArr[i].prevent;
+                newObj.returns = p.returns + statArr[i].returns;
+                newObj.support = p.support + statArr[i].support;
+                newObj.name = p.name;
+                playerObjArr.splice(idx, 1);
+                playerObjArr.push(newObj);
+              }
+            })
           }
         }
       })
 
       function checkPlayerObjArr(player, playerObjArr) {
+        var toReturn = true;
         playerObjArr.forEach(function(p){
           if(p.name == player) {
-            return false;
+            toReturn = false;
           }
         })
-        return true;
+        return toReturn;
       }
-
-      function combineStats() { }
 
       $scope.games.forEach(function(tempGame){
         if(tempGame.gameId == game.gameId) {
           //push statsToCompile (organized) to tempGame.playerObjArr
           tempGame.playerObjArr = playerObjArr;
           tempGame.close = 'Close Stats';
+          var idToShow = "#moreInfo" + game.gameId;
+          if(!game.open) {
+            angular.element(idToShow).slideToggle();
+          }
+          tempGame.open = true;
         }
       })
-      var idToShow = "#moreInfo" + game.gameId;
-      if(!$scope.seeMoreOpen) {
-        angular.element(idToShow).slideToggle();
-        $scope.seeMoreOpen = true;
-      }
     }
 
     $scope.weekId = $routeParams.id || 1;

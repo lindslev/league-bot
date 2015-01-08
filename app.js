@@ -264,12 +264,8 @@ function *mandrillTSVs(teamId) {
       "from_email": "geminycrickett@gmail.com",
       "from_name": "Gem",
       "to": [{
-              "email": "geminycrickett@gmail.com",
-              "name": "Gem"
-          },
-          {
-            "email": "leodarrfut@gmail.com",
-            "name": "Nqoba"
+              "email": "lindslev.ll@gmail.com",
+              "name": "Lindsay"
           }],
       "important": false,
       "track_opens": true,
