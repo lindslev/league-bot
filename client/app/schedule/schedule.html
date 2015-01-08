@@ -25,6 +25,14 @@
   .weekTitle a {
     color: white;
   }
+  .weekTitle span {
+    display: block;
+    font-size: 15px;
+    padding: 2.5px 0px 1.5px 0px;
+  }
+  .weekTitle span a {
+    padding: 0px 10px 0px 10px;
+  }
   .divisionTitle {
     color: white;
     background: black;
@@ -37,7 +45,7 @@
     display: block;
   }
   .week {
-    height: 380px;
+   /*height: 380px;*/
   }
   .week table {
     font-size: 17.5px;
@@ -98,7 +106,7 @@
   </div>
   <div class="row">
       <div class="week col-lg-4" ng-repeat="week in sched">
-        <h2 class="weekTitle"><a href="/#/schedule/week/{{$index+1}}">Week {{$index + 1}} - {{weekarr[$index]}}</a></h2>
+        <h2 class="weekTitle"><a href="/#/schedule/week/{{$index+1}}">Week {{$index + 1}} - {{weekarr[$index]}}</a><span><a href="{{(maparr[$index])[0]}}" target="_blank">{{(maparr[$index])[1]}}</a><a href="{{(maparr[$index + 1])[0]}}" target="_blank">{{(maparr[$index+1])[1]}}</a><span></h2>
         <table style="width: 100%">
           <tr ng-repeat="game in week">
             <td ng-class="{ 'atlantic' : game.team1division == 1, 'northeast' : game.team1division == 2,
