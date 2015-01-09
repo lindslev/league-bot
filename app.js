@@ -7,6 +7,7 @@ var send = require('koa-send');
 var serve = require('koa-static-folder');
 var cors = require('koa-cors');
 var mount = require('koa-mount');
+var helmet = require('koa-helmet');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('r7WRzIXqZC2ZNXcaq_KF0A');
 var app = koa();
@@ -14,6 +15,7 @@ app.use(bodyParser());
 app.use(router(app));
 app.use(json());
 app.use(cors());
+app.use(helmet.cacheControl());
 app.use(serve('./client/bower_components'));
 app.use(serve('./client/app'));
 
