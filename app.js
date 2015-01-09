@@ -140,7 +140,11 @@ app.get('/', function *() {
 
 /*** team data for client side ***/
 app.post('/api/teams', function *(){
-  this.body = teamdata;
+  var db = yield comongo.connect(DB);
+  var teamsColl = yield db.collection('teams');
+  var teams = yield teamsColl.find().toArray();
+  this.body = teams;
+  yield db.close();
 });
 
 var server = require('http').createServer(app.callback());

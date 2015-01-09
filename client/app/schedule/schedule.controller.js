@@ -73,7 +73,9 @@ angular.module('mltpApp')
       var playerObjArr = [];
       var statsToCompile = [];
       var team1 = game.team1;
+      var team2 = game.team2;
       var week = 'week' + $routeParams.id;
+      var checkTheOtherTeam = false;
       teamsdata.forEach(function(team){
         if(team1 == team.name) {
           if(halfOrGame.length == 2) { //if G1 or G2
@@ -82,6 +84,7 @@ angular.module('mltpApp')
             for(var half in (team[week])[halvesToCheck]) {
               var game = (team[week])[halvesToCheck];
               var halfStats = game[half];
+              if(halfStats.length == 0) checkTheOtherTeam = true;
               halfStats.forEach(function(stat){ //bc this is an array of stats arrays, loop thru
                statsToCompile.push(stat);
               })
@@ -92,13 +95,39 @@ angular.module('mltpApp')
             var gameToCheck = 'game' + whichGame;
             var halfToCheck = 'half' + whichHalf;
             var stats = ((team[week])[gameToCheck])[halfToCheck]; //bc this is an array of stats arrays, loop thru
+            if(stats.length == 0) checkTheOtherTeam = true;
             stats.forEach(function(stat){
               statsToCompile.push(stat);
             })
           }
         }
       });
-
+      if(checkTheOtherTeam) {
+        teamsdata.forEach(function(team){
+          if(team2 == team.name) {
+            if(halfOrGame.length == 2) { //if G1 or G2
+              var whichGame = (halfOrGame.split(''))[1];
+              var halvesToCheck = 'game' + whichGame;
+              for(var half in (team[week])[halvesToCheck]) {
+                var game = (team[week])[halvesToCheck];
+                var halfStats = game[half];
+                halfStats.forEach(function(stat){ //bc this is an array of stats arrays, loop thru
+                 statsToCompile.push(stat);
+                })
+              }
+            } else { //if just one half
+              var whichGame = (halfOrGame.split(''))[1];
+              var whichHalf = (halfOrGame.split(''))[3];
+              var gameToCheck = 'game' + whichGame;
+              var halfToCheck = 'half' + whichHalf;
+              var stats = ((team[week])[gameToCheck])[halfToCheck]; //bc this is an array of stats arrays, loop thru
+              stats.forEach(function(stat){
+                statsToCompile.push(stat);
+              })
+            }
+          }
+        });
+      }
       statsToCompile.forEach(function(statArr){
         for(var i=7; i < statArr.length; i++) {
           if(checkPlayerObjArr(statArr[i].name, playerObjArr)) { //if player not already in there
