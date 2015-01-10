@@ -137,6 +137,7 @@
     background: #666;
     padding: 5px;
   }
+  .yellow { background: yellow; }
   footer a {
     padding-left: 10px;
     padding-right: 10px;
@@ -164,12 +165,12 @@
         <table class='scoreboard' style="width:100%">
           <tr>
             <td class="leftMostTD">Teams</td>
-            <td ng-click="onSeeMoreClick(game, 'G1H1')"><span class='seeMore'>G1H1</span></td>
-            <td ng-click="onSeeMoreClick(game, 'G1H2')"><span class='seeMore'>G1H2</span></td>
-            <td ng-click="onSeeMoreClick(game, 'G1')"><span class='seeMore'>Game 1</span></td>
-            <td ng-click="onSeeMoreClick(game, 'G2H1')"><span class='seeMore'>G2H1</span></td>
-            <td ng-click="onSeeMoreClick(game, 'G2H2')"><span class='seeMore'>G2H2</span></td>
-            <td ng-click="onSeeMoreClick(game, 'G2')"><span class='seeMore'>Game 2</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G1H1')"><span id='G1H1{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>G1H1</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G1H2')"><span id='G1H2{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>G1H2</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G1')"><span id='G1{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>Game 1</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G2H1')"><span id='G2H1{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>G2H1</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G2H2')"><span id='G2H2{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>G2H2</span></td>
+            <td ng-click="onSeeMoreClick(game, 'G2')"><span id='G2{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>Game 2</span></td>
           </tr>
           <tr>
             <td class="teamName leftMostTD">{{game.team1}}</td>

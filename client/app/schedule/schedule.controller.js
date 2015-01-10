@@ -8,7 +8,7 @@ angular.module('mltpApp')
     $scope.maparr = [['http://i.imgur.com/Aa2JVEc.png','Smirk'],['http://i.imgur.com/wLQsUUc.png#map-velocity','Velocity'],
                     ['http://i.imgur.com/iEmJy16.png#map-wormy','Wormy'],['http://i.imgur.com/9uZSGOn.png#map-danger-zone','Danger Zone 3'],
                     ['http://i.imgur.com/zfqqa5C.png','Iron'],['http://i.imgur.com/G2IRxWd.png#map-45','45'],
-                    ['http://i.imgur.com/VixChXZ.png#map-boombox','Boombox'],['http://i.imgur.com/xgoaXJy.png#map-star','Star'],['/#/schedule','Community Vote'],['http://i.imgur.com/CDcTbs0.png#map-smirk','Smirk']];
+                    ['http://i.imgur.com/VixChXZ.png#map-boombox','Boombox'],['http://i.imgur.com/xgoaXJy.png#map-star','Star'],['/#/schedule','Community Vote'],['http://i.imgur.com/Aa2JVEc.png','Smirk']];
 
     var teamsdata, scheddata;
 
@@ -60,6 +60,8 @@ angular.module('mltpApp')
 
     $scope.closeStats = function(game) {
       var idToShow = "#moreInfo" + game.gameId;
+      var classOfHeadersToClear = '.seeMore' + game.gameId;
+      angular.element(classOfHeadersToClear).removeClass('yellow');
       $scope.games.forEach(function(g){
         if(g.gameId == game.gameId) {
           g.close = "";
@@ -76,6 +78,11 @@ angular.module('mltpApp')
       var team2 = game.team2;
       var week = 'week' + $routeParams.id;
       var checkTheOtherTeam = false;
+      var idOfHeaderToHighlight = '#' + halfOrGame + game.gameId;
+      var classOfHeadersToClear = '.seeMore' + game.gameId;
+      angular.element(classOfHeadersToClear).removeClass('yellow');
+      angular.element(idOfHeaderToHighlight).addClass('yellow');
+
       teamsdata.forEach(function(team){
         if(team1 == team.name) {
           if(halfOrGame.length == 2) { //if G1 or G2
