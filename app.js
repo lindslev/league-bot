@@ -253,7 +253,6 @@ function *mandrillTSVs(teamId) {
   for(var half in game2) {
     for(var i=0; i < game2[half].length; i++) {
       var currentStatsArr = (game2[half])[i];
-      console.log('currnet stats arr', currentStatsArr)
       var statsData = currentStatsArr.slice(7,currentStatsArr.length);
       var thisTsv = makeTSV(statsData);
       var fileName = "" + team.name + "game2" + half + ".tsv";
