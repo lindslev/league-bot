@@ -39,6 +39,12 @@ co(function *() {
   var count = yield collection.count();
   var gamesColl = yield db.collection('games');
   var gameCount = yield gamesColl.count();
+  var userTracking = yield db.collection('analytics');
+  var userCount = yield userTracking.count();
+
+  if(userCount == 0) {
+    yield userTracking.insert({count: 'connect', numberOf: 0});
+  }
 
   /*** populating teams in the db ***/
   if(count == 0) {
@@ -153,7 +159,17 @@ var io = require('socket.io').listen(app.listen(process.env.PORT || 4000));
 
 io.on('connection', function(socket){
   console.log('User connected.');
+  co(analyzeConnections());
 });
+
+function *analyzeConnections(){
+  var db = yield comongo.connect(DB);
+  var userTracking = yield db.collection('analytics');
+  var userCount = yield userTracking.findOne({count:'connect'});
+  userCount.numberOf += 1;
+  yield userTracking.update({count:'connect'}, userCount);
+  yield db.close();
+}
 
 // expected req format from userscript:
 //  map, server, game, half, key, score, state, stats...
