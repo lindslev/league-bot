@@ -113,7 +113,7 @@
 
 <div class="container">
   <div class="row">
-    <h3> WEEK {{thisWeek}} </h3>
+    <h3> WEEK {{thisWeek}} : <a href="{{(maparr[thisWeek-1])[0]}}" target="_blank">{{(maparr[thisWeek-1])[1]}}</a> & <a href="{{(maparr[thisWeek])[0]}}" target="_blank">{{(maparr[thisWeek])[1]}}</a></h3>
     <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
       <p class='gameTitle'><span ng-show="game.streamLink" class="liveLink"><a target="_blank" href="{{game.streamLink}}">Stream</a></span> {{game.team1}} vs {{game.team2}} <span class="currentHalfStats" ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">Current Half Stats</span></p>
       <div>
