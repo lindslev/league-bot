@@ -52,12 +52,19 @@
     background: black;
     font-size: 20px;
   }
-  .gameTitle span {
+  .closeStatsButton, .vodLink {
     cursor: pointer;
     font-size: 12px;
     float: right;
     margin-top: 5px;
     margin-right: 10px;
+  }
+  .vodLink {
+    float: left;
+  }
+  .vodLink a {
+    color: white;
+    padding-left: 10px;
   }
   .score {
     /*border: 3px solid black;*/
@@ -160,7 +167,7 @@
     <h3> WEEK {{weekId}} - <span>{{ weekarr[weekId-1] }}</span></h3>
     <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
       <!-- <p class='gameTitle'> {{game.team1}} vs {{game.team2}} <span ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">See More</span></p> -->
-      <p class='gameTitle'> {{game.team1}} vs {{game.team2}} <span ng-click="closeStats(game)">{{game.close}}</span></p>
+      <p class='gameTitle'><span class="vodLink" ng-show="game.streamLink"><a href="{{game.streamLink}}" target="_blank">Vod</a></span> {{game.team1}} vs {{game.team2}} <span class="closeStatsButton" ng-click="closeStats(game)">{{game.close}}</span></p>
       <div>
         <table class='scoreboard' style="width:100%">
           <tr>

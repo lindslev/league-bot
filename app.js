@@ -317,11 +317,15 @@ function *mandrillTSVs(teamId) {
 
 function getWeekNum() {
   var weekMS = 604800000;
-  var compareMS = new Date(2014, 11, 27).getTime();
-  /*REMEMBER TO CHANGE THIS TO WEEK 1 DATE*/
+  var compareMS = new Date(2015, 0, 16).getTime(); //2 days before scheduled week 1 start date
   var todayMS = new Date().getTime();
   var whichWeek = Math.round((todayMS - compareMS) / weekMS);
-  return 1;
+  if(whichWeek < 1) {
+    whichWeek = 1;
+  } else if(whichWeek > 9) {
+    whichWeek = 9;
+  }
+  return whichWeek;
 }
 
 /** for client to get a SPECIFIC week on pg load **/
@@ -406,5 +410,29 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
                     };
   io.sockets.emit('newScoreUpdate', objForClient);
   this.body = 'SUCCESS';
+  yield db.close();
+});
+
+/** for POSTMAN RESTclient to add stream links on sundays once decided **/
+app.post('/api/game/stream', function*(){
+  var db = yield comongo.connect(DB);
+  var gamesColl = yield db.collection('games');
+  var weekId = getWeekNum();
+  var thisWeeksGames = yield gamesColl.findOne({week: weekId});
+  console.log('thisweek', thisWeeksGames, weekId);
+  var body = this.request;
+  var params = ((body.url.split('?'))[1]).split('&');
+  var team = (params[0].split('='))[1];
+  var stream = (params[1].split('='))[1];
+  console.log(team, stream)
+
+  for(var game in thisWeeksGames) {
+    if(thisWeeksGames[game].team1 == team || thisWeeksGames[game].team2 == team) {
+      thisWeeksGames[game].streamLink = stream;
+    }
+  }
+
+  yield gamesColl.update({week: weekId}, thisWeeksGames);
+  this.body = body;
   yield db.close();
 });

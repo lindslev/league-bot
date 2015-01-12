@@ -9,10 +9,15 @@ angular.module('mltpApp')
 
     function getWeekNum() {
       var weekMS = 604800000;
-      var compareMS = new Date(2014, 11, 27).getTime(); //will need to change this to 1/18
+      var compareMS = new Date(2015, 0, 16).getTime(); //2 days before scheduled week 1 start date
       var todayMS = new Date().getTime();
       var whichWeek = Math.round((todayMS - compareMS) / weekMS);
-      return 1;
+      if(whichWeek < 1) {
+        whichWeek = 1;
+      } else if(whichWeek > 9) {
+        whichWeek = 9;
+      }
+      return whichWeek;
     }
 
     $scope.onSeeMoreClick = function(game) {
