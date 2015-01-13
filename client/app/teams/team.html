@@ -25,12 +25,20 @@
     background: black;
     color: white;
   }
-  li {
+  li, table {
     font-family: Bangers;
     font-size: 20px;
   }
-  li span {
+  table {
+    width: 100%;
+    border: 1px solid black;
+  }
+  li span, td {
     font-family: Dosis;
+  }
+  td {
+    border: 1px solid black;
+    text-align: center;
   }
   ul {
     list-style-type: none;
@@ -64,7 +72,8 @@
 </style>
 <h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="/#/">MAJOR LEAGUE TAGPRO</a><a class="subhead" href="/#/schedule">schedule</a></h2>
 
-<h1>{{teams[idx].name}}</h1>
+<h1>{{teams[idx].name}}<br>{{wins}} - {{ties}} - {{losses}}</h1>
+
 <div class="container">
   <div class="row">
     <div class="col-lg-4 col-md-4 col-xs-12">
@@ -80,9 +89,13 @@
     </div>
     <div class="col-lg-4 col-md-4 col-xs-12">
       <h2>Schedule</h2>
-      <ul>
-        <li ng-repeat="team in teams[idx].schedule"><span>Week {{$index + 1}}:</span><a href="/#/teams/{{team}}"> {{team}}</a></li>
-      </ul>
+      <table>
+        <tr ng-repeat="team in teams[idx].schedule">
+          <td class='tdWeek'><span>Week {{$index + 1}}</span></td>
+          <td><a href="/#/teams/{{team}}"> {{team}}</a></td>
+          <td><span ng-show="record[$index].game2">{{record[$index].game1}} & {{record[$index].game2}}</span></td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>

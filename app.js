@@ -31,6 +31,12 @@ var keys = ['11abc','12def','13ghi','14jkl','15mno',
             '21abc','22def','23ghi','24jki','25mno',
             '31abc','32def','33ghi','34jkl','35mno',
             '51abc','52def','53ghi','54jkl','55mno'];
+var maparr = [['http://i.imgur.com/Aa2JVEc.png','Smirk'],['http://i.imgur.com/wLQsUUc.png#map-velocity','Velocity'],
+                ['http://i.imgur.com/iEmJy16.png#map-wormy','Wormy'],['http://i.imgur.com/9uZSGOn.png#map-danger-zone','Danger Zone 3'],
+                ['http://i.imgur.com/zfqqa5C.png','Iron'],['http://i.imgur.com/G2IRxWd.png#map-45','45'],
+                ['http://i.imgur.com/VixChXZ.png#map-boombox','Boombox'],['http://i.imgur.com/xgoaXJy.png#map-star','Star'],['/#/schedule','Community Vote'],['http://i.imgur.com/Aa2JVEc.png','Smirk']];
+
+
 
 co(function *() {
   var teams = yield cjson.load('./server/db/teams.json');
@@ -421,6 +427,7 @@ app.post('/api/game/stream', function*(){
   var thisWeeksGames = yield gamesColl.findOne({week: weekId});
   console.log('thisweek', thisWeeksGames, weekId);
   var body = this.request;
+  //expected syntax == team="name"&link="???"
   var params = ((body.url.split('?'))[1]).split('&');
   var team = (params[0].split('='))[1];
   var stream = (params[1].split('='))[1];
