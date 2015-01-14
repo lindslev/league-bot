@@ -50,6 +50,9 @@
   .pacific {
     background: #FF6666; /*nqoba's pref lol*/
   }
+  .gray {
+    background: #999;
+  }
   footer {
     background: black;
     height: 25px;
@@ -82,7 +85,7 @@
 </style>
 <h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="/#/">MAJOR LEAGUE TAGPRO</a><a class="subhead" href="/#/schedule">schedule</a></h2>
 
-<h1>Standings</h1>
+<h1>{{divisionName}} Standings</h1>
 
 <div class='container'>
 
@@ -105,8 +108,7 @@
         <td>Cap Differential</td>
         <!-- <td>Division</td> -->
       </tr>
-      <tr ng-repeat="team in standings | orderBy:['points','capDiff']:'reverse'" ng-class="{ 'atlantic' : team.division == 'Atlantic', 'northeast' : team.division == 'Northeast',
-                            'midwest' : team.division == 'Midwest', 'pacific' : team.division == 'Pacific' }">
+      <tr ng-repeat="team in standings | filter:divisionName | orderBy:['points','capDiff']:'reverse'" class='{{divisionName}}' ng-class="{ 'gray' : $index >= 3 }">
         <!-- orderBy takes an array of strings ['points','capDiff'] ;;;; alsoconvert hash to array -->
         <td><a href="/#/teams/{{team.name}}">{{team.name}}</a></td>
         <td>{{team.wins}}</td>

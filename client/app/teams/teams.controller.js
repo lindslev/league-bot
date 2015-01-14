@@ -6,6 +6,7 @@ angular.module('mltpApp')
     $scope.teams = [], $scope.atlantic = [], $scope.northeast = [],
     $scope.midwest = [], $scope.pacific = [];
     $scope.teamName = $routeParams.name || 0;
+    $scope.divisionName = $routeParams.division || 0;
     $scope.record = [];
     $scope.wins = 0, $scope.ties = 0, $scope.losses = 0;
     $scope.standings = [];
