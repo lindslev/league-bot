@@ -16,9 +16,9 @@
     color: #333;
   }
   .subhead {
-    font-size: 18px;
+    font-size: 30px;
     font-family: Dosis;
-    margin: 0px 30px 0px 30px;
+    padding: 0px 30px 0px 30px;
   }
   h1 {
     font-family: Bangers;
@@ -98,27 +98,54 @@
   </div>
   <br>
   <div class='row'>
-    <table>
-      <tr>
-        <td>Team</td>
-        <td>Wins</td>
-        <td>Ties</td>
-        <td>Losses</td>
-        <td>Points</td>
-        <td>Cap Differential</td>
-        <!-- <td>Division</td> -->
-      </tr>
-      <tr ng-repeat="team in standings | filter:divisionName | orderBy:['points','capDiff']:'reverse'" class='{{divisionName}}' ng-class="{ 'gray' : $index >= 3 }">
-        <!-- orderBy takes an array of strings ['points','capDiff'] ;;;; alsoconvert hash to array -->
-        <td><a href="/#/teams/{{team.name}}">{{team.name}}</a></td>
-        <td>{{team.wins}}</td>
-        <td>{{team.ties}}</td>
-        <td>{{team.losses}}</td>
-        <td>{{team.points}}</td>
-        <td>{{team.capDiff}}</td>
-        <!-- <td>{{team.division}}</td> -->
-      </tr>  <!-- with 20 rows where rows are each team ranked from highest points to lowest points uhhh cap diff tho?? -->
-    </table>
+    <div class='col-lg-6 col-md-12 col-xs-12'>
+      <h2 class='subhead'>Conference Standings: {{conference}}</h2>
+      <table>
+        <tr>
+          <td>Team</td>
+          <td>Wins</td>
+          <td>Ties</td>
+          <td>Losses</td>
+          <td>Points</td>
+          <td>Cap Differential</td>
+          <!-- <td>Division</td> -->
+        </tr>
+        <tr ng-repeat="team in standings | filter:conference | orderBy:['points','capDiff']:'reverse'" class='{{divisionName}}' ng-class="{ 'atlantic' : team.division == 'Atlantic', 'northeast' : team.division == 'Northeast',
+                            'midwest' : team.division == 'Midwest', 'pacific' : team.division == 'Pacific', 'gray' : $index >= 6 }">
+          <!-- orderBy takes an array of strings ['points','capDiff'] ;;;; alsoconvert hash to array -->
+          <td><a href="/#/teams/{{team.name}}">{{team.name}}</a></td>
+          <td>{{team.wins}}</td>
+          <td>{{team.ties}}</td>
+          <td>{{team.losses}}</td>
+          <td>{{team.points}}</td>
+          <td>{{team.capDiff}}</td>
+          <!-- <td>{{team.division}}</td> -->
+        </tr>  <!-- with 20 rows where rows are each team ranked from highest points to lowest points uhhh cap diff tho?? -->
+      </table>
+    </div>
+    <div class='col-lg-6 col-md-12 col-xs-12'>
+      <h2 class='subhead'>Division Standings: {{divisionName}}</h2>
+      <table>
+        <tr>
+          <td>Team</td>
+          <td>Wins</td>
+          <td>Ties</td>
+          <td>Losses</td>
+          <td>Points</td>
+          <td>Cap Differential</td>
+          <!-- <td>Division</td> -->
+        </tr>
+        <tr ng-repeat="team in standings | filter:divisionName | orderBy:['points','capDiff']:'reverse'" class='{{divisionName.toLowerCase()}}'>
+          <td><a href="/#/teams/{{team.name}}">{{team.name}}</a></td>
+          <td>{{team.wins}}</td>
+          <td>{{team.ties}}</td>
+          <td>{{team.losses}}</td>
+          <td>{{team.points}}</td>
+          <td>{{team.capDiff}}</td>
+          <!-- <td>{{team.division}}</td> -->
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
 

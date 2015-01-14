@@ -1,21 +1,27 @@
 'use strict';
 
 angular.module('mltpApp')
-  .controller('TeamsCtrl', function ($http, $scope, $routeParams) {
+.controller('TeamsCtrl', function ($http, $scope, $routeParams) {
 
-    $scope.teams = [], $scope.atlantic = [], $scope.northeast = [],
-    $scope.midwest = [], $scope.pacific = [];
-    $scope.teamName = $routeParams.name || 0;
-    $scope.divisionName = $routeParams.division || 0;
-    $scope.record = [];
-    $scope.wins = 0, $scope.ties = 0, $scope.losses = 0;
-    $scope.standings = [];
-    $scope.standingsHash = {};
+  $scope.teams = [], $scope.atlantic = [], $scope.northeast = [],
+  $scope.midwest = [], $scope.pacific = [];
+  $scope.teamName = $routeParams.name || 0;
+  $scope.divisionName = $routeParams.division || 0;
+  $scope.divisionName = $scope.divisionName.charAt(0).toUpperCase() + $scope.divisionName.slice(1);
+  if($scope.divisionName.toLowerCase() == 'northeast' || $scope.divisionName.toLowerCase() == 'atlantic') {
+    $scope.conference = 'East';
+  } else {
+    $scope.conference = 'West';
+  }
+  $scope.record = [];
+  $scope.wins = 0, $scope.ties = 0, $scope.losses = 0;
+  $scope.standings = [];
+  $scope.standingsHash = {};
 
-    $http.post('/api/teams', {})
-      .success(function(list){
-            $scope.teams = list;
-            $scope.idx;
+  $http.post('/api/teams', {})
+  .success(function(list){
+    $scope.teams = list;
+    $scope.idx;
             if($scope.teamName) { //if :/team/name - doesnt happen on /teams route
               $scope.teams.forEach(function(team, i){
                 if(team.name.toLowerCase() == $scope.teamName.toLowerCase()) $scope.idx = i;
@@ -34,6 +40,7 @@ angular.module('mltpApp')
                     ties: 0,
                     points: 0,
                     division: 'Atlantic',
+                    conference: 'east',
                     capDiff: 0
                   }
                 } else if(team.key.split('')[0] == '2') {
@@ -45,6 +52,7 @@ angular.module('mltpApp')
                     ties: 0,
                     points: 0,
                     division: 'Northeast',
+                    conference: 'east',
                     capDiff: 0
                   }
                 } else if(team.key.split('')[0] == '3') {
@@ -56,6 +64,7 @@ angular.module('mltpApp')
                     ties: 0,
                     points: 0,
                     division: 'Midwest',
+                    conference: 'west',
                     capDiff: 0
                   }
                 } else {
@@ -67,25 +76,26 @@ angular.module('mltpApp')
                     ties: 0,
                     points: 0,
                     division: 'Pacific',
+                    conference: 'west',
                     capDiff: 0
                   }
                 }
               });
-            }
+}
 
-        function findTeamDivision(team) {
-          var div;
-          list.forEach(function(tm){
-            if(tm.name == team) {
-              div = tm.key.split('')[0];
-            }
-          })
-          return div;
-        }
+function findTeamDivision(team) {
+  var div;
+  list.forEach(function(tm){
+    if(tm.name == team) {
+      div = tm.key.split('')[0];
+    }
+  })
+  return div;
+}
 
 
-        $http.post('/api/schedule', {})
-          .success(function(sched){
+$http.post('/api/schedule', {})
+.success(function(sched){
             sched.sort(function(a,b){ //because db doesnt give weeks back in order, for some reason
               if(a.week < b.week) return -1;
               if(a.week > b.week) return 1;
@@ -241,13 +251,13 @@ angular.module('mltpApp')
             }
 
           }) //end .success
-          .error(function(err){
-            if(err) throw new Error(err);
-          });
+.error(function(err){
+  if(err) throw new Error(err);
+});
 
-      })
-      .error(function(err){
-        if(err) throw new Error(err);
-      });
+})
+.error(function(err){
+  if(err) throw new Error(err);
+});
 
-  });
+});

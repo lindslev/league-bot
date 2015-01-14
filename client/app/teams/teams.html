@@ -12,6 +12,9 @@
     background: white;
     color: #333;
   }
+  .divisionTitle a {
+    color: white;
+  }
   .subhead {
     font-size: 18px;
     font-family: Dosis;
@@ -67,21 +70,21 @@
 <div class="container">
   <div class="row">
       <div class="col-lg-6">
-        <h2 class="divisionTitle">NORTHEAST TEAMS</h2>
+        <h2 class="divisionTitle"><a href="/#/standings/northeast">NORTHEAST TEAMS</a></h2>
         <a href="/#/teams/{{team.name}}" class='teamName' ng-repeat="team in northeast">{{team.name}}</a>
       </div>
       <div class="col-lg-6">
-        <h2 class="divisionTitle">ATLANTIC TEAMS</h2>
+        <h2 class="divisionTitle"><a href="/#/standings/atlantic">ATLANTIC TEAMS</a></h2>
         <a href="/#/teams/{{team.name}}" class='teamName' ng-repeat="team in atlantic">{{team.name}}</a>
       </div>
   </div>
   <div class="row">
     <div class="col-lg-6">
-      <h2 class="divisionTitle">MIDWEST TEAMS</h2>
+      <h2 class="divisionTitle"><a href="/#/standings/midwest">MIDWEST TEAMS</a></h2>
       <a href="/#/teams/{{team.name}}" class='teamName' ng-repeat="team in midwest">{{team.name}}</a>
     </div>
     <div class="col-lg-6">
-      <h2 class="divisionTitle">PACIFIC TEAMS</h2>
+      <h2 class="divisionTitle"><a href="/#/standings/pacific">PACIFIC TEAMS</a></h2>
       <a href="/#/teams/{{team.name}}" class='teamName' ng-repeat="team in pacific">{{team.name}}</a>
     </div>
   </div>
