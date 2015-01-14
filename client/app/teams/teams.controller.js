@@ -8,6 +8,8 @@ angular.module('mltpApp')
     $scope.teamName = $routeParams.name || 0;
     $scope.record = [];
     $scope.wins = 0, $scope.ties = 0, $scope.losses = 0;
+    $scope.standings = [];
+    $scope.standingsHash = {};
 
     $http.post('/api/teams', {})
       .success(function(list){
@@ -18,15 +20,54 @@ angular.module('mltpApp')
                 if(team.name.toLowerCase() == $scope.teamName.toLowerCase()) $scope.idx = i;
               });
             } else { //if /teams
+
+              //also build standings hash and team objects in here somewhere because down there is not working
+
               $scope.teams.forEach(function(team){
                 if(team.key.split('')[0] == '1') {
                   $scope.atlantic.push(team);
+                  $scope.standingsHash[team.name] = {
+                    name: team.name,
+                    wins: 0,
+                    losses: 0,
+                    ties: 0,
+                    points: 0,
+                    division: 'Atlantic',
+                    capDiff: 0
+                  }
                 } else if(team.key.split('')[0] == '2') {
                   $scope.northeast.push(team);
+                  $scope.standingsHash[team.name] = {
+                    name: team.name,
+                    wins: 0,
+                    losses: 0,
+                    ties: 0,
+                    points: 0,
+                    division: 'Northeast',
+                    capDiff: 0
+                  }
                 } else if(team.key.split('')[0] == '3') {
                   $scope.midwest.push(team);
+                  $scope.standingsHash[team.name] = {
+                    name: team.name,
+                    wins: 0,
+                    losses: 0,
+                    ties: 0,
+                    points: 0,
+                    division: 'Midwest',
+                    capDiff: 0
+                  }
                 } else {
                   $scope.pacific.push(team);
+                  $scope.standingsHash[team.name] = {
+                    name: team.name,
+                    wins: 0,
+                    losses: 0,
+                    ties: 0,
+                    points: 0,
+                    division: 'Pacific',
+                    capDiff: 0
+                  }
                 }
               });
             }
@@ -40,6 +81,7 @@ angular.module('mltpApp')
           })
           return div;
         }
+
 
         $http.post('/api/schedule', {})
           .success(function(sched){
@@ -61,9 +103,66 @@ angular.module('mltpApp')
             });
             $scope.sched = sched;
 
-            $scope.sched.forEach(function(week){
-              for(var gameNum in week){
+            $scope.sched.forEach(function(week){ //for every week of season
+              for(var gameNum in week){ //for every matchup in the week
                 var game = week[gameNum]; //game should really say 'matchup' because each matchup has two games
+
+                /***** THIS CODE == CALCULATE LEAGUE STANDINGS ****/
+                var team1 = game.team1;
+                var team2 = game.team2;
+
+                if(game.g1h1 !== null && game.g1h2 !== null) {
+                  var team1scoreG1 = game.g1h1[team1] + game.g1h2[team1];
+                  var team2scoreG1 = game.g1h1[team2] + game.g1h2[team2];
+                  var team1capDiffG1 = team1scoreG1 - team2scoreG1;
+                  var team2capDiffG1 = team2scoreG1 - team1scoreG1;
+                  if(team1scoreG1 > team2scoreG1) {
+                    $scope.standingsHash[team1].wins += 1;
+                    $scope.standingsHash[team2].losses += 1;
+                    $scope.standingsHash[team1].points += 3;
+                    $scope.standingsHash[team1].capDiff += team1capDiffG1;
+                    $scope.standingsHash[team2].capDiff += team2capDiffG1;
+                  } else if(team1scoreG1 == team2scoreG1) {
+                    $scope.standingsHash[team1].ties += 1;
+                    $scope.standingsHash[team2].ties += 1;
+                    $scope.standingsHash[team1].points += 1;
+                    $scope.standingsHash[team2].points += 1;
+                    //shouldnt be a cap diff for a tie..
+                  } else {
+                    $scope.standingsHash[team2].wins += 1;
+                    $scope.standingsHash[team1].losses += 1;
+                    $scope.standingsHash[team2].points += 3;
+                    $scope.standingsHash[team1].capDiff += team1capDiffG1;
+                    $scope.standingsHash[team2].capDiff += team2capDiffG1;
+                  }
+                }
+
+                if(game.g2h1 !== null && game.g2h2 !== null) {
+                  var team1scoreG2 = game.g2h1[team1] + game.g2h2[team1];
+                  var team2scoreG2 = game.g2h1[team2] + game.g2h2[team2];
+                  var team1capDiffG2 = team1scoreG2 - team2scoreG2;
+                  var team2capDiffG2 = team2scoreG2 - team1scoreG2;
+                  if(team1scoreG2 > team2scoreG2) {
+                    $scope.standingsHash[team1].wins += 1;
+                    $scope.standingsHash[team2].losses += 1;
+                    $scope.standingsHash[team1].points += 3;
+                    $scope.standingsHash[team1].capDiff += team1capDiffG2;
+                    $scope.standingsHash[team2].capDiff += team2capDiffG2;
+                  } else if(team1scoreG2 == team2scoreG2) {
+                    $scope.standingsHash[team1].ties += 1;
+                    $scope.standingsHash[team2].ties += 1;
+                    $scope.standingsHash[team1].points += 1;
+                    $scope.standingsHash[team2].points += 1;
+                    //shouldnt be a cap diff for a tie..
+                  } else {
+                    $scope.standingsHash[team2].wins += 1;
+                    $scope.standingsHash[team1].losses += 1;
+                    $scope.standingsHash[team2].points += 3;
+                    $scope.standingsHash[team1].capDiff += team1capDiffG1;
+                    $scope.standingsHash[team2].capDiff += team2capDiffG1;
+                  }
+                }
+                /***** THIS CODE ENCOMPASSES HOW TO GET AN INDIVIDUAL'S TEAM RECORD ******/
                 var objForRecordArray = {
                   'game1':null,
                   'game2':null
@@ -130,10 +229,16 @@ angular.module('mltpApp')
                   }
                   $scope.record.push(objForRecordArray);
                 }
+                /***** END HOW TO GET AN INDIVIDUAL TEAM'S RECORD *****/
 
               }
             }); //end sched.forEach
-console.log($scope.record)
+
+            //populate standings arr from hash for ng-repeat
+            for(var team in $scope.standingsHash) {
+              $scope.standings.push($scope.standingsHash[team]);
+            }
+
           }) //end .success
           .error(function(err){
             if(err) throw new Error(err);
@@ -143,7 +248,5 @@ console.log($scope.record)
       .error(function(err){
         if(err) throw new Error(err);
       });
-
-
 
   });

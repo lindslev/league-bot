@@ -1,0 +1,125 @@
+<style>
+  body {
+    color: black;
+  }
+  .container {
+    padding-bottom: 80px;
+  }
+  a, a:hover {
+    text-decoration: none;
+    color: black;
+  }
+  h1, h2, h3, .divisionTitle {
+    text-align: center;
+    font-family: Poiret One;
+    background: white;
+    color: #333;
+  }
+  .subhead {
+    font-size: 18px;
+    font-family: Dosis;
+    margin: 0px 30px 0px 30px;
+  }
+  h1 {
+    font-family: Bangers;
+    background: black;
+    color: white;
+  }
+  table {
+    text-align: center;
+    margin: 0 auto;
+    width: 95%;
+    font-family: Dosis;
+  }
+  table td {
+    border: 1px solid black;
+    font-size: 18px;
+  }
+  .northeast, .atlantic, .pacific, .midwest {
+    font-size: 14px;
+  }
+  .northeast {
+    background: #80CC80;
+  }
+  .atlantic {
+    background: #66A3FF;
+  }
+  .midwest {
+    background: #FFFF66;
+  }
+  .pacific {
+    background: #FF6666; /*nqoba's pref lol*/
+  }
+  footer {
+    background: black;
+    height: 25px;
+    width: 100%;
+    text-align: center;
+    font-family: Dosis;
+    color: white;
+    position: fixed;
+    bottom: 0;
+  }
+  i {
+    color: white;
+  }
+  footer a {
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+  }
+  footer p {
+    display: inline;
+  }
+  @media (max-width: 600px) {
+    #mainBanner a {
+      display: block;
+    }
+    table td {
+      font-size: 10px;
+    }
+  }
+</style>
+<h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="/#/">MAJOR LEAGUE TAGPRO</a><a class="subhead" href="/#/schedule">schedule</a></h2>
+
+<h1>Standings</h1>
+
+<div class='container'>
+
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-12">
+      <table style="width: 100%">
+        <tr><td class="northeast">Northeast</td><td class="atlantic">Atlantic</td><td class="midwest">Midwest</td><td class="pacific">Pacific</td></tr>
+      </table>
+    </div>
+  </div>
+  <br>
+  <div class='row'>
+    <table>
+      <tr>
+        <td>Team</td>
+        <td>Wins</td>
+        <td>Ties</td>
+        <td>Losses</td>
+        <td>Points</td>
+        <td>Cap Differential</td>
+        <!-- <td>Division</td> -->
+      </tr>
+      <tr ng-repeat="team in standings | orderBy:['points','capDiff']:'reverse'" ng-class="{ 'atlantic' : team.division == 'Atlantic', 'northeast' : team.division == 'Northeast',
+                            'midwest' : team.division == 'Midwest', 'pacific' : team.division == 'Pacific' }">
+        <!-- orderBy takes an array of strings ['points','capDiff'] ;;;; alsoconvert hash to array -->
+        <td><a href="/#/teams/{{team.name}}">{{team.name}}</a></td>
+        <td>{{team.wins}}</td>
+        <td>{{team.ties}}</td>
+        <td>{{team.losses}}</td>
+        <td>{{team.points}}</td>
+        <td>{{team.capDiff}}</td>
+        <!-- <td>{{team.division}}</td> -->
+      </tr>  <!-- with 20 rows where rows are each team ranked from highest points to lowest points uhhh cap diff tho?? -->
+    </table>
+  </div>
+</div>
+
+<footer>
+  <a href="https://twitter.com/thekoalabeast" target="_blank"><i class="fa fa-twitter"></i></a><a href="http://reddit.com/r/tagpro" target="_blank"><i class="fa fa-reddit"></i></a><p> &copy; Gem </p><a href="http://tagpro.gg" target="_blank"><i class="fa fa-gamepad"></i></a><a href="https://docs.google.com/spreadsheets/d/1gYRmRLbaxMyyWdLPh_7gkR5dHlH0qNwEExsd9p5uTM0/edit#gid=740173053" target="_blank"><i class="fa fa-bar-chart"></i></a>
+</footer>

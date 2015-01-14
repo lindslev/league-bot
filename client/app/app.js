@@ -15,6 +15,10 @@ angular.module('mltpApp', ['ngRoute'])
         templateUrl: '/client/app/teams/team.html',
         controller: 'TeamsCtrl'
       })
+      .when('/standings', {
+        templateUrl: '/client/app/teams/standings.html',
+        controller: 'TeamsCtrl'
+      })
       .when('/schedule', {
         templateUrl: '/client/app/schedule/schedule.html',
         controller: 'ScheduleCtrl'
