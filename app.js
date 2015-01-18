@@ -425,6 +425,7 @@ app.post('/api/game/stream', function*(){
   //expected syntax == team="name"&link="???"
   var params = ((body.url.split('?'))[1]).split('&');
   var team = (params[0].split('='))[1];
+  team = team.replace("%20", " ");
   var stream = (params[1].split('='))[1];
   console.log(team, stream)
 
