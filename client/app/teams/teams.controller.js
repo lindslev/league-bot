@@ -170,8 +170,8 @@ angular.module('mltpApp')
                         $scope.standingsHash[team2].wins += 1;
                         $scope.standingsHash[team1].losses += 1;
                         $scope.standingsHash[team2].points += 3;
-                        $scope.standingsHash[team1].capDiff += team1capDiffG1;
-                        $scope.standingsHash[team2].capDiff += team2capDiffG1;
+                        $scope.standingsHash[team1].capDiff += team1capDiffG2;
+                        $scope.standingsHash[team2].capDiff += team2capDiffG2;
                       }
                     }
                 }
@@ -246,7 +246,7 @@ angular.module('mltpApp')
 
               }
             }); //end sched.forEach
-
+            console.log('standingsHash', $scope.standingsHash)
             //populate standings arr from hash for ng-repeat
             for(var team in $scope.standingsHash) {
               $scope.standings.push($scope.standingsHash[team]);
