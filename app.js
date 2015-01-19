@@ -205,10 +205,10 @@ app.post('/api/teams/game/stats', cors({origin:true}), function*(){
   io.sockets.emit('newGameUpdate', body);
   if(body[2].game == 2 && body[3].half == 2 && body[6].state == 2) { //if g2h2 and state is over
     yield sentStatsCheck(teamId); //check if stats for this game have already been sent
-    if(!globalSent){
-      yield mandrillTSVs(teamId);
-      console.log('mandrilling for teamId', teamId);
-    }
+    // if(!globalSent){ // removing this conditional for now due to lp/tears issue of week 1
+    yield mandrillTSVs(teamId);
+    console.log('mandrilling for teamId', teamId);
+    // }
   }
   this.body = 'SUCCESS';
 });
@@ -288,6 +288,10 @@ function *mandrillTSVs(teamId) {
       "to": [{
               "email": "geminycrickett@gmail.com",
               "name": "Gem"
+          },
+          {
+            "email": "leodarrfut@gmail.com",
+            "name": "Nqoba"
           }],
       "important": false,
       "track_opens": true,
