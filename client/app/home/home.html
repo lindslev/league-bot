@@ -23,6 +23,12 @@
     background: black;
     font-size: 20px;
   }
+  .complete {
+    color: #D69999;
+  }
+  .gameTitle span {
+    color: white;
+  }
   .currentHalfStats, .liveLink {
     cursor: pointer;
     font-size: 12px;
@@ -111,6 +117,9 @@
       font-size: 15px;
       color: white;
     }
+    .complete {
+      color: #D69999;
+    }
     .gameTitle span {
       padding-bottom: 3.5px;
       font-size: 11px;
@@ -124,6 +133,9 @@
     .gameTitle {
       font-size: 12.5px;
       color: white;
+    }
+    .complete {
+      color: #D69999;
     }
     .gameTitle span {
       font-size: 9px;
@@ -140,7 +152,7 @@
   <div class="row">
     <h3> WEEK {{thisWeek}} : <a href="{{(maparr[thisWeek-1])[0]}}" target="_blank">{{(maparr[thisWeek-1])[1]}}</a> & <a href="{{(maparr[thisWeek])[0]}}" target="_blank">{{(maparr[thisWeek])[1]}}</a></h3>
     <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
-      <p class='gameTitle'><span ng-show="game.streamLink" class="liveLink"><a target="_blank" href="{{game.streamLink}}">Stream</a></span> {{game.team1}} vs {{game.team2}} <span class="currentHalfStats" ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">Current Half Stats</span></p>
+      <p class='gameTitle' ng-class=" { 'complete' : game.stats[2].game == 2 && game.stats[3].half == 2 && game.stats[6].state == 2 } "><span ng-show="game.streamLink" class="liveLink"><a target="_blank" href="{{game.streamLink}}">Stream</a></span> {{game.team1}} vs {{game.team2}} <span class="currentHalfStats" ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">Current Half Stats</span></p>
       <div>
         <table class='scoreboard' style="width:100%">
           <tr>

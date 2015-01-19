@@ -56,6 +56,12 @@ angular.module('mltpApp')
               game.playerObjArr.push(game.stats[j]);
             }
             j=0;
+            // var idForCSS = "#" + game.gameId + " .gameTitle";
+            // if(game.stats[2].game == 2 && game.stats[3].half == 2 && game.stats[6].state == 2) {
+            //   angular.element(idForCSS).addClass('complete');
+            //   console.log('this is true');
+            //   $scope.$apply()
+            // }
           }
         })
       })
@@ -83,8 +89,8 @@ angular.module('mltpApp')
             $timeout(function(){
               angular.element(idForCSS).removeClass('red');
               angular.element(idForCSS).removeClass('green');
+              if(halfToUpdate == 'g2h2' && objFromServer.stats[6] == 2) angular.element(idForCSS).addClass('complete');
             }, 5000);
-
             //adding part to deal w. live stats?
             if(objFromServer.stats) {
               game.playerObjArr = [];
