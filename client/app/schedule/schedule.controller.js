@@ -110,6 +110,7 @@ angular.module('mltpApp')
         }
       });
       if(checkTheOtherTeam) {
+        statsToCompile = [];
         teamsdata.forEach(function(team){
           if(team2 == team.name) {
             if(halfOrGame.length == 2) { //if G1 or G2
