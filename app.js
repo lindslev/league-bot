@@ -349,7 +349,7 @@ app.post('/api/schedule', function*(){
 });
 
 /** for client to get THIS WEEK from db on.score **/
-app.post('/api/scorekeeper', function*(){
+app.post('/api/scorekeeper', cors({origin:true}), function*(){
   var db = yield comongo.connect(DB);
   var gamesColl = yield db.collection('games');
   var thisWeek = getWeekNum();
