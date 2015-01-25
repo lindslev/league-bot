@@ -18,6 +18,10 @@
     color: white;
     background: black;
   }
+  .game {
+    color: rgba(188,92,92,1);
+    font-weight: bold;
+  }
   .teamName {
     font-size: 30px;
     font-family: Dosis;
@@ -213,19 +217,19 @@
             <td class="teamName leftMostTD">{{game.team1}}</td>
             <td class="scoreNum">{{ game.g1h1[game.team1] }}</td>
             <td class="scoreNum">{{ game.g1h2[game.team1] }}</td>
-            <td class="scoreNum">{{ game.g1h1[game.team1] + game.g1h2[game.team1]}}</td>
+            <td class="scoreNum game">{{ game.g1h1[game.team1] + game.g1h2[game.team1]}}</td>
             <td class="scoreNum">{{ game.g2h1[game.team1] }}</td>
             <td class="scoreNum">{{ game.g2h2[game.team1] }}</td>
-            <td class="scoreNum">{{ game.g2h1[game.team1] + game.g2h2[game.team1]}}</td>
+            <td class="scoreNum game">{{ game.g2h1[game.team1] + game.g2h2[game.team1]}}</td>
           </tr>
           <tr>
             <td class="teamName leftMostTD">{{game.team2}}</td>
             <td class="scoreNum">{{ game.g1h1[game.team2] }}</td>
             <td class="scoreNum">{{ game.g1h2[game.team2] }}</td>
-            <td class="scoreNum">{{ game.g1h1[game.team2] + game.g1h2[game.team2]}}</td>
+            <td class="scoreNum game">{{ game.g1h1[game.team2] + game.g1h2[game.team2]}}</td>
             <td class="scoreNum">{{ game.g2h1[game.team2] }}</td>
             <td class="scoreNum">{{ game.g2h2[game.team2] }}</td>
-            <td class="scoreNum">{{ game.g2h1[game.team2] + game.g2h2[game.team2]}}</td>
+            <td class="scoreNum game">{{ game.g2h1[game.team2] + game.g2h2[game.team2]}}</td>
           </tr>
         </table>
         <div class="moreInfo" id="moreInfo{{$index+1}}">
