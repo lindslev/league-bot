@@ -14,7 +14,7 @@ angular.module('mltpApp')
 
     function getWeekNum() {
       var weekMS = 604800000;
-      var compareMS = new Date(2015, 0, 16).getTime(); //2 days before scheduled week 1 start date
+      var compareMS = new Date(2015, 0, 14).getTime(); //2 days before scheduled week 1 start date
       var todayMS = new Date().getTime();
       var whichWeek = Math.round((todayMS - compareMS) / weekMS);
       if(whichWeek < 1) {
@@ -56,12 +56,6 @@ angular.module('mltpApp')
               game.playerObjArr.push(game.stats[j]);
             }
             j=0;
-            // var idForCSS = "#" + game.gameId + " .gameTitle";
-            // if(game.stats[2].game == 2 && game.stats[3].half == 2 && game.stats[6].state == 2) {
-            //   angular.element(idForCSS).addClass('complete');
-            //   console.log('this is true');
-            //   $scope.$apply()
-            // }
           }
         })
       })
