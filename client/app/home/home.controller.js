@@ -14,9 +14,9 @@ angular.module('mltpApp')
 
     function getWeekNum() {
       var weekMS = 604800000;
-      var compareMS = new Date(2015, 0, 21).getTime(); //2 days before scheduled week 1 start date
+      var compareMS = new Date(2015, 0, 24).getTime(); //2 days before scheduled week 1 start date
       var todayMS = new Date().getTime();
-      var whichWeek = Math.round((todayMS - compareMS) / weekMS);
+      var whichWeek = Math.ceil((todayMS - compareMS) / weekMS);
       if(whichWeek < 1) {
         whichWeek = 1;
       } else if(whichWeek > 9) {
