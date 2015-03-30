@@ -27,10 +27,13 @@ var games = [];
 var teams = [];
 
 var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp';
-var keys = ['11abc','12def','13ghi','14jkl','15mno',
-            '21abc','22def','23ghi','24jkl','25mno',
-            '31abc','32def','33ghi','34jkl','35mno',
-            '51abc','52def','53ghi','54jkl','55mno'];
+// var keys = ['11abc','12def','13ghi','14jkl','15mno',
+//             '21abc','22def','23ghi','24jkl','25mno',
+//             '31abc','32def','33ghi','34jkl','35mno',
+//             '51abc','52def','53ghi','54jkl','55mno'];
+
+var keys = [];
+/*** commenting out keys array in offseason so throws an err if anyone tries to submit ***/
 
 
 co(function *() {

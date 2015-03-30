@@ -101,6 +101,24 @@
  i {
     color: white;
   }
+  #thanks {
+    font-family: Dosis;
+    padding: 30px;
+    font-size: 25px;
+    text-align: center;
+  }
+  hr {
+    height: 5px;
+    background: black;
+  }
+  #playoffs {
+    margin-bottom: 50px;
+  }
+  #playoffstitle {
+    text-align: center;
+    font-family: Dosis;
+    font-size: 60px;
+  }
   footer a {
     padding-left: 10px;
     padding-right: 10px;
@@ -148,7 +166,15 @@
 </style>
 <h2 id="mainBanner"><a class="subhead" href="/#/teams">teams</a><a href="/#/">MAJOR LEAGUE TAGPRO: LIVE</a><a class="subhead" href="/#/schedule">schedule</a></h2>
 
-<div class="container">
+<hr>
+<h4 id="thanks">Thanks for an excellent regular season, MLTP. This was an experimental project that had its perks and its weaknesses. Looking forward to working with ballparts to improve it for season 8, hopefully including more about players using SuperSans' database and more content like mLTP, top plays, etc. I also hope the future administration of MLTP considers which captains succeeded and which captains failed with stats this season when making captain offers for season 8. Special shoutout to Legman and Yossarian for being the only 2 captains to reliably use the script every single week. You da real MVPs. - Gem</h4>
+<hr>
+
+<p id="playoffstitle"> S7 Playoffs </p>
+
+<img id="playoffs" src="http://puu.sh/gUSzS/6ddb80743b.png" style="width:100%;">
+
+<!-- <div class="container">
   <div class="row">
     <h3> WEEK {{thisWeek}} : <a href="{{(maparr[thisWeek-1])[0]}}" target="_blank">{{(maparr[thisWeek-1])[1]}}</a> & <a href="{{(maparr[thisWeek])[0]}}" target="_blank">{{(maparr[thisWeek])[1]}}</a></h3>
     <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
@@ -218,7 +244,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
  <footer>
   <a href="https://twitter.com/thekoalabeast" target="_blank"><i class="fa fa-twitter"></i></a><a href="http://reddit.com/r/tagpro" target="_blank"><i class="fa fa-reddit"></i></a><p> &copy; Gem </p><a href="http://tagpro.gg" target="_blank"><i class="fa fa-gamepad"></i></a><a href="https://docs.google.com/spreadsheets/d/1gYRmRLbaxMyyWdLPh_7gkR5dHlH0qNwEExsd9p5uTM0/edit#gid=740173053" target="_blank"><i class="fa fa-bar-chart"></i></a>
