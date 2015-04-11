@@ -26,7 +26,7 @@ var teamdata = [];
 var games = [];
 var teams = [];
 
-var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp';
+var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp-dev';
 // var keys = ['11abc','12def','13ghi','14jkl','15mno',
 //             '21abc','22def','23ghi','24jkl','25mno',
 //             '31abc','32def','33ghi','34jkl','35mno',
