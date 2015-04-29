@@ -11,12 +11,13 @@ body {
 
 .dropdown-toggle, .dropdown-menu {
   margin-top: 10px;
-  background: #ffcc80;
+  background: #ef5350;
+  border: 0px;
 }
 
 .dropdown-toggle {
   margin-top: 10px;
-  background: #ffcc80;
+  background: #ef5350;
 }
 
 #nav {
@@ -29,7 +30,8 @@ body {
 }
 
 .nav-link {
-  color: #ffcc80;
+  color: white;
+  text-shadow: 1px 1px 1px #ef5350;
   display: inline-block;
   margin: 0px 20px;
   margin-top: 12.5px;
@@ -38,7 +40,8 @@ body {
 }
 
 .nav-link:hover {
-  color: white;
+  color: #ef5350;
+  text-shadow: .5px .5px .5px white;
 }
 
 #logo {
@@ -57,12 +60,11 @@ a, a:hover {
 }
 
 footer {
-  background: black;
   height: 25px;
   width: 100%;
   text-align: center;
   font-family: Dosis;
-  color: white;
+  color: #263238;
   bottom: 0;
   position: fixed;
 }
@@ -70,7 +72,10 @@ footer {
 footer a {
   padding-left: 10px;
   padding-right: 10px;
-  color: white;
+  color: #263238;
+}
+footer a:hover {
+  color: #263238;
 }
 footer p {
   display: inline;
