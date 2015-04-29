@@ -1,0 +1,275 @@
+body {
+  font-family: Lato;
+  background-image: url('http://i.imgur.com/KW29B0o.png');
+  background-attachment: fixed;
+}
+
+#collapsed {
+  width: 100%;
+  display: none;
+}
+
+.dropdown-toggle, .dropdown-menu {
+  margin-top: 10px;
+  background: #ffcc80;
+}
+
+.dropdown-toggle {
+  margin-top: 10px;
+  background: #ffcc80;
+}
+
+#nav {
+  height: 60px;
+  background: #263238;
+}
+
+#nav-links-container {
+  text-align: center;
+}
+
+.nav-link {
+  color: #ffcc80;
+  display: inline-block;
+  margin: 0px 20px;
+  margin-top: 12.5px;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+#logo {
+  display: inline-block;
+  width: 120px;
+  height: 35px;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+.home-title {
+  font-weight: Thin 100;
+  font-size: 150px;
+}
+
+footer {
+  background: black;
+  height: 25px;
+  width: 100%;
+  text-align: center;
+  font-family: Dosis;
+  color: white;
+  bottom: 0;
+  position: fixed;
+}
+
+footer a {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+}
+footer p {
+  display: inline;
+}
+
+
+/**
+  *
+  *
+  ** MEDIA QUERIES **
+                    *
+                    *
+                    **/
+
+@media (max-width: 900px) {
+  .nav-link {
+    display: none;
+  }
+  #nav {
+    height: 120px;
+  }
+  #collapsed, #logo-collapsible {
+    text-align: center;
+    display: inline-block;
+  }
+  .dropdown-menu {
+    margin-left: 40%;
+  }
+}
+
+
+
+/*body {
+    color: black;
+  }
+  a, a:hover {
+    text-decoration: none;
+    color: black;
+  }
+  h2, h3, .gameTitle {
+    text-align: center;
+    font-family: Poiret One;
+    background: white;
+    color: #333;
+  }
+  .subhead {
+    font-size: 18px;
+    font-family: Dosis;
+    margin: 0px 30px 0px 30px;
+  }
+  .gameTitle {
+    font-family: Dosis;
+    color: white;
+    background: black;
+    font-size: 20px;
+  }
+  .complete {
+    color: #D69999;
+  }
+  .gameTitle span {
+    color: white;
+  }
+  .currentHalfStats, .liveLink {
+    cursor: pointer;
+    font-size: 12px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+  .liveLink {
+    float: left;
+  }
+  .liveLink a {
+    color: white;
+    padding-left: 10px;
+  }
+  .score {
+    /*border: 3px solid black;*/
+    /*height: 200px;*/
+  /*}
+  table {
+    text-align: center;
+    font-family: Dosis;
+  }
+  .teamName {
+    font-family: Bangers;
+    letter-spacing: .75px;
+    font-size: 16px;
+  }
+  table td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .scoreNum {
+    font-size: 18px;
+    font-family: Oswald;
+  }
+  .leftMostTD {
+    text-align: left;
+    padding-left: 5px;
+    width: 100px;
+  }
+  .green {
+    background: green;
+  }
+  .red {
+    background: red;
+  }
+  .moreInfo {
+    background: white;
+    display: none;
+  }
+  footer {
+    background: black;
+    height: 25px;
+    width: 100%;
+    text-align: center;
+    font-family: Dosis;
+    color: white;
+    bottom: 0;
+    position: fixed;
+  }
+  .cleartry {
+     clear: both;
+  }
+  .container {
+    padding-bottom: 80px;
+  }
+  .topRow {
+    border-bottom: 1px solid black;
+  }
+ i {
+    color: white;
+  }
+  #thanks {
+    font-family: Dosis;
+    padding: 30px;
+    font-size: 25px;
+    text-align: center;
+  }
+  hr {
+    height: 5px;
+    background: black;
+  }
+  #playoffs {
+    margin-bottom: 50px;
+  }
+  #playoffstitle {
+    text-align: center;
+    font-family: Dosis;
+    font-size: 60px;
+  }
+  footer a {
+    padding-left: 10px;
+    padding-right: 10px;
+    color: white;
+  }
+  footer p {
+    display: inline;
+  }
+  @media (max-width: 600px) {
+    #mainBanner a {
+      display: block;
+    }
+    .gameTitle {
+      font-size: 15px;
+      color: white;
+    }
+    .complete {
+      color: #D69999;
+    }
+    .gameTitle span {
+      padding-bottom: 3.5px;
+      font-size: 11px;
+      color: white;
+    }
+    table td {
+      font-size: 10px;
+    }
+  }
+  @media (max-width: 500px) {
+    .gameTitle {
+      font-size: 12.5px;
+      color: white;
+    }
+    .complete {
+      color: #D69999;
+    }
+    .gameTitle span {
+      font-size: 9px;
+      color: white;
+    }
+    table td {
+      font-size: 10px;
+    }
+
+    @media (max-width: 600px) {
+      #mainBanner a {
+        display: block;
+      }
+    }
+  }*/
