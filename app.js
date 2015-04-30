@@ -19,6 +19,7 @@ app.use(helmet.cacheControl());
 app.use(serve('./client/bower_components'));
 app.use(serve('./client/app'));
 app.use(serve('./client/assets'));
+app.use(serve('./client/components'));
 
 var comongo = require('co-mongo');
 var co = require('co');

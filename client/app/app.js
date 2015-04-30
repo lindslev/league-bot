@@ -31,6 +31,14 @@ angular.module('mltpApp', ['ngRoute'])
         templateUrl: '/client/app/schedule/week.html',
         controller: 'ScheduleCtrl'
       })
+      .when('/seasons', {
+        templateUrl: '/client/app/seasons/seasons.html',
+        controller: 'SeasonsCtrl'
+      })
+      .when('/seasons/:id', {
+        templateUrl: '/client/app/seasons/season.html',
+        controller: 'SeasonsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
