@@ -7,6 +7,10 @@ angular.module('mltpApp', ['ngRoute'])
         templateUrl: '/client/app/home/home.html',
         controller: 'HomeCtrl'
       })
+      .when('/live', {
+        templateUrl: '/client/app/live/live.html',
+        controller: 'LiveCtrl'
+      })
       .when('/teams', {
         templateUrl: '/client/app/teams/teams.html',
         controller: 'TeamsCtrl'
