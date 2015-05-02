@@ -67,12 +67,13 @@ footer {
   color: #263238;
   bottom: 0;
   position: fixed;
+  background: white;
 }
 
 footer a {
   padding-left: 10px;
   padding-right: 10px;
-  color: #263238;
+  color: #263238 !important;
 }
 footer a:hover {
   color: #263238;
