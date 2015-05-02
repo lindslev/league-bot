@@ -11,9 +11,11 @@
   }
   h1, h2, h3, .divisionTitle {
     text-align: center;
-    font-family: Poiret One;
-    background: white;
-    color: #333;
+    font-family: Lato;
+    font-weight: 200;
+    background: black;
+    color: white;
+    padding: 5px 0px;
   }
   .subhead {
     font-size: 18px;
@@ -21,12 +23,13 @@
     margin: 0px 30px 0px 30px;
   }
   h1 {
-    font-family: Bangers;
-    background: black;
+    font-family: Lato;
+    font-weight: 200;
+    background: #ef5350;
     color: white;
   }
   li, table {
-    font-family: Bangers;
+    font-family: Dosis;
     font-size: 20px;
   }
   table {
@@ -45,26 +48,8 @@
   }
   h5 {
     text-align: center;
-    font-family: Bangers;
-    font-size: 40px;
-  }
-  footer {
-    background: black;
-    height: 25px;
-    width: 100%;
-    text-align: center;
     font-family: Dosis;
-    color: white;
-    position: fixed;
-    bottom: 0;
-  }
-  i {
-    color: white;
-  }
-  footer a {
-    padding-left: 10px;
-    padding-right: 10px;
-    color: white;
+    font-size: 40px;
   }
   footer p {
     display: inline;
@@ -102,6 +87,4 @@
 
 <!--incorporate ng-hide if routeParams doesnt match anything i want -->
 
- <footer>
-  <a href="https://twitter.com/thekoalabeast" target="_blank"><i class="fa fa-twitter"></i></a><a href="http://reddit.com/r/tagpro" target="_blank"><i class="fa fa-reddit"></i></a><p> &copy; Gem </p><a href="http://tagpro.gg" target="_blank"><i class="fa fa-gamepad"></i></a><a href="https://docs.google.com/spreadsheets/d/1gYRmRLbaxMyyWdLPh_7gkR5dHlH0qNwEExsd9p5uTM0/edit#gid=740173053" target="_blank"><i class="fa fa-bar-chart"></i></a>
-</footer>
+<div ng-include="'client/components/footer.html'"></div>

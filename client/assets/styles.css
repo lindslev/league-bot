@@ -59,6 +59,10 @@ a, a:hover {
   font-size: 150px;
 }
 
+table td {
+  text-align: center;
+}
+
 footer {
   height: 25px;
   width: 100%;

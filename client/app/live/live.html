@@ -1,5 +1,7 @@
 <div ng-include="'client/components/nav.html'"></div>
 
+<h1 style="color: #ef5350; text-align: center;"> LIVE! </h1>
+
 <div class="container">
   <div class="row">
     <h3> WEEK {{thisWeek}} : <a href="{{(maparr[thisWeek-1])[0]}}" target="_blank">{{(maparr[thisWeek-1])[1]}}</a> & <a href="{{(maparr[thisWeek])[0]}}" target="_blank">{{(maparr[thisWeek])[1]}}</a></h3>
@@ -84,7 +86,8 @@ body {
   }
   h2, h3, .gameTitle {
     text-align: center;
-    font-family: Poiret One;
+    font-family: Lato;
+    font-weight: 200;
     background: white;
     color: #333;
   }
@@ -151,16 +154,6 @@ body {
     background: white;
     display: none;
   }
-  footer {
-    background: black;
-    height: 25px;
-    width: 100%;
-    text-align: center;
-    font-family: Dosis;
-    color: white;
-    bottom: 0;
-    position: fixed;
-  }
   .cleartry {
      clear: both;
   }
@@ -169,9 +162,6 @@ body {
   }
   .topRow {
     border-bottom: 1px solid black;
-  }
- i {
-    color: white;
   }
   #thanks {
     font-family: Dosis;
@@ -190,14 +180,6 @@ body {
     text-align: center;
     font-family: Dosis;
     font-size: 60px;
-  }
-  footer a {
-    padding-left: 10px;
-    padding-right: 10px;
-    color: white;
-  }
-  footer p {
-    display: inline;
   }
   @media (max-width: 600px) {
     #mainBanner a {
