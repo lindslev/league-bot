@@ -346,7 +346,7 @@ angular.module('mltpApp')
                   var statsToCompile = [];
                   var team1 = game.team1;
                   var team2 = game.team2;
-                  var week = 'week' + $routeParams.id;
+                  var week = 'week' + $scope.weekId;
                   var checkTheOtherTeam = false;
                   var idOfHeaderToHighlight = '#' + halfOrGame + game.gameId;
                   var classOfHeadersToClear = '.seeMore' + game.gameId;
