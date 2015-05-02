@@ -29,10 +29,10 @@ var games = [];
 var teams = [];
 
 var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp-dev';
-// var keys = ['11abc','12def','13ghi','14jkl','15mno',
-//             '21abc','22def','23ghi','24jkl','25mno',
-//             '31abc','32def','33ghi','34jkl','35mno',
-//             '51abc','52def','53ghi','54jkl','55mno'];
+// var keys = ['11abc8','12def8','13ghi8','14jkl8','15mno8',
+//             '21abc8','22def8','23ghi8','24jkl8','25mno8',
+//             '31abc8','32def8','33ghi8','34jkl8','35mno8',
+//             '51abc8','52def8','53ghi8','54jkl8','55mno8'];
 
 var keys = [];
 /*** commenting out keys array in offseason so throws an err if anyone tries to submit ***/
@@ -442,5 +442,40 @@ app.post('/api/game/stream', function*(){
 
   yield gamesColl.update({week: weekId}, thisWeeksGames);
   this.body = body;
+  yield db.close();
+});
+
+
+/**
+
+END
+
+
+CURRENT
+
+
+SEASON
+
+
+STUFF
+
+
+**/
+
+/** for client to get season 7 games coll **/
+app.post('/api/season/7/games', function*() {
+  var db = yield comongo.connect(DB);
+  var gamesColl = yield db.collection('games');
+  var weeks = yield gamesColl.find().toArray();
+  this.body = weeks;
+  yield db.close();
+});
+
+/** for client to get season 7 teams coll **/
+app.post('/api/season/7/teams', function*() {
+  var db = yield comongo.connect(DB);
+  var teams = yield db.collection('teams');
+  var t = yield teams.find().toArray();
+  this.body = t;
   yield db.close();
 });
