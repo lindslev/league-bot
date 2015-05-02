@@ -4,11 +4,20 @@ angular.module('mltpApp')
   .controller('SeasonsCtrl', function ($http, $scope, $location, $timeout, $routeParams, SeasonData) {
    $scope.seasonID = $routeParams.id;
    if(!$scope.seasonID) { //seasons
-
+    $scope.seasons = [];
+    for(var season in SeasonData) {
+      var mltpInfoSupported;
+      season <= 6 ? mltpInfoSupported = '/#/seasons' : mltpInfoSupported = '/#/seasons/' + season;
+      $scope.seasons.push({
+        spreadsheet: SeasonData[season].spreadsheet,
+        supported: mltpInfoSupported
+      });
+    }
    } else { //season/id
     if(Number($scope.seasonID) !== 7) {
       $location.path('/seasons');
     } else { //if season 7
+      $scope.spreadsheetURL = SeasonData[$scope.seasonID].spreadsheet;
       $scope.teams = [], $scope.atlantic = [], $scope.northeast = [],
       $scope.midwest = [], $scope.pacific = [];
       $scope.teamName = $routeParams.name || 0;
@@ -260,8 +269,6 @@ angular.module('mltpApp')
               .error(function(err){
                 if(err) throw new Error(err);
               });
-    }
-  }
 
   ///////
   ///////
@@ -469,5 +476,8 @@ angular.module('mltpApp')
       .error(function(err){
         if(err) console.log(err);
       })
+
+     }
+  }
 
 });
