@@ -10,11 +10,14 @@ angular.module('mltpApp')
                     ['http://i.imgur.com/iEmJy16.png#map-wormy','Wormy'],['http://i.imgur.com/9uZSGOn.png#map-danger-zone','Danger Zone 3'],
                     ['http://i.imgur.com/zfqqa5C.png','Iron'],['http://i.imgur.com/G2IRxWd.png#map-45','45'],
                     ['http://i.imgur.com/VixChXZ.png#map-boombox','Boombox'],['http://i.imgur.com/xgoaXJy.png#map-star','Star'],['/#/schedule','Community Vote'],['http://i.imgur.com/Aa2JVEc.png','Smirk']];
-
+                    //
+                    //
+                    // REPLACE ABOVE WITH SEASONDATA VAR
+                    //
 
     function getWeekNum() {
       var weekMS = 604800000;
-      var compareMS = new Date(2015, 0, 31).getTime(); //2 days before scheduled week 1 start date
+      var compareMS = new Date(2015, 5, 12).getTime(); //2 days before scheduled week 1 start date
       var todayMS = new Date().getTime();
       var whichWeek = Math.ceil((todayMS - compareMS) / weekMS);
       if(whichWeek < 1) {

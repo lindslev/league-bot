@@ -29,24 +29,22 @@ var games = [];
 var teams = [];
 
 var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp-dev';
-// var keys = ['11abc8','12def8','13ghi8','14jkl8','15mno8',
-//             '21abc8','22def8','23ghi8','24jkl8','25mno8',
-//             '31abc8','32def8','33ghi8','34jkl8','35mno8',
-//             '51abc8','52def8','53ghi8','54jkl8','55mno8'];
-
-var keys = [];
-/*** commenting out keys array in offseason so throws an err if anyone tries to submit ***/
-
+var keys = ['11abc8','12def8','13ghi8','14jkl8','15mno8',
+            '21abc8','22def8','23ghi8','24jkl8','25mno8',
+            '31abc8','32def8','33ghi8','34jkl8','35mno8',
+            '51abc8','52def8','53ghi8','54jkl8','55mno8'];
 
 co(function *() {
-  var teams = yield cjson.load('./server/db/teams.json');
+  var teams = yield cjson.load('./server/db/s8teams.json');
   var db = yield comongo.connect(DB);
-  var collection = yield db.collection('teams');
+  var collection = yield db.collection('s8teams');
   var count = yield collection.count();
-  var gamesColl = yield db.collection('games');
+  var gamesColl = yield db.collection('s8games');
   var gameCount = yield gamesColl.count();
   var userTracking = yield db.collection('analytics');
   var userCount = yield userTracking.count();
+
+  console.log('da fuq is the game count homie', gameCount)
 
   if(userCount == 0) {
     yield userTracking.insert({count: 'connect', numberOf: 0});
@@ -153,7 +151,7 @@ app.get('/', function *() {
 /*** team data for client side ***/
 app.post('/api/teams', function *(){
   var db = yield comongo.connect(DB);
-  var teamsColl = yield db.collection('teams');
+  var teamsColl = yield db.collection('s8teams');
   var teams = yield teamsColl.find().toArray();
   this.body = teams;
   yield db.close();
@@ -184,7 +182,7 @@ function *analyzeConnections(){
 /** function called when post request is made at the end of games **/
 function *updateTeamsDB(teamId, gameStats) {
   var db = yield comongo.connect(DB);
-  var teams = yield db.collection('teams');
+  var teams = yield db.collection('s8teams');
   var whichWeek = getWeekNum();
   var thisTeam = yield teams.findOne({key: teamId});
   var weekStr = "week" + whichWeek;
@@ -220,7 +218,7 @@ app.post('/api/teams/game/stats', cors({origin:true}), function*(){
 
 function *sentStatsCheck(teamId) { //checks to see if already mandrill'd opponent's stats
   var db = yield comongo.connect(DB);
-  var teams = yield db.collection('teams');
+  var teams = yield db.collection('s8teams');
   var team = yield teams.findOne({key:teamId});
   var weekNum = getWeekNum();
   var opponentName = team.schedule[weekNum - 1];
@@ -253,7 +251,7 @@ function makeTSV(statsData) {
 function *mandrillTSVs(teamId) {
   var tsvArr = [];
   var db = yield comongo.connect(DB);
-  var teams = yield db.collection('teams');
+  var teams = yield db.collection('s8teams');
   var team = yield teams.findOne({key:teamId});
   var weekStr = "week" + getWeekNum();
   var game1 = team[weekStr].game1;
@@ -323,7 +321,7 @@ function *mandrillTSVs(teamId) {
 
 function getWeekNum() {
   var weekMS = 604800000;
-  var compareMS = new Date(2015, 0, 31).getTime(); //2 days before scheduled week 1 start date
+  var compareMS = new Date(2015, 5, 12).getTime(); //2 days before scheduled week 1 start date
   var todayMS = new Date().getTime();
   var whichWeek = Math.ceil((todayMS - compareMS) / weekMS);
   if(whichWeek < 1) {
@@ -337,7 +335,7 @@ function getWeekNum() {
 /** for client to get a SPECIFIC week on pg load **/
 app.post('/api/schedule/week/:id', function*(){
   var db = yield comongo.connect(DB);
-  var gamesColl = yield db.collection('games');
+  var gamesColl = yield db.collection('s8games');
   var weekId = Number(this.params.id);
   var thisWeek = yield gamesColl.findOne({week: weekId});
   this.body = thisWeek;
@@ -347,7 +345,7 @@ app.post('/api/schedule/week/:id', function*(){
 /** for client to get ALL weeks from db for schedule **/
 app.post('/api/schedule', function*(){
   var db = yield comongo.connect(DB);
-  var gamesColl = yield db.collection('games');
+  var gamesColl = yield db.collection('s8games');
   var weeks = yield gamesColl.find().toArray();
   this.body = weeks;
   yield db.close();
@@ -356,7 +354,7 @@ app.post('/api/schedule', function*(){
 /** for client to get THIS WEEK from db on.score **/
 app.post('/api/scorekeeper', cors({origin:true}), function*(){
   var db = yield comongo.connect(DB);
-  var gamesColl = yield db.collection('games');
+  var gamesColl = yield db.collection('s8games');
   var thisWeek = getWeekNum();
   var thisWeekFromDB = yield gamesColl.findOne({week: thisWeek});
   this.body = thisWeekFromDB;
@@ -366,7 +364,7 @@ app.post('/api/scorekeeper', cors({origin:true}), function*(){
 /** for contact with captain's userscript **/
 app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
   var db = yield comongo.connect(DB);
-  var games = yield db.collection('games');
+  var games = yield db.collection('s8games');
   var thisWeek = getWeekNum();
   var thisWeekFromDB = yield games.findOne({week: thisWeek});
 
@@ -378,7 +376,9 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
     throw new Error('Not a valid API key.');
   }
 
-  var teamInfo = yield db.collection('teams');
+  console.log('body in scorekeeper', body)
+
+  var teamInfo = yield db.collection('s8teams');
   var team = yield teamInfo.findOne({key: teamId});
   var teamName = team.name;
 
@@ -422,7 +422,7 @@ app.post('/api/game/scorekeeper', cors({origin:true}), function*(){
 /** for POSTMAN RESTclient to add stream links on sundays once decided **/
 app.post('/api/game/stream', function*(){
   var db = yield comongo.connect(DB);
-  var gamesColl = yield db.collection('games');
+  var gamesColl = yield db.collection('s8games');
   var weekId = getWeekNum();
   var thisWeeksGames = yield gamesColl.findOne({week: weekId});
   console.log('thisweek', thisWeeksGames, weekId);

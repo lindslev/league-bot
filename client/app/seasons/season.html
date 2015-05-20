@@ -89,7 +89,7 @@
       <tr ng-repeat="team in standings | orderBy:['points','capDiff']:'reverse'" ng-class="{ 'atlantic' : team.division == 'Atlantic', 'northeast' : team.division == 'Northeast',
                             'midwest' : team.division == 'Midwest', 'pacific' : team.division == 'Pacific' }">
         <!-- orderBy takes an array of strings ['points','capDiff'] ;;;; alsoconvert hash to array -->
-        <td><a href="/#/teams/{{team.name}}">{{team.name}}</a></td>
+        <td>{{team.name}}</td>
         <td>{{team.wins}}</td>
         <td>{{team.ties}}</td>
         <td>{{team.losses}}</td>
