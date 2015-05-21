@@ -1,0 +1,226 @@
+<div ng-include="'client/components/nav.html'"></div>
+
+<h1 style="color: #ef5350; text-align: center;"> LIVE! </h1>
+
+<div class="container">
+  <div class="row">
+    <h3> WEEK {{thisWeek}} : <a href="{{(maparr[thisWeek-1])[0]}}" target="_blank">{{(maparr[thisWeek-1])[1]}}</a> & <a href="{{(maparr[thisWeek])[0]}}" target="_blank">{{(maparr[thisWeek])[1]}}</a></h3>
+    <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
+      <p class='gameTitle' ng-class=" { 'complete' : game.stats[2].game == 2 && game.stats[3].half == 2 && game.stats[6].state == 2 } "><span ng-show="game.streamLink" class="liveLink"><a target="_blank" href="{{game.streamLink}}">Stream</a></span> {{game.team1}} vs {{game.team2}} <span class="currentHalfStats" ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">Current Half Stats</span></p>
+      <div>
+        <table class='scoreboard' style="width:100%">
+          <tr>
+            <td class="leftMostTD">Teams</td>
+            <td>G1H1</td>
+            <td>G1H2</td>
+            <td>Game 1</td>
+            <td>G2H1</td>
+            <td>G2H2</td>
+            <td>Game 2</td>
+          </tr>
+          <tr>
+            <td class="teamName leftMostTD">{{game.team1}}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g1h2[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team1] + game.g1h2[game.team1]}}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g2h2[game.team1] }}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team1] + game.g2h2[game.team1]}}</td>
+          </tr>
+          <tr>
+            <td class="teamName leftMostTD">{{game.team2}}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g1h2[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g1h1[game.team2] + game.g1h2[game.team2]}}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g2h2[game.team2] }}</td>
+            <td class="scoreNum">{{ game.g2h1[game.team2] + game.g2h2[game.team2]}}</td>
+          </tr>
+        </table>
+        <div class="moreInfo" id="moreInfo{{$index+1}}">
+          <div>
+            <table style="width: 100%">
+              <tr class="topRow">
+                <td>Player</td>
+                <td>Score</td>
+                <td>Minutes</td>
+                <td>Tags</td>
+                <td>Returns</td>
+                <td>Captures</td>
+                <td>Grabs</td>
+                <td>Drops</td>
+                <td>Hold</td>
+                <td>Prevent</td>
+                <td>Pops</td>
+              </tr>
+              <tr ng-repeat="player in game.playerObjArr | orderBy:'score':'reverse'">
+                <td>{{player.name}}</td>
+                <td>{{player.score}}</td>
+                <td>{{player.minutes}}</td>
+                <td>{{player.tags}}</td>
+                <td>{{player.returns}}</td>
+                <td>{{player.captures}}</td>
+                <td>{{player.grabs}}</td>
+                <td>{{player.drops}}</td>
+                <td>{{player.hold}}</td>
+                <td>{{player.prevent}}</td>
+                <td>{{player.pops}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-include="'client/components/footer.html'"></div>
+
+<style>
+body {
+    color: black;
+  }
+  a, a:hover {
+    text-decoration: none;
+    color: black;
+  }
+  h2, h3, .gameTitle {
+    text-align: center;
+    font-family: Lato;
+    font-weight: 200;
+    background: white;
+    color: #333;
+  }
+  .subhead {
+    font-size: 18px;
+    font-family: Dosis;
+    margin: 0px 30px 0px 30px;
+  }
+  .gameTitle {
+    font-family: Dosis;
+    color: white;
+    background: black;
+    font-size: 20px;
+  }
+  .complete {
+    color: #D69999;
+  }
+  .gameTitle span {
+    color: white;
+  }
+  .currentHalfStats, .liveLink {
+    cursor: pointer;
+    font-size: 12px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+  .liveLink {
+    float: left;
+  }
+  .liveLink a {
+    color: white;
+    padding-left: 10px;
+  }
+  table {
+    text-align: center;
+    font-family: Dosis;
+  }
+  .teamName {
+    font-family: Bangers;
+    letter-spacing: .75px;
+    font-size: 16px;
+  }
+  table td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .scoreNum {
+    font-size: 18px;
+    font-family: Oswald;
+  }
+  .leftMostTD {
+    text-align: left;
+    padding-left: 5px;
+    width: 100px;
+  }
+  .green {
+    background: green;
+  }
+  .red {
+    background: red;
+  }
+  .moreInfo {
+    background: white;
+    display: none;
+  }
+  .cleartry {
+     clear: both;
+  }
+  .container {
+    padding-bottom: 80px;
+  }
+  .topRow {
+    border-bottom: 1px solid black;
+  }
+  #thanks {
+    font-family: Dosis;
+    padding: 30px;
+    font-size: 25px;
+    text-align: center;
+  }
+  hr {
+    height: 5px;
+    background: black;
+  }
+  #playoffs {
+    margin-bottom: 50px;
+  }
+  #playoffstitle {
+    text-align: center;
+    font-family: Dosis;
+    font-size: 60px;
+  }
+  @media (max-width: 600px) {
+    #mainBanner a {
+      display: block;
+    }
+    .gameTitle {
+      font-size: 15px;
+      color: white;
+    }
+    .complete {
+      color: #D69999;
+    }
+    .gameTitle span {
+      padding-bottom: 3.5px;
+      font-size: 11px;
+      color: white;
+    }
+    table td {
+      font-size: 10px;
+    }
+  }
+  @media (max-width: 500px) {
+    .gameTitle {
+      font-size: 12.5px;
+      color: white;
+    }
+    .complete {
+      color: #D69999;
+    }
+    .gameTitle span {
+      font-size: 9px;
+      color: white;
+    }
+    table td {
+      font-size: 10px;
+    }
+
+    @media (max-width: 600px) {
+      #mainBanner a {
+        display: block;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,1957 @@
+{"teams": {
+    "conferences": {
+      "eastern": {
+          "atlantic": {
+            "LagProne": {
+              "captain": "Ballymandias",
+              "roster": ["i'm high", "Jaycmoney", "LEBRON*JAMES", "Syniikal", "E"],
+              "server": "Pi",
+              "key": "11abc8",
+              "schedule": ["Ghostboosters", "Marble Madness", "Boostin Dynamo", "30 Seconds to Mars Ball", "Myrtle Beach Merballs", "ALL CAPS", "Skillz that Killz", "Bad News Balls", "Adrenaline Spikes"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+            },
+            "Myrtle Beach Merballs": {
+              "captain": "Romulus",
+              "roster": ["Mr. Thot", "BAllstar", "Ball OON", "Makin Bacon", "trendygrub"],
+              "server": "Pi",
+              "key": "12def8",
+              "schedule": ["30 Seconds to Mars Ball", "Bad News Balls", "ALL CAPS", "Skillz that Killz", "LagProne", "Adrenaline Spikes", "Ghostboosters", "Marble Madness", "Boostin Dynamo"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+            },
+            "Adrenaline Spikes": {
+              "captain": "Nebuchanezar",
+              "roster": ["Xile", "Arbybear", "nub", "BigMeaty", "demman32"],
+              "server": "Radius",
+              "key": "13ghi8",
+              "schedule": ["Bad News Balls", "Ghostboosters", "Marble Madness", "Boostin Dynamo", "30 Seconds to Mars Ball", "Myrtle Beach Merballs", "ALL CAPS", "Skillz that Killz", "LagProne"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+            },
+            "Boostin Dynamo": {
+              "captain": "jjpoole",
+              "roster": ["Prizm", "Dead Nan", "Ty", "Dennit", "okthen"],
+              "server": "Radius",
+              "key": "14jkl8",
+              "schedule": ["ALL CAPS", "Skillz that Killz", "LagProne", "Adrenaline Spikes", "Ghostboosters", "Marble Madness", "Bad News Balls", "30 Seconds to Mars Ball", "Myrtle Beach Merballs"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+            },
+            "Bad News Balls": {
+              "captain": "honeybear",
+              "roster": ["Spiller", "Helen Keller", "CC", "Marquis", "Howard"],
+              "server": "Radius",
+              "key": "15mno8",
+              "schedule": ["Adrenaline Spikes", "Myrtle Beach Merballs", "Ghostboosters", "ALL CAPS", "Marble Madness", "Skillz that Killz", "Boostin Dynamo", "LagProne", "30 Seconds to Mars Ball"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+            }
+          },
+          "northeast": {
+            "Skillz that Killz": {
+              "captain": "Dino",
+              "roster": ["GriefSeeds", "CHECKNATE.", "Sweep", "QBreezy", "fucKINGtank"],
+              "server": "Radius",
+              "key": "21abc8",
+              "schedule": ["Marble Madness", "Boostin Dynamo", "30 Seconds to Mars Ball", "Myrtle Beach Merballs", "ALL CAPS", "Bad News Balls", "LagProne", "Adrenaline Spikes", "Ghostboosters"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+            },
+            "Ghostboosters": {
+              "captain": "Gem",
+              "roster": ["L1Psy", "Nawse", "Fronj", "Solf", "UberNub"],
+              "server": "Radius",
+              "key": "22def8",
+              "schedule": ["LagProne", "Adrenaline Spikes", "Bad News Balls", "Marble Madness", "Boostin Dynamo", "30 Seconds to Mars Ball", "Myrtle Beach Merballs", "ALL CAPS", "Skillz that Killz"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+            },
+            "ALL CAPS": {
+              "captain": "BALLDON'TLIE",
+              "roster": ["FAT", "YOSSARIAN", "JMART", "BIG SWINGIN", "PITHY"],
+              "server": "Radius",
+              "key": "23ghi8",
+              "schedule": ["Boostin Dynamo", "30 Seconds to Mars Ball", "Myrtle Beach Merballs", "Bad News Balls", "Skillz that Killz", "LagProne", "Adrenaline Spikes", "Ghostboosters", "Marble Madness"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+            },
+            "Marble Madness": {
+              "captain": "swerve",
+              "roster": ["Stann", "rd", "Bob Loblaw", "whiteflame", "F2PDynasty"],
+              "server": "Radius",
+              "key": "24jkl8",
+              "schedule": ["Skillz that Killz", "LagProne", "Adrenaline Spikes", "Ghostboosters", "Bad News Balls", "Boostin Dynamo", "30 Seconds to Mars Ball", "Myrtle Beach Merballs", "ALL CAPS"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+            },
+            "30 Seconds to Mars Ball": {
+              "captain": "Legman",
+              "roster": ["Stalin", "khaleesii", "Ashmungashma", "aardvark74", "BilldaCat"],
+              "server": "Radius",
+              "key": "25mno8",
+              "schedule": ["Myrtle Beach Merballs", "ALL CAPS", "Skillz that Killz", "LagProne", "Adrenaline Spikes", "Ghostboosters", "Marble Madness", "Boostin Dynamo", "Bad News Balls"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+            }
+          }
+      },
+      "western": {
+        "central": {
+          "Tears": {
+              "captain": "TroBall",
+              "roster": ["sidewalk", "Mr. Gone", "Altiger", "Milk Steak", "Bongo"],
+              "server": "Origin",
+              "key": "31abc8",
+              "schedule": ["Pop Em Block Em Probots", "Easily Excitaball", "Sum of all Spheres", "Cappers Delight", "Rollin Golden Boulders", "Wild Pings", "Roll Models", "KGBallers", "Ballchimedes"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+          },
+          "Wild Pings": {
+            "captain": "crosky",
+            "roster": ["Fatal", "dodsfall", "RonSpawnson", "DudeMcGuy", "HarkMollis"],
+            "server": "Origin",
+            "key": "32def8",
+            "schedule": ["Roll Models", "KGBallers", "Ballchimedes", "Pop Em Block Em Probots", "Easily Excitaball", "Tears", "Cappers Delight", "Rollin Golden Boulders", "Sum of all Spheres"],
+            "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+          },
+          "KGBallers": {
+            "captain": "Raven",
+            "roster": ["WowSuchPro", "Scott", "lukemoo", "Koala", "Subglacious"],
+            "server": "Origin",
+            "key": "33ghi8",
+            "schedule": ["Rollin Golden Boulders", "Wild Pings", "Roll Models", "Sum of all Spheres", "Ballchimedes", "Pop Em Block Em Probots", "Easily Excitaball", "Tears", "Cappers Delight"],
+            "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+          },
+          "Cappers Delight": {
+            "captain": "Tpr",
+            "roster": ["TackPro", "coys", "KPow", "dad", "SuperSans"],
+            "server": "Origin",
+            "key": "34jkl8",
+            "schedule": ["Ballchimedes", "Pop Em Block Em Probots", "Easily Excitaball", "Tears", "Sum of all Spheres", "Rollin Golden Boulders", "Wild Pings", "Roll Models", "KGBallers"],
+            "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+          },
+          "Ballchimedes": {
+            "captain": "Chalksy",
+            "roster": ["Flail", "dywz", "eee", "teddybear", "Fairy"],
+            "server": "Sphere",
+            "key": "35mno8",
+            "schedule": ["Cappers Delight", "Rollin Golden Boulders", "Wild Pings", "Roll Models", "KGBallers", "Sum of all Spheres", "Pop Em Block Em Probots", "Easily Excitaball", "Tears"],
+            "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+          }
+        },
+        "pacific": {
+          "Sum of all Spheres": {
+              "captain": "Turbo",
+              "roster": ["bowtie", "donuts42", "Carp", "Wayne", "Ignitius"],
+              "server": "Sphere",
+              "key": "51abc8",
+              "schedule": ["Easily Excitaball", "Roll Models", "Tears", "KGBallers", "Cappers Delight", "Ballchimedes", "Rollin Golden Boulders", "Pop Em Block Em Probots", "Wild Pings"],
+              "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+          },
+          "Roll Models": {
+            "captain": "Ballee Lama",
+            "roster": ["Sundown", "drukQs", "UnoriginalSN", "KevBear", "Butter Churn"],
+            "server": "Centra",
+            "key": "52def8",
+            "schedule": ["Wild Pings", "Sum of all Spheres", "KGBallers", "Ballchimedes", "Pop Em Block Em Probots", "Easily Excitaball", "Tears", "Cappers Delight", "Rollin Golden Boulders"],
+            "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+          },
+          "Pop Em Block Em Probots": {
+            "captain": "bad",
+            "roster": ["Crippy", "Matetricks", "Ball God", "Apopalypse", "ooo kill 'em"],
+            "server": "Centra",
+            "key": "53ghi8",
+            "schedule": ["Tears", "Cappers Delight", "Rollin Golden Boulders", "Wild Pings", "Roll Models", "KGBallers", "Ballchimedes", "Sum of all Spheres", "Easily Excitaball"],
+            "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+          },
+          "Rollin Golden Boulders": {
+            "captain": "Ibis",
+            "roster": ["ooo killem", "Curry.", "Brainiac", "bdl", "mc ride"],
+            "server": "Centra",
+            "key": "54jkl8",
+            "schedule": ["KGBallers", "Ballchimedes", "Pop Em Block Em Probots", "Easily Excitaball", "Tears", "Cappers Delight", "Sum of all Spheres", "Wild Pings", "Roll Models"],
+            "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+          },
+          "Easily Excitaball": {
+            "captain": "Tiza",
+            "roster": ["Dalek", "Pnaoxt", "Magikarp", "BigBird", "Iron_Ball"],
+            "server": "Centra",
+            "key": "55mno8",
+            "schedule": ["Sum of all Spheres", "Tears", "Cappers Delight", "Rollin Golden Boulders", "Wild Pings", "Roll Models", "KGBallers", "Ballchimedes", "Pop Em Block Em Probots"],
+            "week1": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week2": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week3": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week4": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week5": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week6": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week7": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week8": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              },
+              "week9": {
+                "game1": {
+                  "half1": [],
+                  "half2": []
+                },
+                "game2": {
+                  "half1": [],
+                  "half2": []
+                }
+              }
+          }
+        }
+      }
+    }
+  }
+}

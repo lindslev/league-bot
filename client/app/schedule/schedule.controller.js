@@ -3,8 +3,8 @@
 angular.module('mltpApp')
   .controller('ScheduleCtrl', function ($http, $scope, $routeParams) {
 
-    $scope.weekarr = ['1/18/2015', '1/25/2015','2/8/2015','2/22/2015',
-                      '3/1/2015','3/8/2015','3/15/2015', '3/22/2015', '3/29/2015']
+    $scope.weekarr = ['6/14/2015', '6/21/2015','6/28/2015','7/12/2015',
+                      '7/19/2015','7/26/2015','8/2/2015', '8/9/2015', '8/16/2015']
     $scope.maparr = [['http://i.imgur.com/Aa2JVEc.png','Smirk'],['http://i.imgur.com/wLQsUUc.png#map-velocity','Velocity'],
                     ['http://i.imgur.com/iEmJy16.png#map-wormy','Wormy'],['http://i.imgur.com/9uZSGOn.png#map-danger-zone','Danger Zone 3'],
                     ['http://i.imgur.com/zfqqa5C.png','Iron'],['http://i.imgur.com/G2IRxWd.png#map-45','45'],

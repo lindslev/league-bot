@@ -15,4 +15,4 @@ viewable at [www.mltp.info](http://mltp.info)
 
 ## License
 
-This projected is licensed under the terms of the [MIT license](/LICENSE)
+This projected is licensed under the terms of the MIT License.

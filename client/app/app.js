@@ -7,6 +7,14 @@ angular.module('mltpApp', ['ngRoute'])
         templateUrl: '/client/app/home/home.html',
         controller: 'HomeCtrl'
       })
+      .when('/balloffame', {
+        templateUrl: '/client/app/balloffame/balloffame.html',
+        controller: 'HomeCtrl'
+      })
+      .when('/live', {
+        templateUrl: '/client/app/live/live.html',
+        controller: 'LiveCtrl'
+      })
       .when('/teams', {
         templateUrl: '/client/app/teams/teams.html',
         controller: 'TeamsCtrl'
@@ -30,6 +38,14 @@ angular.module('mltpApp', ['ngRoute'])
       .when('/schedule/week/:id', {
         templateUrl: '/client/app/schedule/week.html',
         controller: 'ScheduleCtrl'
+      })
+      .when('/seasons', {
+        templateUrl: '/client/app/seasons/seasons.html',
+        controller: 'SeasonsCtrl'
+      })
+      .when('/seasons/:id', {
+        templateUrl: '/client/app/seasons/season.html',
+        controller: 'SeasonsCtrl'
       })
       .otherwise({
         redirectTo: '/'

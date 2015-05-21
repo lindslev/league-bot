@@ -1,0 +1,365 @@
+<div ng-include="'client/components/nav.html'"></div>
+
+<h1 style="font-style:italic; background: #ef5350;"><a target="_blank" href="{{spreadsheetURL}}">Season {{seasonID}}</a></h1>
+
+<style>
+  body {
+    color: black;
+  }
+  .container {
+    padding-bottom: 80px;
+  }
+  a, a:hover {
+    text-decoration: none;
+    color: black;
+  }
+  h1 {
+    text-align: center;
+  }
+  h2, h3, .divisionTitle {
+    text-align: center;
+    font-family: Poiret One;
+    background: white;
+    color: #333;
+  }
+  .subhead {
+    font-size: 18px;
+    font-family: Dosis;
+    margin: 0px 30px 0px 30px;
+  }
+  table {
+    text-align: center;
+    margin: 0 auto;
+    width: 95%;
+    font-family: Dosis;
+  }
+  table td {
+    border: 1px solid black;
+    font-size: 18px;
+    text-align: center;
+  }
+  .northeast, .atlantic, .pacific, .midwest {
+    font-size: 14px;
+  }
+  .northeast {
+    background: #80CC80;
+  }
+  .atlantic {
+    background: #66A3FF;
+  }
+  .midwest {
+    background: #FFFF66;
+  }
+  .pacific {
+    background: #FF6666; /*nqoba's pref lol*/
+  }
+  @media (max-width: 600px) {
+    #mainBanner a {
+      display: block;
+    }
+    table td {
+      font-size: 10px;
+    }
+  }
+</style>
+
+<h1>Regular Season Standings</h1>
+
+<div class='container'>
+
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-12">
+      <table style="width: 100%">
+        <tr><td class="northeast"><a href="/#/standings/northeast">Northeast</a></td><td class="atlantic"><a href="/#/standings/atlantic">Atlantic</a></td><td class="midwest"><a href="/#/standings/midwest">Midwest</a></td><td class="pacific"><a href="/#/standings/pacific">Pacific</a></td></tr>
+      </table>
+    </div>
+  </div>
+  <br>
+  <div class='row'>
+    <table>
+      <tr>
+        <td>Team</td>
+        <td>Wins</td>
+        <td>Ties</td>
+        <td>Losses</td>
+        <td>Points</td>
+        <td>Cap Differential</td>
+        <!-- <td>Division</td> -->
+      </tr>
+      <tr ng-repeat="team in standings | orderBy:['points','capDiff']:'reverse'" ng-class="{ 'atlantic' : team.division == 'Atlantic', 'northeast' : team.division == 'Northeast',
+                            'midwest' : team.division == 'Midwest', 'pacific' : team.division == 'Pacific' }">
+        <!-- orderBy takes an array of strings ['points','capDiff'] ;;;; alsoconvert hash to array -->
+        <td>{{team.name}}</td>
+        <td>{{team.wins}}</td>
+        <td>{{team.ties}}</td>
+        <td>{{team.losses}}</td>
+        <td>{{team.points}}</td>
+        <td>{{team.capDiff}}</td>
+        <!-- <td>{{team.division}}</td> -->
+      </tr>  <!-- with 20 rows where rows are each team ranked from highest points to lowest points uhhh cap diff tho?? -->
+    </table>
+  </div>
+</div>
+
+<!-- week stuff -->
+<style>
+/*  a, a:hover {
+    text-decoration: none;
+    color: black;
+  }
+  h2, h3, .divisionTitle {
+    text-align: center;
+    font-family: Poiret One;
+    background: white;
+    color: #333;
+  }
+  .subhead {
+    font-size: 18px;
+    font-family: Dosis;
+    margin: 0px 30px 0px 30px;
+  }
+  .divisionTitle {
+    color: white;
+    background: black;
+  }
+  .game {
+    color: rgba(188,92,92,1);
+    font-weight: bold;
+  }*/
+  /*.teamName {
+    font-size: 30px;
+    font-family: Dosis;
+    color: black;
+    text-align: center;
+    display: block;
+  }
+    body {
+    color: black;
+  }
+  a, a:hover {
+    text-decoration: none;
+    color: black;
+  }*/
+  h2, h3, .gameTitle {
+    text-align: center;
+    font-family: Poiret One;
+    background: white;
+    color: #333;
+  }
+  h3 span {
+    font-family: Dosis;
+  }
+  .subhead {
+    font-size: 18px;
+    font-family: Dosis;
+    margin: 0px 30px 0px 30px;
+  }
+  .gameTitle {
+    font-family: Dosis;
+    color: white;
+    background: black;
+    font-size: 20px;
+  }
+  .closeStatsButton, .vodLink {
+    cursor: pointer;
+    font-size: 12px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+  .vodLink {
+    float: left;
+  }
+  .vodLink a {
+    color: white;
+    padding-left: 10px;
+  }
+
+  table {
+    text-align: center;
+    font-family: Dosis;
+  }
+  .teamName {
+    font-family: Bangers;
+    letter-spacing: .75px;
+    font-size: 16px;
+  }
+  .season-week-td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    font-size: 14px;
+  }
+  .scoreNum {
+    font-size: 18px;
+    font-family: Oswald;
+  }
+  .leftMostTD {
+    text-align: left;
+    padding-left: 5px;
+    width: 100px;
+  }
+  .green {
+    background: green;
+  }
+  .moreInfo {
+    background: white;
+    display: none;
+  }
+  .cleartry {
+     clear: both;
+  }
+  .container {
+    padding-bottom: 80px;
+  }
+  .seeMore {
+    cursor: pointer;
+  }
+  .topRow {
+    border-bottom: 1px solid black;
+  }
+  #infoCircle {
+    text-align: center;
+  }
+  #infoCircle i {
+    color: black;
+    cursor: pointer;
+  }
+  #aboutWeek p {
+    color: white;
+    font-family: Dosis;
+    text-align: center;
+  }
+  #aboutWeek {
+    display: none;
+    background: #666;
+    padding: 5px;
+  }
+  .yellow { background: yellow; }
+  #weekSelectList {
+    text-align: center;
+  }
+  .weekSelect {
+    display: inline-block;
+    margin: 0px 10px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 20%;
+  }
+  .weekSelect:hover {
+    background: #ef5350;
+  }
+  @media (max-width: 600px) {
+    .gameTitle {
+      font-size: 15px;
+      color: white;
+    }
+    .gameTitle span {
+      padding-bottom: 3.5px;
+      font-size: 11px;
+      color: white;
+    }
+    table td, .season-week-td {
+      font-size: 10px;
+    }
+  }
+  @media (max-width: 500px) {
+    .gameTitle {
+      font-size: 12.5px;
+      color: white;
+    }
+    .gameTitle span {
+      font-size: 9px;
+      color: white;
+    }
+    table td, .season-week-td {
+      font-size: 10px;
+    }
+  }
+</style>
+
+<h1> Choose a week # to see the matchups for that week of season {{seasonID}} </h1>
+<ul id="weekSelectList">
+  <li class="weekSelect" ng-click="showDiffWeek($index)" ng-repeat="week in sched">Week {{$index + 1}}</li>
+</ul>
+
+<div class="container">
+  <div class="row">
+    <p id="infoCircle"><i ng-click="toggleAbout()" class="fa fa-info-circle fa-2x"></i></p>
+    <div id="aboutWeek">
+      <p>Game 1: {{maparr[weekId-1][1]}}</p>
+      <p>Game 2: {{maparr[weekId][1]}}</p>
+      <p>You can click on the G1H1/G1H2/Game 1/G2H1/G2H2/Game 2 table headers, when the game is over, to see stats for that respective half or game.</p>
+    </div>
+    <h3> WEEK {{weekId}} - <span>{{ weekarr[weekId-1] }}</span></h3>
+    <div class="score col-lg-6 col-md-6 col-xs-12" id="{{$index + 1}}" ng-repeat="game in games"  ng-class="{ 'cleartry' : $index % 2 == 0 }">
+      <!-- <p class='gameTitle'> {{game.team1}} vs {{game.team2}} <span ng-click="onSeeMoreClick(game)" id="seeMore{{$index + 1}}">See More</span></p> -->
+      <p class='gameTitle'><span class="vodLink" ng-show="game.streamLink"><a href="{{game.streamLink}}" target="_blank">Vod</a></span> {{game.team1}} vs {{game.team2}} <span class="closeStatsButton" ng-click="closeStats(game)">{{game.close}}</span></p>
+      <div>
+        <table class='scoreboard' style="width:100%">
+          <tr>
+            <td class="season-week-td" class="leftMostTD">Teams</td>
+            <td class="season-week-td" ng-click="onSeeMoreClick(game, 'G1H1')"><span id='G1H1{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>G1H1</span></td>
+            <td class="season-week-td" ng-click="onSeeMoreClick(game, 'G1H2')"><span id='G1H2{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>G1H2</span></td>
+            <td class="season-week-td" ng-click="onSeeMoreClick(game, 'G1')"><span id='G1{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>Game 1</span></td>
+            <td class="season-week-td" ng-click="onSeeMoreClick(game, 'G2H1')"><span id='G2H1{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>G2H1</span></td>
+            <td class="season-week-td" ng-click="onSeeMoreClick(game, 'G2H2')"><span id='G2H2{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>G2H2</span></td>
+            <td class="season-week-td" ng-click="onSeeMoreClick(game, 'G2')"><span id='G2{{game.gameId}}' class='seeMore seeMore{{game.gameId}}'>Game 2</span></td>
+          </tr>
+          <tr>
+            <td class="season-week-td teamName leftMostTD">{{game.team1}}</td>
+            <td class="season-week-td scoreNum">{{ game.g1h1[game.team1] }}</td>
+            <td class="season-week-td scoreNum">{{ game.g1h2[game.team1] }}</td>
+            <td class="season-week-td scoreNum game">{{ game.g1h1[game.team1] + game.g1h2[game.team1]}}</td>
+            <td class="season-week-td scoreNum">{{ game.g2h1[game.team1] }}</td>
+            <td class="season-week-td scoreNum">{{ game.g2h2[game.team1] }}</td>
+            <td class="season-week-td scoreNum game">{{ game.g2h1[game.team1] + game.g2h2[game.team1]}}</td>
+          </tr>
+          <tr>
+            <td class="season-week-td teamName leftMostTD">{{game.team2}}</td>
+            <td class="season-week-td scoreNum">{{ game.g1h1[game.team2] }}</td>
+            <td class="season-week-td scoreNum">{{ game.g1h2[game.team2] }}</td>
+            <td class="season-week-td scoreNum game">{{ game.g1h1[game.team2] + game.g1h2[game.team2]}}</td>
+            <td class="season-week-td scoreNum">{{ game.g2h1[game.team2] }}</td>
+            <td class="season-week-td scoreNum">{{ game.g2h2[game.team2] }}</td>
+            <td class="season-week-td scoreNum game">{{ game.g2h1[game.team2] + game.g2h2[game.team2]}}</td>
+          </tr>
+        </table>
+        <div class="moreInfo" id="moreInfo{{$index+1}}">
+          <div>
+            <table style="width: 100%">
+              <tr class="topRow">
+                <td class="season-week-td">Player</td>
+                <td class="season-week-td">Score</td>
+                <td class="season-week-td">Minutes</td>
+                <td class="season-week-td">Tags</td>
+                <td class="season-week-td">Returns</td>
+                <td class="season-week-td">Captures</td>
+                <td class="season-week-td">Grabs</td>
+                <td class="season-week-td">Drops</td>
+                <td class="season-week-td">Hold</td>
+                <td class="season-week-td">Prevent</td>
+                <td class="season-week-td">Pops</td>
+              </tr>
+              <tr ng-repeat="player in game.playerObjArr | orderBy:'score':'reverse'">
+                <td class="season-week-td">{{player.name}}</td>
+                <td class="season-week-td">{{player.score}}</td>
+                <td class="season-week-td">{{player.minutes}}</td>
+                <td class="season-week-td">{{player.tags}}</td>
+                <td class="season-week-td">{{player.returns}}</td>
+                <td class="season-week-td">{{player.captures}}</td>
+                <td class="season-week-td">{{player.grabs}}</td>
+                <td class="season-week-td">{{player.drops}}</td>
+                <td class="season-week-td">{{player.hold}}</td>
+                <td class="season-week-td">{{player.prevent}}</td>
+                <td class="season-week-td">{{player.pops}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div ng-include="'client/components/footer.html'"></div>
