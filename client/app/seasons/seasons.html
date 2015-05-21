@@ -1,0 +1,30 @@
+<div ng-include="'client/components/nav.html'"></div>
+
+<h1>Past Seasons</h1>
+
+<ul>
+  <li ng-repeat="season in seasons"><a href="{{season.supported}}">Season {{$index + 1}}</a><a href="{{season.spreadsheet}}" target="_blank"><i class="fa fa-bar-chart"></i></a></li>
+</ul>
+
+<style>
+  h1 {
+    color: black;
+    font-style:italic;
+    background: #ef5350;
+  }
+  ul, h1 {
+    text-align: center;
+  }
+  ul li a {
+    font-family: Dosis;
+    text-decoration: none;
+    font-size: 50px;
+    margin: 10px;
+    color: #263238;
+  }
+  a:hover {
+    color: #ef5350;
+  }
+</style>
+
+<div ng-include="'client/components/footer.html'"></div>

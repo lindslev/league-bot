@@ -1,0 +1,112 @@
+body {
+  font-family: Lato;
+  background-image: url('http://i.imgur.com/KW29B0o.png');
+  background-attachment: fixed;
+}
+
+#collapsed {
+  width: 100%;
+  display: none;
+}
+
+.dropdown-toggle, .dropdown-menu {
+  margin-top: 10px;
+  background: #ef5350;
+  border: 0px;
+}
+
+.dropdown-toggle {
+  margin-top: 10px;
+  background: #ef5350;
+}
+
+#nav {
+  height: 60px;
+  background: #263238;
+}
+
+#nav-links-container {
+  text-align: center;
+}
+
+.nav-link {
+  color: white;
+  text-shadow: 1px 1px 1px #ef5350;
+  display: inline-block;
+  margin: 0px 20px;
+  margin-top: 12.5px;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.nav-link:hover {
+  color: #ef5350;
+  text-shadow: .5px .5px .5px white;
+}
+
+#logo {
+  display: inline-block;
+  width: 120px;
+  height: 35px;
+}
+
+a, a:hover {
+  text-decoration: none;
+}
+
+.home-title {
+  font-weight: Thin 100;
+  font-size: 150px;
+}
+
+table td {
+  text-align: center;
+}
+
+footer {
+  height: 25px;
+  width: 100%;
+  text-align: center;
+  font-family: Dosis;
+  color: #263238;
+  bottom: 0;
+  position: fixed;
+  background: white;
+}
+
+footer a {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #263238 !important;
+}
+footer a:hover {
+  color: #263238;
+}
+footer p {
+  display: inline;
+}
+
+
+/**
+  *
+  *
+  ** MEDIA QUERIES **
+                    *
+                    *
+                    **/
+
+@media (max-width: 900px) {
+  .nav-link {
+    display: none;
+  }
+  #nav {
+    height: 120px;
+  }
+  #collapsed, #logo-collapsible {
+    text-align: center;
+    display: inline-block;
+  }
+  .dropdown-menu {
+    margin-left: 40%;
+  }
+}
