@@ -31,6 +31,11 @@ angular.module('mltpApp')
         games: '/api/season/7/games',
         teams: '/api/season/7/teams',
         spreadsheet: 'https://docs.google.com/spreadsheets/d/1gYRmRLbaxMyyWdLPh_7gkR5dHlH0qNwEExsd9p5uTM0/edit#gid=740173053'
+      },
+      8 : {
+        weeks: ['6/7/2015','6/14/2015', '6/21/2015','6/28/2015','7/12/2015',
+                '7/19/2015','7/26/2015','8/2/2015', '8/9/2015'],
+        maps: [['http://i.imgur.com/0lUIxgA.png#map-pilot', 'Pilot'], ['http://i.imgur.com/VixChXZ.png#map-boombox', 'Boombox'], ['http://i.imgur.com/hL0ITjs.png#map-monarch', 'Monarch'], ['http://i.imgur.com/iEmJy16.png#map-wormy', 'Wormy'],['http://i.imgur.com/zfqqa5C.png#map-iron','IRON'],['http://i.imgur.com/Aa2JVEc.png', 'Smirk'],['http://i.imgur.com/wLQsUUc.png#map-velocity', 'Velocity'], ['/#/schedule', 'Community'],['http://i.imgur.com/bpxNkeb.jpg#map-geokoala','GeoKoala'],['http://i.imgur.com/0lUIxgA.png#map-pilot', 'Pilot']]
       }
     }
 

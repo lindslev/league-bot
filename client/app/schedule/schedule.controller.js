@@ -1,14 +1,10 @@
 'use strict';
 
 angular.module('mltpApp')
-  .controller('ScheduleCtrl', function ($http, $scope, $routeParams) {
+  .controller('ScheduleCtrl', function ($http, $scope, $routeParams, SeasonData) {
 
-    $scope.weekarr = ['6/14/2015', '6/21/2015','6/28/2015','7/12/2015',
-                      '7/19/2015','7/26/2015','8/2/2015', '8/9/2015', '8/16/2015']
-    $scope.maparr = [['http://i.imgur.com/Aa2JVEc.png','Smirk'],['http://i.imgur.com/wLQsUUc.png#map-velocity','Velocity'],
-                    ['http://i.imgur.com/iEmJy16.png#map-wormy','Wormy'],['http://i.imgur.com/9uZSGOn.png#map-danger-zone','Danger Zone 3'],
-                    ['http://i.imgur.com/zfqqa5C.png','Iron'],['http://i.imgur.com/G2IRxWd.png#map-45','45'],
-                    ['http://i.imgur.com/VixChXZ.png#map-boombox','Boombox'],['http://i.imgur.com/xgoaXJy.png#map-star','Star'],['/#/schedule','Community Vote'],['http://i.imgur.com/Aa2JVEc.png','Smirk']];
+    $scope.weekarr = SeasonData[8].weeks;
+    $scope.maparr = SeasonData[8].maps;
 
     var teamsdata, scheddata;
 
