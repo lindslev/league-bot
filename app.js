@@ -479,3 +479,12 @@ app.post('/api/season/7/teams', function*() {
   this.body = t;
   yield db.close();
 });
+
+
+var request = require('koa-request');
+/*** for groupster lolz ***/
+app.get('/groupster', cors({origin:true}), function*(){
+  var response = yield request.post({url: 'http://tagpro-radius.koalabeast.com/groups/create/', headers:{ Cookie: 'tagpro=s%3AD7EiXNwLlTj83q8Xkrs06QAu.stp69Bcpgye0LoAeKxGine5awAGBzxVpKFa4kI7kZ58' }, form: { }});
+  var link = response.body.split('/groups/')[1];
+  this.body = link;
+});
