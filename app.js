@@ -492,7 +492,9 @@ var cookiesHash = {
   centra: 'tagpro=s%3AuYWz7VVoxDmEB58rsXOptqXR.5RcYHGRYL4q96x33a98vSlTs2JygoNXH2EzFEMFQ4hI',
   chord: 'tagpro=s%3AFZfL0608E3SXZfA23NtwIp5g.ZI594qkQ65RZAWHLb5JV0BL3MEfeZw34t6hu8SrWq18',
   orbit: 'tagpro=s%3AiWrzwCxmuw99mFDvjp13mAMW.HXSXSo7UKr7X5M%2Frd1Pel9LX5RFJlQ4Wg7WuqRf6KMM',
-  diameter: 'tagpro=s%3AsoiGybyucdrRaTZK472tMigq.oWYMjRzp9sii5n24JXCGcHUc4%2BRbgpDjxdY8etm%2FOGE'
+  diameter: 'tagpro=s%3AsoiGybyucdrRaTZK472tMigq.oWYMjRzp9sii5n24JXCGcHUc4%2BRbgpDjxdY8etm%2FOGE',
+  maptest2: 'tagpro=s%3AmwxCdeGDwxwrWG1vfDbSSfGk.p7CV3Bj7LuF38kYsCPkpNgeXlF0R0yyV6N7xyFm%2FZGM',
+  tangent: 'tagpro=s%3A0qWPVVhfILU96rogHooAQWoC.pRSEKUp3FaRG5AuAi58dWbKrIDc5%2BrUpy%2BxvfhYQ5J8'
 }
 
 /*** for groupster lolz ***/
