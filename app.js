@@ -500,6 +500,8 @@ var cookiesHash = {
 /*** for groupster lolz ***/
 app.get('/groupster/:server', cors({origin:true}), function*(){
   var url = 'http://tagpro-' + this.params.server + '.koalabeast.com/groups/create/';
+  if(this.params.server == 'maptest2') url = 'http://maptest2.newcompte.fr/groups/create/';
+  if(this.params.server == 'tangent') url = 'http://tangent.jukejuice.com/groups/create/';
   var response = yield request.post({url: url, headers:{ Cookie: cookiesHash[this.params.server] }, form: { }});
   var link = response.body.split('/groups/')[1];
   this.body = link;
