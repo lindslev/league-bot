@@ -480,11 +480,26 @@ app.post('/api/season/7/teams', function*() {
   yield db.close();
 });
 
-
 var request = require('koa-request');
+
+var cookiesHash = {
+  origin: 'tagpro=s%3AZULO6VqUoWbUeY0zIfKnhN3R.as4SvRDDW3%2BK5%2F%2FJ7z7T0gkNEvVQ71sn32FlXV5CYJA',
+  radius: 'tagpro=s%3AD7EiXNwLlTj83q8Xkrs06QAu.stp69Bcpgye0LoAeKxGine5awAGBzxVpKFa4kI7kZ58',
+  sphere: 'tagpro=s%3AuCGdoe7Gb9pXZSeSyzAdagNx.S%2FPZA3hRwSR6y%2BxhZiPlCn40oOnYp6uo3p3%2FyTiDcHw',
+  segment: 'tagpro=s%3ANy20Pk99iWShSDx2cLSBbzDL.FKeQMolzcuDHATGoCDMEcE%2Bq3hIHHrj9MZEkojmcr30',
+  pi: 'tagpro=s%3AWXgfxW1ECMa16jt7G0pRS0ik.ejEuqhUf45%2BsLG9a%2FCPnArbmZ2%2Bezh3T5WrV%2BgO2vqc',
+  arc: 'tagpro=s%3AaaviXP6X898AEnnyrU8DaiXh.TsxF0senCpA5a51GSLr2HGHdjuQTDZCLvcD4i7jMcUo',
+  centra: 'tagpro=s%3AuYWz7VVoxDmEB58rsXOptqXR.5RcYHGRYL4q96x33a98vSlTs2JygoNXH2EzFEMFQ4hI',
+  chord: 'tagpro=s%3AFZfL0608E3SXZfA23NtwIp5g.ZI594qkQ65RZAWHLb5JV0BL3MEfeZw34t6hu8SrWq18',
+  orbit: 'tagpro=s%3AiWrzwCxmuw99mFDvjp13mAMW.HXSXSo7UKr7X5M%2Frd1Pel9LX5RFJlQ4Wg7WuqRf6KMM',
+  diameter: 'tagpro=s%3AsoiGybyucdrRaTZK472tMigq.oWYMjRzp9sii5n24JXCGcHUc4%2BRbgpDjxdY8etm%2FOGE'
+}
+
 /*** for groupster lolz ***/
-app.get('/groupster', cors({origin:true}), function*(){
-  var response = yield request.post({url: 'http://tagpro-radius.koalabeast.com/groups/create/', headers:{ Cookie: 'tagpro=s%3AD7EiXNwLlTj83q8Xkrs06QAu.stp69Bcpgye0LoAeKxGine5awAGBzxVpKFa4kI7kZ58' }, form: { }});
+app.get('/groupster/:server', cors({origin:true}), function*(){
+  var url = 'http://tagpro-' + this.params.server + '.koalabeast.com/groups/create/';
+  var response = yield request.post({url: url, headers:{ Cookie: cookiesHash[this.params.server] }, form: { }});
   var link = response.body.split('/groups/')[1];
   this.body = link;
 });
+
