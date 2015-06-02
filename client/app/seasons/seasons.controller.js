@@ -6,12 +6,14 @@ angular.module('mltpApp')
    if(!$scope.seasonID) { //seasons
     $scope.seasons = [];
     for(var season in SeasonData) {
-      var mltpInfoSupported;
-      season <= 6 ? mltpInfoSupported = '/#/seasons' : mltpInfoSupported = '/#/seasons/' + season;
-      $scope.seasons.push({
-        spreadsheet: SeasonData[season].spreadsheet,
-        supported: mltpInfoSupported
-      });
+      if(season < 8) { //DONT SHOW CURRENT SEASON IN PAST SEASONS
+        var mltpInfoSupported;
+        season <= 6 ? mltpInfoSupported = '/#/seasons' : mltpInfoSupported = '/#/seasons/' + season;
+        $scope.seasons.push({
+          spreadsheet: SeasonData[season].spreadsheet,
+          supported: mltpInfoSupported
+        });
+      }
     }
    } else { //season/id
     if(Number($scope.seasonID) !== 7) {
