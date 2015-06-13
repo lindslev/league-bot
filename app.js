@@ -44,8 +44,6 @@ co(function *() {
   var userTracking = yield db.collection('analytics');
   var userCount = yield userTracking.count();
 
-  console.log('da fuq is the game count homie', gameCount)
-
   if(userCount == 0) {
     yield userTracking.insert({count: 'connect', numberOf: 0});
   }
@@ -321,7 +319,7 @@ function *mandrillTSVs(teamId) {
 
 function getWeekNum() {
   var weekMS = 604800000;
-  var compareMS = new Date(2015, 5, 12).getTime(); //2 days before scheduled week 1 start date
+  var compareMS = new Date(2015, 5, 5).getTime(); //2 days before scheduled week 1 start date
   var todayMS = new Date().getTime();
   var whichWeek = Math.ceil((todayMS - compareMS) / weekMS);
   if(whichWeek < 1) {
