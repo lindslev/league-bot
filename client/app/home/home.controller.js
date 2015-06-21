@@ -8,4 +8,6 @@ angular.module('mltpApp')
     //       console.log('...', res);
     //     })
     // }
+    var vid = document.getElementById("audio");
+    vid.volume = 0.3;
   });
