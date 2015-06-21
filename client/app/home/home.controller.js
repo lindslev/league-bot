@@ -9,5 +9,5 @@ angular.module('mltpApp')
     //     })
     // }
     var vid = document.getElementById("audio");
-    vid.volume = 0.3;
+    if(vid) vid.volume = 0.3;
   });
