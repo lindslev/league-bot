@@ -1,16 +1,24 @@
 <div ng-include="'client/components/nav.html'"></div>
 
-<h1> Season 8 is officially under way! Stop by Sunday nights for <a href="/#/live">live</a> action. </h1>
+<h1> <span id="red">H</span><span id="orange">a</span><span id="yellow">p</span><span id="green">p</span><span id="blue">y</span> MLTP! Join me in celebrating SCOTUS' call for marriage equality! </h1>
 
-<audio id="audio" autoplay="true" preload="auto" tabindex="0"  type="audio/mpeg">
-    <source type="audio/mp3" src="http://puu.sh/ixFUB/689c390c90.mp3">
-</audio>
+<h2> Let's also commemorate PrivateMajor for his leadership and contributions throughout MLTP history. Thank him with a nice thought / comment below. </h2>
+
+<input type="text" placeholder="comment here" ng-model="comment" size="60">
+<br>
+<button ng-click="submitComment()">submit</button>
+
+<p ng-repeat="comment in comments">{{comment}}</p>
+
+<br>
+<br>
+<br>
 
 <style>
-  h1 {
+  h1, h2{
     font-family: Dosis;
     font-weight: 100;
-    font-size: 100px;
+    font-size: 50px;
     color: black;
     text-align: center;
     padding: 70px;
@@ -20,6 +28,57 @@
   }
   h1 a:hover {
     color: #263238;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  input {
+    width: 20% !important;
+    text-align: center;
+    display: block !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+    color: black;
+    font-size: 20px !important;
+  }
+
+  #red {
+    color: red;
+  }
+  #blue {
+    color: blue;
+  }
+  #orange {
+    color: orange;
+  }
+  #yellow {
+    color: yellow;
+  }
+  #green {
+    color: green;
+  }
+
+  button {
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background: black;
+    padding: 15px;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  p {
+    width: 50%;
+    text-align: center;
+    padding: 15px;
+    color: #666666;
+    border-bottom: 2px solid #ef5350;
+    display: block;
+    margin: 0 auto;
   }
 </style>
 

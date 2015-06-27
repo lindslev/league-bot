@@ -43,9 +43,15 @@ co(function *() {
   var gameCount = yield gamesColl.count();
   var userTracking = yield db.collection('analytics');
   var userCount = yield userTracking.count();
+  var pmColl = yield db.collection('pm');
+  var pmCount = yield pmColl.count();
 
   if(userCount == 0) {
     yield userTracking.insert({count: 'connect', numberOf: 0});
+  }
+
+  if(pmCount == 0) {
+    yield pmColl.insert({ type: 'comments', comments: [] })
   }
 
   /*** populating teams in the db ***/
@@ -505,3 +511,30 @@ app.get('/groupster/:server', cors({origin:true}), function*(){
   this.body = link;
 });
 
+app.get('/privatemajor', cors({origin:true}), function*(){
+  var db = yield comongo.connect(DB);
+  var pmColl = yield db.collection('pm');
+  var pmArr = yield pmColl.find().toArray();
+  this.body = pmArr;
+  yield db.close();
+});
+
+app.post('/privatemajor', cors({origin:true}), function*(){
+  var body = this.request.body;
+  var comment = body.comment;
+  var db = yield comongo.connect(DB);
+  var pmColl = yield db.collection('pm');
+  var pmComments = yield pmColl.findOne({ type : 'comments' })
+  pmComments.comments.push(comment);
+  yield pmColl.update({ type: 'comments' }, pmComments);
+  yield db.close();
+  this.body = 'Thanks!';
+});
+
+//  var db = yield comongo.connect(DB);
+//   var userTracking = yield db.collection('analytics');
+//   var userCount = yield userTracking.findOne({count:'connect'});
+//   userCount.numberOf += 1;
+//   yield userTracking.update({count:'connect'}, userCount);
+//   yield db.close();
+// }

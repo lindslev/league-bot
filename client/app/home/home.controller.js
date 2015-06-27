@@ -8,6 +8,21 @@ angular.module('mltpApp')
     //       console.log('...', res);
     //     })
     // }
-    var vid = document.getElementById("audio");
-    if(vid) vid.volume = 0.3;
+    $scope.comments = [];
+
+    $http.get('http://serene-headland-9709.herokuapp.com/privatemajor')
+      .success(function(res) {
+        $scope.comments = res[0].comments;
+      })
+
+    $scope.submitComment = function() {
+      var comment = { comment : $scope.comment };
+      comment = JSON.stringify(comment);
+      $scope.comments.push($scope.comment);
+      $scope.comment = '';
+      $http.post('http://serene-headland-9709.herokuapp.com/privatemajor', comment)
+        .success(function(res) {
+          console.log(res);
+        })
+    }
   });
