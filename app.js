@@ -530,11 +530,3 @@ app.post('/privatemajor', cors({origin:true}), function*(){
   yield db.close();
   this.body = 'Thanks!';
 });
-
-//  var db = yield comongo.connect(DB);
-//   var userTracking = yield db.collection('analytics');
-//   var userCount = yield userTracking.findOne({count:'connect'});
-//   userCount.numberOf += 1;
-//   yield userTracking.update({count:'connect'}, userCount);
-//   yield db.close();
-// }

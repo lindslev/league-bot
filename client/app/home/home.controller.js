@@ -20,7 +20,7 @@ angular.module('mltpApp')
       comment = JSON.stringify(comment);
       $scope.comments.push($scope.comment);
       $scope.comment = '';
-      $http.post('http://serene-headland-9709.herokuapp.com/privatemajor', comment)
+      $http.post('http://mltp.info/privatemajor', comment)
         .success(function(res) {
           console.log(res);
         })
