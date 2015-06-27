@@ -511,7 +511,7 @@ app.get('/groupster/:server', cors({origin:true}), function*(){
   this.body = link;
 });
 
-app.get('/privatemajor', cors({origin:true}), function*(){
+app.get('/privatemajorlist', cors({origin:true}), function*(){
   var db = yield comongo.connect(DB);
   var pmColl = yield db.collection('pm');
   var pmArr = yield pmColl.find().toArray();
@@ -519,9 +519,11 @@ app.get('/privatemajor', cors({origin:true}), function*(){
   yield db.close();
 });
 
-app.post('/privatemajor', cors({origin:true}), function*(){
-  var body = this.request.body;
-  var comment = body.comment;
+app.get('/privatemajor/:comment', cors({origin:true}), function*(){
+  // var body = this.request.body;
+  // var comment = body.comment;
+  var comment = decodeURIComponent(this.params.comment);
+  console.log('???', comment)
   var db = yield comongo.connect(DB);
   var pmColl = yield db.collection('pm');
   var pmComments = yield pmColl.findOne({ type : 'comments' })
