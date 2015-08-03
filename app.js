@@ -299,6 +299,10 @@ function *mandrillTSVs(teamId) {
           {
             "email": "leodarrfut@gmail.com",
             "name": "Nqoba"
+          },
+          {
+            "email": "mrgone92@gmail.com",
+            "name": "Mr. Gone"
           }],
       "important": false,
       "track_opens": true,
