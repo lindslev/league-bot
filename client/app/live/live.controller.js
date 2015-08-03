@@ -79,7 +79,7 @@ angular.module('mltpApp')
             $timeout(function(){
               angular.element(idForCSS).removeClass('red');
               angular.element(idForCSS).removeClass('green');
-              if(halfToUpdate == 'g2h2' && objFromServer.stats[6] == 2) angular.element(idForCSS).addClass('complete');
+              if(objFromServer.halfToUpdate == 'g2h2' && objFromServer.stats[6] == 2) angular.element(idForCSS).addClass('complete');
             }, 5000);
             //adding part to deal w. live stats?
             if(objFromServer.stats) {
