@@ -29,10 +29,11 @@ var games = [];
 var teams = [];
 
 var DB = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp-dev';
-var keys = ['11abc8','12def8','13ghi8','14jkl8','15mno8',
+var keys = [];
+/*var keys = ['11abc8','12def8','13ghi8','14jkl8','15mno8',
             '21abc8','22def8','23ghi8','24jkl8','25mno8',
             '31abc8','32def8','33ghi8','34jkl8','35mno8',
-            '51abc8','52def8','53ghi8','54jkl8','55mno8'];
+            '51abc8','52def8','53ghi8','54jkl8','55mno8'];*/
 
 co(function *() {
   var teams = yield cjson.load('./server/db/s8teams.json');
