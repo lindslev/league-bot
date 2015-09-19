@@ -503,7 +503,9 @@ var cookiesHash = {
   orbit: 'tagpro=s%3AiWrzwCxmuw99mFDvjp13mAMW.HXSXSo7UKr7X5M%2Frd1Pel9LX5RFJlQ4Wg7WuqRf6KMM',
   diameter: 'tagpro=s%3AsoiGybyucdrRaTZK472tMigq.oWYMjRzp9sii5n24JXCGcHUc4%2BRbgpDjxdY8etm%2FOGE',
   maptest2: 'tagpro=s%3AmwxCdeGDwxwrWG1vfDbSSfGk.p7CV3Bj7LuF38kYsCPkpNgeXlF0R0yyV6N7xyFm%2FZGM',
-  tangent: 'tagpro=s%3A0qWPVVhfILU96rogHooAQWoC.pRSEKUp3FaRG5AuAi58dWbKrIDc5%2BrUpy%2BxvfhYQ5J8'
+  tangent: 'tagpro=s%3A0qWPVVhfILU96rogHooAQWoC.pRSEKUp3FaRG5AuAi58dWbKrIDc5%2BrUpy%2BxvfhYQ5J8',
+  maptest3: 'tagpro=s%3AM00OOcRELnX9I8nuCwyL4iV0.3bEL8fXp8Odl42akHmDKE0Kph1OYjQwbY9VgWjIiuG4',
+  maptest1: 'tagpro=s%3ATlWXY7W3wl1vtHSpBBA1Erxb.KQ9pDnTfrVrI0SeTAZhK8t5Fwta8%2BpUVaNeXtIPximw'
 }
 
 /*** for groupster lolz ***/
@@ -511,6 +513,8 @@ app.get('/groupster/:server', cors({origin:true}), function*(){
   var url = 'http://tagpro-' + this.params.server + '.koalabeast.com/groups/create/';
   if(this.params.server == 'maptest2') url = 'http://maptest2.newcompte.fr/groups/create/';
   if(this.params.server == 'tangent') url = 'http://tangent.jukejuice.com/groups/create/';
+  if(this.params.server == 'maptest3') url = 'http://maptest3.newcompte.fr/groups/create/';
+  if(this.params.server == 'maptest1') url = 'http://maptest.newcompte.fr/groups/create/';
   var response = yield request.post({url: url, headers:{ Cookie: cookiesHash[this.params.server] }, form: { }});
   var link = response.body.split('/groups/')[1];
   this.body = link;
