@@ -1,1 +1,1 @@
-web: node --harmony app.js
+web: node src/server/app.js

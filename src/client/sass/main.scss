@@ -1,0 +1,238 @@
+$black: #000;
+$gray: #999;
+$gray-bg: #898989;
+$shadow: #9E9E9E;
+$green: rgb(0,126,2);
+$red: red;
+$blue: blue;
+$navy: rgb(41, 51, 123);
+$maroon: rgb(124, 41, 42);
+
+body {
+	background-image: url('http://i.imgur.com/KW29B0o.png');
+  background-attachment: fixed;
+  font-family: Oswald;
+}
+
+.app {
+	height: 100vh;
+}
+
+h1 {
+	text-align: center;
+	color: $navy;
+	margin: 0;
+}
+
+.chasing-dots {
+	width: 120px !important;
+	height: 120px !important;
+	margin: 0 auto;
+}
+
+.dot1 {
+	background-color: $navy !important;
+}
+
+.dot2 {
+	background-color: $maroon !important;
+}
+
+.league-chooser {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.home-logo {
+	margin: 0 auto;
+	display: block;
+	height: 150px;
+	width: 600px;
+}
+
+.league-link-container {
+	text-align: center;
+}
+
+.league-link {
+	font-size: 60px;
+	display: inline-block;
+	text-align: center;
+	padding: 10px;
+	text-decoration: none;
+	color: $navy;
+	font-family: Oswald;
+
+	&:hover {
+		text-decoration: none;
+		color: $gray;
+	}
+}
+
+.league-link:first-of-type {
+	&:hover {
+		color: $maroon;
+	}
+}
+
+.league-view {
+	margin-bottom: 50px;
+	.game-board {
+			height: 170px;
+			margin-bottom: 24px;
+			h2 {
+				font-family: Oswald;
+				margin: 0;
+				font-size: 20px;
+				text-align: center;
+				background: $black;
+				color: white;
+				padding: 10px;
+				cursor: pointer;
+			}
+			.header-flash-green {
+				background: green;
+			}
+			.header-flash-gray {
+				background: $gray-bg;
+			}
+			.game-over {
+				color: $maroon;
+			}
+			table {
+				width: 100%;
+				text-align: center;
+				font-family: Abel;
+				color: white;
+				box-shadow: 0px 8px 17px -2px rgba(0,0,0,0.6);
+			}
+			td {
+				height: 40px;
+			}
+			.left-aligned {
+				text-align: left;
+				width: 150px;
+				padding-left: 16px;
+			}
+			.team-name {
+				font-family: Montserrat;
+			}
+			.padded-bottom td {
+				padding-bottom: 10px;
+			}
+			.td-highlight {
+				background: yellow;
+				color: $black;
+			}
+	}
+	.board-navy {
+		background: $navy;
+	}
+	.board-maroon {
+		background: $maroon;
+	}
+	.page-title {
+		a, a:hover, a:active { text-decoration: none; }
+		font-family: Anton;
+		font-size: 50px;
+		a { color: $black; }
+	}
+	.page-subtitle {
+		text-align: center;
+		font-family: Abel;
+		a, a:hover, a:active { text-decoration: none; }
+		a {
+			color: $navy;
+		}
+	}
+	.week-banner {
+		font-family: Montserrat;
+		text-align: center;
+		padding: 8px;
+		background: white;
+	}
+}
+
+.modal-backdrop {
+	background: $maroon !important;
+}
+.modal-dialog {
+	transform: translateY(50%) !important;
+}
+.modal-content {
+	background: $black !important;
+	color: white !important;
+	font-family: Abel !important;
+}
+.modal-header .close { color: $maroon; }
+.modal-title {
+	text-align: center;
+	font-family: Oswald;
+}
+.modal-body table {
+	width: 100%;
+	text-align: center;
+}
+.modal-footer button {
+	background: $maroon;
+	color: white;
+	border: none;
+	border-radius: 4px;
+}
+.stats-header-row td {
+	color: $maroon;
+	font-weight: bold;
+}
+.no-stats {
+	text-align: center;
+	margin-top: 20px;
+}
+
+
+footer {
+  height: 25px;
+  width: 100%;
+  text-align: center;
+  font-family: Abel;
+  color: #263238;
+  bottom: 0;
+  position: fixed;
+  background: white;
+}
+footer a {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #263238 !important;
+}
+footer a:hover {
+  color: #263238;
+}
+footer p {
+  display: inline;
+}
+
+@media (max-width: 700px) {
+	.home-logo {
+		height: 70px;
+		width: 250px;
+	}
+  .league-link {
+		font-size: 40px;
+	}
+	.league-view {
+		.game-board {
+			table {
+				font-size: 12px;
+			}
+			.left-aligned {
+				width: 100px;
+			}
+		}
+	}
+	.modal-body {
+		table {
+			font-size: 9px;
+		}
+	}
+}

@@ -1,0 +1,185 @@
+body {
+  background-image: url("http://i.imgur.com/KW29B0o.png");
+  background-attachment: fixed;
+  font-family: Oswald; }
+
+.app {
+  height: 100vh; }
+
+h1 {
+  text-align: center;
+  color: #29337b;
+  margin: 0; }
+
+.chasing-dots {
+  width: 120px !important;
+  height: 120px !important;
+  margin: 0 auto; }
+
+.dot1 {
+  background-color: #29337b !important; }
+
+.dot2 {
+  background-color: #7c292a !important; }
+
+.league-chooser {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.home-logo {
+  margin: 0 auto;
+  display: block;
+  height: 150px;
+  width: 600px; }
+
+.league-link-container {
+  text-align: center; }
+
+.league-link {
+  font-size: 60px;
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #29337b;
+  font-family: Oswald; }
+  .league-link:hover {
+    text-decoration: none;
+    color: #999; }
+
+.league-link:first-of-type:hover {
+  color: #7c292a; }
+
+.league-view {
+  margin-bottom: 50px; }
+  .league-view .game-board {
+    height: 170px;
+    margin-bottom: 24px; }
+    .league-view .game-board h2 {
+      font-family: Oswald;
+      margin: 0;
+      font-size: 20px;
+      text-align: center;
+      background: #000;
+      color: white;
+      padding: 10px;
+      cursor: pointer; }
+    .league-view .game-board .header-flash-green {
+      background: green; }
+    .league-view .game-board .header-flash-gray {
+      background: #898989; }
+    .league-view .game-board .game-over {
+      color: #7c292a; }
+    .league-view .game-board table {
+      width: 100%;
+      text-align: center;
+      font-family: Abel;
+      color: white;
+      box-shadow: 0px 8px 17px -2px rgba(0, 0, 0, 0.6); }
+    .league-view .game-board td {
+      height: 40px; }
+    .league-view .game-board .left-aligned {
+      text-align: left;
+      width: 150px;
+      padding-left: 16px; }
+    .league-view .game-board .team-name {
+      font-family: Montserrat; }
+    .league-view .game-board .padded-bottom td {
+      padding-bottom: 10px; }
+    .league-view .game-board .td-highlight {
+      background: yellow;
+      color: #000; }
+  .league-view .board-navy {
+    background: #29337b; }
+  .league-view .board-maroon {
+    background: #7c292a; }
+  .league-view .page-title {
+    font-family: Anton;
+    font-size: 50px; }
+    .league-view .page-title a, .league-view .page-title a:hover, .league-view .page-title a:active {
+      text-decoration: none; }
+    .league-view .page-title a {
+      color: #000; }
+  .league-view .page-subtitle {
+    text-align: center;
+    font-family: Abel; }
+    .league-view .page-subtitle a, .league-view .page-subtitle a:hover, .league-view .page-subtitle a:active {
+      text-decoration: none; }
+    .league-view .page-subtitle a {
+      color: #29337b; }
+  .league-view .week-banner {
+    font-family: Montserrat;
+    text-align: center;
+    padding: 8px;
+    background: white; }
+
+.modal-backdrop {
+  background: #7c292a !important; }
+
+.modal-dialog {
+  transform: translateY(50%) !important; }
+
+.modal-content {
+  background: #000 !important;
+  color: white !important;
+  font-family: Abel !important; }
+
+.modal-header .close {
+  color: #7c292a; }
+
+.modal-title {
+  text-align: center;
+  font-family: Oswald; }
+
+.modal-body table {
+  width: 100%;
+  text-align: center; }
+
+.modal-footer button {
+  background: #7c292a;
+  color: white;
+  border: none;
+  border-radius: 4px; }
+
+.stats-header-row td {
+  color: #7c292a;
+  font-weight: bold; }
+
+.no-stats {
+  text-align: center;
+  margin-top: 20px; }
+
+footer {
+  height: 25px;
+  width: 100%;
+  text-align: center;
+  font-family: Abel;
+  color: #263238;
+  bottom: 0;
+  position: fixed;
+  background: white; }
+
+footer a {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #263238 !important; }
+
+footer a:hover {
+  color: #263238; }
+
+footer p {
+  display: inline; }
+
+@media (max-width: 700px) {
+  .home-logo {
+    height: 70px;
+    width: 250px; }
+  .league-link {
+    font-size: 40px; }
+  .league-view .game-board table {
+    font-size: 12px; }
+  .league-view .game-board .left-aligned {
+    width: 100px; }
+  .modal-body table {
+    font-size: 9px; } }
