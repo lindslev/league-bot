@@ -39,6 +39,7 @@ function updateState(PAYLOAD) {
     let gameToUpdate = game.TEAMS.indexOf(PAYLOAD.teams[0]) > -1;
     if ( gameToUpdate ) {
       game.RECENT_STATS = PAYLOAD.stats;
+      game.LAST_UPDATE = PAYLOAD.LAST_UPDATE;
       game[getGameNumber(PAYLOAD.game)][getHalfNumber(PAYLOAD.half)] = PAYLOAD.score;
       thisUpdate = game;
       scoreboardUpdates.push(_.assign({}, game, {

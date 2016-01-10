@@ -1,5 +1,6 @@
 var socket = require('./../../app').socket;
 var _ = require('lodash');
+var moment = require('moment');
 
 var DB = require('mongodb-next');
 var DB_LINK = process.env.MONGOLAB_URI || 'mongodb://localhost/mltp-v2';
@@ -56,6 +57,11 @@ function updateLiveDocument(PAYLOAD) {
 		PAYLOAD.score = {};
 		PAYLOAD.score[TEAM_NAME] = thisTeamScore;
 		PAYLOAD.score[OPPONENT] = otherTeamScore;
+		PAYLOAD.LAST_UPDATE = {
+			time: moment().format('hh:mmA'),
+			game: PAYLOAD.game,
+			half: PAYLOAD.half
+		};
 		var LIVE_OBJ = _.assign({}, PAYLOAD, { teams: [TEAM_NAME, OPPONENT], majors: IS_MAJORS });
 		if ( isGameOver(PAYLOAD) ) LIVE_OBJ.GAME_OVER = true;
 		socket.emit('live', LIVE_OBJ);
@@ -84,6 +90,11 @@ function getUpdatedGame(week, PAYLOAD, IS_MAJORS, LEAGUE_TYPE) {
 	scoreToUpdate[TEAM_NAME] = PAYLOAD.score.thisTeamScore;
 	scoreToUpdate[OPPONENT] = PAYLOAD.score.otherTeamScore;
 	gameToUpdate.RECENT_STATS = PAYLOAD.stats;
+	gameToUpdate.LAST_UPDATE = {
+		time: moment().format('hh:mmA'),
+		game: PAYLOAD.game,
+		half: PAYLOAD.half
+	};
 	if ( isGameOver(PAYLOAD) ) gameToUpdate.GAME_OVER = true;
 	return gameToUpdate;
 }

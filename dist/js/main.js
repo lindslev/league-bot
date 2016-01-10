@@ -43162,67 +43162,67 @@ module.exports=require(29)
 },{"+7ZJp0":5}],304:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = ".chasing-dots {\n  width: 27px;\n  height: 27px;\n  position: relative;\n\n  -webkit-animation: rotate 2.0s infinite linear;\n  animation: rotate 2.0s infinite linear;\n}\n\n.dot1, .dot2 {\n  width: 60%;\n  height: 60%;\n  display: inline-block;\n  position: absolute;\n  top: 0;\n  background-color: #333;\n  border-radius: 100%;\n\n  -webkit-animation: bounce 2.0s infinite ease-in-out;\n  animation: bounce 2.0s infinite ease-in-out;\n}\n\n.dot2 {\n  top: auto;\n  bottom: 0px;\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n\n@-webkit-keyframes rotate { 100% { -webkit-transform: rotate(360deg) }}\n@keyframes rotate {\n  100% {\n    transform: rotate(360deg);\n    -webkit-transform: rotate(360deg);\n  }\n}\n\n@-webkit-keyframes bounce {\n  0%, 100% { -webkit-transform: scale(0.0) }\n  50% { -webkit-transform: scale(1.0) }\n}\n\n@keyframes bounce {\n  0%, 100% {\n    transform: scale(0.0);\n    -webkit-transform: scale(0.0);\n  } 50% {\n    transform: scale(1.0);\n    -webkit-transform: scale(1.0);\n  }\n}\n\n";
-inject(css, undefined, '_1s4nv0m');
+inject(css, undefined, '_1uh0tb9');
 module.exports = css;
 
 },{"../../cssify":1}],305:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = ".circle-wrapper {\n  width: 22px;\n  height: 22px;\n  position: relative;\n}\n\n.circle {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0;\n}\n\n.circle:before {\n  content: '';\n  display: block;\n  margin: 0 auto;\n  width: 20%;\n  height: 20%;\n  background-color: #333;\n\n  border-radius: 100%;\n  -webkit-animation: bouncedelay 1.2s infinite ease-in-out;\n  animation: bouncedelay 1.2s infinite ease-in-out;\n  /* Prevent first frame from flickering when animation starts */\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n\n.circle2  { -webkit-transform: rotate(30deg);  transform: rotate(30deg)  }\n.circle3  { -webkit-transform: rotate(60deg);  transform: rotate(60deg)  }\n.circle4  { -webkit-transform: rotate(90deg);  transform: rotate(90deg)  }\n.circle5  { -webkit-transform: rotate(120deg); transform: rotate(120deg) }\n.circle6  { -webkit-transform: rotate(150deg); transform: rotate(150deg) }\n.circle7  { -webkit-transform: rotate(180deg); transform: rotate(180deg) }\n.circle8  { -webkit-transform: rotate(210deg); transform: rotate(210deg) }\n.circle9  { -webkit-transform: rotate(240deg); transform: rotate(240deg) }\n.circle10 { -webkit-transform: rotate(270deg); transform: rotate(270deg) }\n.circle11 { -webkit-transform: rotate(300deg); transform: rotate(300deg) }\n.circle12 { -webkit-transform: rotate(330deg); transform: rotate(330deg) }\n\n.circle2:before  { -webkit-animation-delay: -1.1s; animation-delay: -1.1s }\n.circle3:before  { -webkit-animation-delay: -1.0s; animation-delay: -1.0s }\n.circle4:before  { -webkit-animation-delay: -0.9s; animation-delay: -0.9s }\n.circle5:before  { -webkit-animation-delay: -0.8s; animation-delay: -0.8s }\n.circle6:before  { -webkit-animation-delay: -0.7s; animation-delay: -0.7s }\n.circle7:before  { -webkit-animation-delay: -0.6s; animation-delay: -0.6s }\n.circle8:before  { -webkit-animation-delay: -0.5s; animation-delay: -0.5s }\n.circle9:before  { -webkit-animation-delay: -0.4s; animation-delay: -0.4s }\n.circle10:before { -webkit-animation-delay: -0.3s; animation-delay: -0.3s }\n.circle11:before { -webkit-animation-delay: -0.2s; animation-delay: -0.2s }\n.circle12:before { -webkit-animation-delay: -0.1s; animation-delay: -0.1s }\n\n@-webkit-keyframes bouncedelay {\n  0%, 80%, 100% { -webkit-transform: scale(0.0) }\n  40% { -webkit-transform: scale(1.0) }\n}\n\n@keyframes bouncedelay {\n  0%, 80%, 100% {\n    -webkit-transform: scale(0.0);\n    transform: scale(0.0);\n  } 40% {\n    -webkit-transform: scale(1.0);\n    transform: scale(1.0);\n  }\n}\n\n";
-inject(css, undefined, '_7zkxd8');
+inject(css, undefined, '_25vin');
 module.exports = css;
 
 },{"../../cssify":1}],306:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = ".cube-grid {\n  width:27px;\n  height:27px;\n}\n\n.cube {\n  width:33%;\n  height:33%;\n  background:#333;\n  float:left;\n  -webkit-animation: scaleDelay 1.3s infinite ease-in-out;\n  animation: scaleDelay 1.3s infinite ease-in-out;\n}\n\n/*\n * Spinner positions\n * 1 2 3\n * 4 5 6\n * 7 8 9\n */\n\n.spinner .cube:nth-child(1) { -webkit-animation-delay: 0.2s; animation-delay: 0.2s  }\n.spinner .cube:nth-child(2) { -webkit-animation-delay: 0.3s; animation-delay: 0.3s  }\n.spinner .cube:nth-child(3) { -webkit-animation-delay: 0.4s; animation-delay: 0.4s  }\n.spinner .cube:nth-child(4) { -webkit-animation-delay: 0.1s; animation-delay: 0.1s  }\n.spinner .cube:nth-child(5) { -webkit-animation-delay: 0.2s; animation-delay: 0.2s  }\n.spinner .cube:nth-child(6) { -webkit-animation-delay: 0.3s; animation-delay: 0.3s  }\n.spinner .cube:nth-child(7) { -webkit-animation-delay: 0.0s; animation-delay: 0.0s  }\n.spinner .cube:nth-child(8) { -webkit-animation-delay: 0.1s; animation-delay: 0.1s  }\n.spinner .cube:nth-child(9) { -webkit-animation-delay: 0.2s; animation-delay: 0.2s  }\n\n@-webkit-keyframes scaleDelay {\n  0%, 70%, 100% { -webkit-transform:scale3D(1.0, 1.0, 1.0) }\n  35%           { -webkit-transform:scale3D(0.0, 0.0, 1.0) }\n}\n\n@keyframes scaleDelay {\n  0%, 70%, 100% { -webkit-transform:scale3D(1.0, 1.0, 1.0); transform:scale3D(1.0, 1.0, 1.0) }\n  35%           { -webkit-transform:scale3D(1.0, 1.0, 1.0); transform:scale3D(0.0, 0.0, 1.0) }\n}\n\n";
-inject(css, undefined, '_6av3ne');
+inject(css, undefined, '_19149l');
 module.exports = css;
 
 },{"../../cssify":1}],307:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = ".double-bounce {\n  width: 27px;\n  height: 27px;\n\n  position: relative;\n}\n\n.double-bounce1, .double-bounce2 {\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n  background-color: #333;\n  opacity: 0.6;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  -webkit-animation: bounce 2.0s infinite ease-in-out;\n  animation: bounce 2.0s infinite ease-in-out;\n}\n\n.double-bounce2 {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n\n@-webkit-keyframes bounce {\n  0%, 100% { -webkit-transform: scale(0.0) }\n  50% { -webkit-transform: scale(1.0) }\n}\n\n@keyframes bounce {\n  0%, 100% {\n    transform: scale(0.0);\n    -webkit-transform: scale(0.0);\n  } 50% {\n    transform: scale(1.0);\n    -webkit-transform: scale(1.0);\n  }\n}\n\n";
-inject(css, undefined, '_1nv5zue');
+inject(css, undefined, '_uxj9w5');
 module.exports = css;
 
 },{"../../cssify":1}],308:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = "@-webkit-keyframes fade-in {\n  0% {\n      opacity: 0;\n  }\n  50% {\n      opacity: 0;\n  }\n  100% {\n      opacity: 1;\n  }\n}\n\n@-moz-keyframes fade-in {\n  0% {\n      opacity: 0;\n  }\n  50% {\n      opacity: 0;\n  }\n  100% {\n      opacity: 1;\n  }\n}\n\n@-ms-keyframes fade-in {\n  0% {\n      opacity: 0;\n  }\n  50% {\n      opacity: 0;\n  }\n  100% {\n      opacity: 1;\n  }\n}\n\n@keyframes fade-in {\n  0% {\n      opacity: 0;\n  }\n  50% {\n      opacity: 0;\n  }\n  100% {\n      opacity: 1;\n  }\n}\n\n.fade-in {\n  -webkit-animation: fade-in 2s;\n  -moz-animation: fade-in 2s;\n  -o-animation: fade-in 2s;\n  -ms-animation: fade-in 2s;\n}\n";
-inject(css, undefined, '_4cwl8y');
+inject(css, undefined, '_i5xygh');
 module.exports = css;
 
 },{"../../cssify":1}],309:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = ".pulse {\n  width: 27px;\n  height: 27px;\n  background-color: #333;\n\n  border-radius: 100%;\n  -webkit-animation: scaleout 1.0s infinite ease-in-out;\n  animation: scaleout 1.0s infinite ease-in-out;\n}\n\n@-webkit-keyframes scaleout {\n  0% { -webkit-transform: scale(0.0) }\n  100% {\n    -webkit-transform: scale(1.0);\n    opacity: 0;\n  }\n}\n\n@keyframes scaleout {\n  0% {\n    transform: scale(0.0);\n    -webkit-transform: scale(0.0);\n  } 100% {\n    transform: scale(1.0);\n    -webkit-transform: scale(1.0);\n    opacity: 0;\n  }\n}\n\n";
-inject(css, undefined, '_1cvzja9');
+inject(css, undefined, '_1vs5obm');
 module.exports = css;
 
 },{"../../cssify":1}],310:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = ".rotating-plane {\n  width: 27px;\n  height: 27px;\n  background-color: #333;\n\n  -webkit-animation: rotateplane 1.2s infinite ease-in-out;\n  animation: rotateplane 1.2s infinite ease-in-out;\n}\n\n@-webkit-keyframes rotateplane {\n  0% { -webkit-transform: perspective(120px) }\n  50% { -webkit-transform: perspective(120px) rotateY(180deg) }\n  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }\n}\n\n@keyframes rotateplane {\n  0% {\n    transform: perspective(120px) rotateX(0deg) rotateY(0deg);\n    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg);\n  } 50% {\n    transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);\n    -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);\n  } 100% {\n    transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);\n    -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);\n  }\n}\n\n";
-inject(css, undefined, '_734k0p');
+inject(css, undefined, '_18zzknu');
 module.exports = css;
 
 },{"../../cssify":1}],311:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = ".three-bounce > div {\n  width: 18px;\n  height: 18px;\n  background-color: #333;\n\n  border-radius: 100%;\n  display: inline-block;\n  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;\n  animation: bouncedelay 1.4s infinite ease-in-out;\n  /* Prevent first frame from flickering when animation starts */\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n}\n\n.three-bounce .bounce1 {\n  -webkit-animation-delay: -0.32s;\n  animation-delay: -0.32s;\n}\n\n.three-bounce .bounce2 {\n  -webkit-animation-delay: -0.16s;\n  animation-delay: -0.16s;\n}\n\n@-webkit-keyframes bouncedelay {\n  0%, 80%, 100% { -webkit-transform: scale(0.0) }\n  40% { -webkit-transform: scale(1.0) }\n}\n\n@keyframes bouncedelay {\n  0%, 80%, 100% {\n    transform: scale(0.0);\n    -webkit-transform: scale(0.0);\n  } 40% {\n    transform: scale(1.0);\n    -webkit-transform: scale(1.0);\n  }\n}\n";
-inject(css, undefined, '_1gh4vwt');
+inject(css, undefined, '_k06yoe');
 module.exports = css;
 
 },{"../../cssify":1}],312:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = ".wandering-cubes {\n  width: 27px;\n  height: 27px;\n  position: relative;\n}\n\n.cube1, .cube2 {\n  background-color: #333;\n  width: 10px;\n  height: 10px;\n  position: absolute;\n  top: 0;\n  left: 0;\n\n  -webkit-animation: cubemove 1.8s infinite ease-in-out;\n  animation: cubemove 1.8s infinite ease-in-out;\n}\n\n.cube2 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n\n@-webkit-keyframes cubemove {\n  25% { -webkit-transform: translateX(22px) rotate(-90deg) scale(0.5) }\n  50% { -webkit-transform: translateX(22px) translateY(22px) rotate(-180deg) }\n  75% { -webkit-transform: translateX(0px) translateY(22px) rotate(-270deg) scale(0.5) }\n  100% { -webkit-transform: rotate(-360deg) }\n}\n\n@keyframes cubemove {\n  25% { \n    transform: translateX(42px) rotate(-90deg) scale(0.5);\n    -webkit-transform: translateX(42px) rotate(-90deg) scale(0.5);\n  } 50% {\n    /* Hack to make FF rotate in the right direction */\n    transform: translateX(42px) translateY(42px) rotate(-179deg);\n    -webkit-transform: translateX(42px) translateY(42px) rotate(-179deg);\n  } 50.1% {\n    transform: translateX(42px) translateY(42px) rotate(-180deg);\n    -webkit-transform: translateX(42px) translateY(42px) rotate(-180deg);\n  } 75% {\n    transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);\n    -webkit-transform: translateX(0px) translateY(42px) rotate(-270deg) scale(0.5);\n  } 100% {\n    transform: rotate(-360deg);\n    -webkit-transform: rotate(-360deg);\n  }\n}\n\n";
-inject(css, undefined, '_118pdq2');
+inject(css, undefined, '_idz9ll');
 module.exports = css;
 
 },{"../../cssify":1}],313:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = ".wave {\n  width: 50px;\n  height: 27px;\n}\n\n.wave > div {\n  background-color: #333;\n  height: 100%;\n  width: 6px;\n  display: inline-block;\n\n  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;\n  animation: stretchdelay 1.2s infinite ease-in-out;\n}\n\n.wave .rect2 {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s;\n}\n\n.wave .rect3 {\n  -webkit-animation-delay: -1.0s;\n  animation-delay: -1.0s;\n}\n\n.wave .rect4 {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s;\n}\n\n.wave .rect5 {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s;\n}\n\n@-webkit-keyframes stretchdelay {\n  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }\n  20% { -webkit-transform: scaleY(1.0) }\n}\n\n@keyframes stretchdelay {\n  0%, 40%, 100% {\n    transform: scaleY(0.4);\n    -webkit-transform: scaleY(0.4);\n  } 20% {\n    transform: scaleY(1.0);\n    -webkit-transform: scaleY(1.0);\n  }\n}\n\n";
-inject(css, undefined, '_1lnie1n');
+inject(css, undefined, '_vmw5w8');
 module.exports = css;
 
 },{"../../cssify":1}],314:[function(require,module,exports){
 var inject = require('../../cssify');
 var css = ".wordpress {\n  background: #333;\n  width: 27px;\n  height: 27px;\n  display: inline-block;\n  border-radius: 27px;\n  position: relative;\n  -webkit-animation: inner-circle 1s linear infinite;\n  animation: inner-circle 1s linear infinite;\n}\n\n.inner-circle {\n  display: block;\n  background: #fff;\n  width: 8px;\n  height: 8px;\n  position: absolute;\n  border-radius: 8px;\n  top: 5px;\n  left: 5px;\n}\n\n@-webkit-keyframes inner-circle {\n  0% { -webkit-transform: rotate(0); }\n  100% { -webkit-transform: rotate(360deg); }\n}\n\n@keyframes inner-circle {\n  0% { transform: rotate(0); -webkit-transform:rotate(0); }\n  100% { transform: rotate(360deg); -webkit-transform:rotate(360deg); }\n}\n\n";
-inject(css, undefined, '_17li9mf');
+inject(css, undefined, '_1su4c8k');
 module.exports = css;
 
 },{"../../cssify":1}],315:[function(require,module,exports){
@@ -62560,6 +62560,7 @@ var ModalContainer = (function (_React$Component) {
     key: 'renderStats',
     value: function renderStats(game) {
       var RECENT_STATS = game.RECENT_STATS;
+      var LAST_UPDATE = game.LAST_UPDATE;
 
       var sortedStats = (0, _lodash.sortBy)(RECENT_STATS, function (p) {
         return - +p.score;
@@ -62567,81 +62568,95 @@ var ModalContainer = (function (_React$Component) {
       var thereAreStats = sortedStats.length > 0;
       if (thereAreStats) {
         return _react2['default'].createElement(
-          'table',
+          'div',
           null,
           _react2['default'].createElement(
-            'tbody',
+            'table',
             null,
             _react2['default'].createElement(
-              'tr',
-              { className: 'stats-header-row' },
+              'tbody',
+              null,
               _react2['default'].createElement(
-                'td',
-                null,
-                'Name'
+                'tr',
+                { className: 'stats-header-row' },
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Name'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Score'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Tags'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Pops'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Grabs'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Drops'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Hold'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Caps'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Prevent'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Returns'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Support'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Pups'
+                ),
+                _react2['default'].createElement(
+                  'td',
+                  null,
+                  'Minutes'
+                )
               ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Score'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Tags'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Pops'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Grabs'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Drops'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Hold'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Caps'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Prevent'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Returns'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Support'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Pups'
-              ),
-              _react2['default'].createElement(
-                'td',
-                null,
-                'Minutes'
-              )
-            ),
-            sortedStats.map(this.renderPlayerRow)
+              sortedStats.map(this.renderPlayerRow)
+            )
+          ),
+          _react2['default'].createElement(
+            'p',
+            { className: 'stats-timestamp' },
+            'Last updated: ',
+            LAST_UPDATE.time,
+            ', G',
+            LAST_UPDATE.game,
+            'H',
+            LAST_UPDATE.half
           )
         );
       } else {
@@ -63061,6 +63076,7 @@ function updateState(PAYLOAD) {
     var gameToUpdate = game.TEAMS.indexOf(PAYLOAD.teams[0]) > -1;
     if (gameToUpdate) {
       game.RECENT_STATS = PAYLOAD.stats;
+      game.LAST_UPDATE = PAYLOAD.LAST_UPDATE;
       game[(0, _serverHelpers.getGameNumber)(PAYLOAD.game)][(0, _serverHelpers.getHalfNumber)(PAYLOAD.half)] = PAYLOAD.score;
       thisUpdate = game;
       scoreboardUpdates.push(_lodash2['default'].assign({}, game, {
@@ -63761,7 +63777,7 @@ module.exports = {
     division: "Northeast"
   }, {
     name: "Base Gods",
-    minorsName: "Base Gods",
+    minorsName: "The Pack",
     key: "s9hihi",
     captain: "Raven",
     roster: ['Mr.Gone', 'bdl', 'jj\'s pool', 'fuckingtank', 'Armbranch', 'iAaronK', 'Punster', 'odawg', 'MrJoeHobo', 'derds', 'canniba||', 'Gyaraderp'],
@@ -63779,7 +63795,7 @@ module.exports = {
     division: "Central"
   }, {
     name: "Tears",
-    minorsName: "Tears",
+    minorsName: "Orzaballs",
     key: "s9jkjk",
     captain: "TroBall",
     roster: ['Fatal', 'AnnaKendrick', 'DudeMcGuy', 'mathnasium', 'Frozty', 'fucking owen', 'coys', 'NEUhusky', 'wabi-sabi', 'JBaayBaay', 'mahatma', 'Jet2', 'alchemist'],
@@ -63797,7 +63813,7 @@ module.exports = {
     division: "Central"
   }, {
     name: "BMX2: Electric Ballaloo",
-    minorsName: "BMX2: Electric Ballaloo",
+    minorsName: "EZ ees",
     key: "s9lmlm",
     captain: "BAllstar",
     roster: ['lukemoo', 'eee', 'bad', 'F2PDynasty', 'quibble', 'ASS CANNON', 'saundy', 'Kimba', 'superdiglett', 'Esoog', 'Micaso', 'WowSuchPro'],

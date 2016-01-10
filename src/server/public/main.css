@@ -149,6 +149,14 @@ h1 {
   width: 100%;
   text-align: center; }
 
+.modal-body {
+  padding-bottom: 0px !important; }
+
+.modal-body .stats-timestamp {
+  text-align: center;
+  font-size: 10px;
+  margin-top: 10px; }
+
 .modal-footer button {
   background: #7c292a;
   color: white;
@@ -172,7 +180,8 @@ h1 {
 
 .no-stats {
   text-align: center;
-  margin-top: 20px; }
+  margin-top: 20px;
+  padding-bottom: 15px; }
 
 footer {
   height: 25px;

@@ -31,11 +31,12 @@ class ModalContainer extends React.Component {
     }
 
     renderStats(game) {
-      const { RECENT_STATS } = game;
+      const { RECENT_STATS, LAST_UPDATE } = game;
       const sortedStats = sortBy(RECENT_STATS, (p) => -(+p.score));
       const thereAreStats = sortedStats.length > 0;
       if ( thereAreStats ) {
         return (
+          <div>
           <table>
             <tbody>
               <tr className="stats-header-row">
@@ -56,6 +57,8 @@ class ModalContainer extends React.Component {
               {sortedStats.map(this.renderPlayerRow)}
             </tbody>
           </table>
+          <p className="stats-timestamp">Last updated: {LAST_UPDATE.time}, G{LAST_UPDATE.game}H{LAST_UPDATE.half}</p>
+          </div>
         );
       } else {
         return (
