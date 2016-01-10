@@ -18,9 +18,10 @@ app.use(express.static(distJs));
 var server = require('http').createServer();
 
 var io = require('socket.io').listen(app.listen(process.env.PORT || 1337));
+var analyzeConnections = require('./connections');
 
 io.on('connection', function (socket) {
-  console.log('User connected..');
+  analyzeConnections();
 });
 
 require('./season_seeder')();

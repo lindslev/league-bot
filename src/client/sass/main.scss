@@ -152,6 +152,23 @@ h1 {
 		padding: 8px;
 		background: white;
 	}
+	.sorting-options {
+		margin-bottom: 10px;
+		text-align: center;
+		.sorting-option {
+			color: black;
+			margin: 10px;
+			font-family: Abel;
+			&:hover {
+				text-decoration: none;
+				cursor: pointer;
+			}
+		}
+		.selected-option {
+			color: $maroon;
+			font-weight: bold;
+		}
+	}
 }
 
 .modal-backdrop {
@@ -179,6 +196,19 @@ h1 {
 	color: white;
 	border: none;
 	border-radius: 4px;
+}
+.modal-footer .stream-link {
+	color: white;
+	float: left;
+	margin-top: 2px;
+	.stream-rec {
+		color: red;
+		font-weight: bold;
+	}
+	&:hover {
+		text-decoration: none;
+		cursor: pointer;
+	}
 }
 .stats-header-row td {
 	color: $maroon;
@@ -210,6 +240,44 @@ footer a:hover {
 }
 footer p {
   display: inline;
+}
+
+.streams-container {
+	text-align: center;
+	font-family: Abel;
+	position: relative;
+	top: 40%;
+	transform: translateY(-50%);
+	.page-title {
+		a, a:hover {
+			font-family: Oswald;
+			text-decoration: none;
+			color: $black;
+		}
+	}
+	input {
+		background: $maroon;
+		border: 1px solid $maroon;
+		padding: 5px;
+		color: white;
+	}
+	button {
+		background: $black;
+		border-radius: 2px;
+		margin-left: 10px;
+		border: none;
+		color: white;
+	}
+	.streams-form {
+		p {
+			margin: 10px;
+		}
+		button {
+			display: block;
+			margin: 0 auto;
+			margin-top: 10px;
+		}
+	}
 }
 
 @media (max-width: 700px) {

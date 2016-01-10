@@ -62657,6 +62657,38 @@ var ModalContainer = (function (_React$Component) {
       }
     }
   }, {
+    key: 'renderStream',
+    value: function renderStream(stream) {
+      return _react2['default'].createElement(
+        'a',
+        { className: 'stream-link', href: stream.link },
+        'REC ',
+        _react2['default'].createElement(
+          'span',
+          { className: 'stream-rec' },
+          '•'
+        ),
+        ' ',
+        stream.time
+      );
+    }
+  }, {
+    key: 'renderModalFooter',
+    value: function renderModalFooter(game) {
+      var STREAM = game.STREAM;
+
+      return _react2['default'].createElement(
+        'div',
+        null,
+        STREAM ? this.renderStream(STREAM) : _react2['default'].createElement('span', null),
+        _react2['default'].createElement(
+          'button',
+          { onClick: this.props.close },
+          'Close'
+        )
+      );
+    }
+  }, {
     key: 'renderStatsModal',
     value: function renderStatsModal(game) {
       return _react2['default'].createElement(
@@ -62687,11 +62719,7 @@ var ModalContainer = (function (_React$Component) {
           _react2['default'].createElement(
             _reactBootstrap.Modal.Footer,
             null,
-            _react2['default'].createElement(
-              'button',
-              { onClick: this.props.close },
-              'Close'
-            )
+            this.renderModalFooter(game)
           )
         )
       );
@@ -62750,6 +62778,10 @@ var _viewsBallOfFame = require('./views/ball-of-fame');
 
 var _viewsBallOfFame2 = _interopRequireDefault(_viewsBallOfFame);
 
+var _viewsStreams = require('./views/streams');
+
+var _viewsStreams2 = _interopRequireDefault(_viewsStreams);
+
 var _reactRouter = require('react-router');
 
 var _historyLibCreateBrowserHistory = require('history/lib/createBrowserHistory');
@@ -62765,14 +62797,142 @@ var APP = _react2['default'].createElement(
 		_react2['default'].createElement(_reactRouter.IndexRoute, { component: _viewsLeagueChooser2['default'] }),
 		_react2['default'].createElement(_reactRouter.Route, { path: 'fame', component: _viewsBallOfFame2['default'] }),
 		_react2['default'].createElement(_reactRouter.Route, { path: 'majors', component: _viewsLeagueView2['default'] }),
-		_react2['default'].createElement(_reactRouter.Route, { path: 'minors', component: _viewsLeagueView2['default'] })
+		_react2['default'].createElement(_reactRouter.Route, { path: 'minors', component: _viewsLeagueView2['default'] }),
+		_react2['default'].createElement(_reactRouter.Route, { path: 'streams', component: _viewsStreams2['default'] })
 	)
 );
 
 _reactDom2['default'].render(APP, document.getElementById('main'));
 
 
-},{"./views/ball-of-fame":476,"./views/home":477,"./views/league-chooser":478,"./views/league-view":479,"history/lib/createBrowserHistory":11,"react":472,"react-dom":277,"react-router":297}],476:[function(require,module,exports){
+},{"./views/ball-of-fame":477,"./views/home":478,"./views/league-chooser":479,"./views/league-view":480,"./views/streams":481,"history/lib/createBrowserHistory":11,"react":472,"react-dom":277,"react-router":297}],476:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports.getTeamConferences = getTeamConferences;
+exports.orderGamesAlphabetically = orderGamesAlphabetically;
+exports.orderGamesEastLeft = orderGamesEastLeft;
+exports.orderGamesWestLeft = orderGamesWestLeft;
+exports.orderGamesEastOverWest = orderGamesEastOverWest;
+exports.orderGamesWestOverEast = orderGamesWestOverEast;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _serverConstants = require('./../../server/constants');
+
+function getEastWestGames(games, confs) {
+  var eastGames = [],
+      westGames = [];
+  games.forEach(function (g) {
+    confs.forEach(function (t) {
+      if (t.name === g.TEAMS[0] && t.conference === 'East') {
+        eastGames.push(g);
+      } else if (t.name === g.TEAMS[0] && t.conference === 'West') {
+        westGames.push(g);
+      }
+    });
+  });
+  return { eastGames: eastGames, westGames: westGames };
+}
+
+function whichConference(div) {
+  var conference = 'West';
+  if (div === 'Atlantic' || div === 'Northeast') {
+    conference = 'East';
+  }
+  return conference;
+}
+
+function getTeamConferences(leagueType) {
+  var nameToGet = leagueType === 'majors' ? 'name' : 'minorsName';
+  return _serverConstants.MLTP_TEAMS.map(function (t) {
+    return { name: t[nameToGet], division: t.division, conference: whichConference(t.division) };
+  });
+}
+
+function orderGamesAlphabetically(games) {
+  return _lodash2['default'].sortBy(games, function (g) {
+    return g.TEAMS[0];
+  });
+}
+
+function orderGamesEastLeft(games, confs) {
+  var sortedGames = [];
+
+  var _getEastWestGames = getEastWestGames(games, confs);
+
+  var eastGames = _getEastWestGames.eastGames;
+  var westGames = _getEastWestGames.westGames;
+
+  var length = eastGames.length + westGames.length;
+  for (var i = 0; i < length; i++) {
+    i % 2 === 0 ? sortedGames.push(eastGames.shift()) : sortedGames.push(westGames.shift());
+  }
+  return sortedGames;
+}
+
+function orderGamesWestLeft(games, confs) {
+  var sortedGames = [];
+
+  var _getEastWestGames2 = getEastWestGames(games, confs);
+
+  var eastGames = _getEastWestGames2.eastGames;
+  var westGames = _getEastWestGames2.westGames;
+
+  var length = eastGames.length + westGames.length;
+  for (var i = 0; i < length; i++) {
+    i % 2 === 0 ? sortedGames.push(westGames.shift()) : sortedGames.push(eastGames.shift());
+  }
+  return sortedGames;
+}
+
+function orderGamesEastOverWest(games, confs) {
+  var sortedGames = [];
+
+  var _getEastWestGames3 = getEastWestGames(games, confs);
+
+  var eastGames = _getEastWestGames3.eastGames;
+  var westGames = _getEastWestGames3.westGames;
+
+  var length = eastGames.length + westGames.length;
+  for (var i = 0; i < length; i++) {
+    i < length / 2 ? sortedGames.push(eastGames.shift()) : sortedGames.push(westGames.shift());
+  }
+  return sortedGames;
+}
+
+function orderGamesWestOverEast(games, confs) {
+  var sortedGames = [];
+
+  var _getEastWestGames4 = getEastWestGames(games, confs);
+
+  var eastGames = _getEastWestGames4.eastGames;
+  var westGames = _getEastWestGames4.westGames;
+
+  var length = eastGames.length + westGames.length;
+  for (var i = 0; i < length; i++) {
+    i < length / 2 ? sortedGames.push(westGames.shift()) : sortedGames.push(eastGames.shift());
+  }
+  return sortedGames;
+}
+
+var sortOptions = [{ order: 'alphabetical',
+  fxn: orderGamesAlphabetically }, { order: 'east | west',
+  fxn: orderGamesEastLeft }, { order: 'west | east',
+  fxn: orderGamesWestLeft }, { order: 'east / west',
+  fxn: orderGamesEastOverWest }, { order: 'west / east',
+  fxn: orderGamesWestOverEast
+}];
+exports.sortOptions = sortOptions;
+
+
+},{"./../../server/constants":482,"lodash":31}],477:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -62824,7 +62984,7 @@ exports['default'] = BallofFame;
 module.exports = exports['default'];
 
 
-},{"react":472}],477:[function(require,module,exports){
+},{"react":472}],478:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -62938,7 +63098,7 @@ exports['default'] = APP;
 module.exports = exports['default'];
 
 
-},{"./../../../server/helpers":481,"./../components/footer":473,"jquery":30,"lodash":31,"react":472}],478:[function(require,module,exports){
+},{"./../../../server/helpers":483,"./../components/footer":473,"jquery":30,"lodash":31,"react":472}],479:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -63005,7 +63165,7 @@ exports['default'] = LeagueChooser;
 module.exports = exports['default'];
 
 
-},{"react":472,"react-spinkit":315}],479:[function(require,module,exports){
+},{"react":472,"react-spinkit":315}],480:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -63030,7 +63190,11 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _serverConstants = require('./../../../server/constants');
+
 var _serverHelpers = require('./../../../server/helpers');
+
+var _ordering = require('./../ordering');
 
 var _componentsModal = require('./../components/modal');
 
@@ -63043,10 +63207,15 @@ var LeagueView = (function (_React$Component) {
     _classCallCheck(this, LeagueView);
 
     _get(Object.getPrototypeOf(LeagueView.prototype), 'constructor', this).call(this, props);
-    this.state = { showModal: false, modalGame: null };
+    this.state = { showModal: false, modalGame: null, order: 'alphabetical' };
+    this.teamConferences = (0, _ordering.getTeamConferences)(props.route.path);
     this.leagueType = props.route.path.toUpperCase();
     this.otherLeague = props.route.path === 'majors' ? 'minors' : 'majors';
     this.renderGameScoreboard = this.renderGameScoreboard.bind(this);
+    this.renderSortingOptions = this.renderSortingOptions.bind(this);
+    this.renderOptionLink = this.renderOptionLink.bind(this);
+    this.setSortingOrder = this.setSortingOrder.bind(this);
+    this.getOrderingFxn = this.getOrderingFxn.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
@@ -63107,11 +63276,18 @@ var LeagueView = (function (_React$Component) {
       });
     }
   }, {
-    key: 'orderGamesAlphabetically',
-    value: function orderGamesAlphabetically(games) {
-      return _lodash2['default'].sortBy(games, function (g) {
-        return g.TEAMS[0];
-      });
+    key: 'getOrderingFxn',
+    value: function getOrderingFxn() {
+      var _this = this;
+
+      return _lodash2['default'].find(_ordering.sortOptions, function (o) {
+        return o.order === _this.state.order;
+      }).fxn;
+    }
+  }, {
+    key: 'setSortingOrder',
+    value: function setSortingOrder(order) {
+      this.setState({ order: order });
     }
   }, {
     key: 'renderGameScoreboard',
@@ -63258,7 +63434,8 @@ var LeagueView = (function (_React$Component) {
   }, {
     key: 'renderGames',
     value: function renderGames() {
-      var games = this.orderGamesAlphabetically(this.props[this.leagueType]);
+      var orderingFxn = this.getOrderingFxn();
+      var games = orderingFxn(this.props[this.leagueType], this.teamConferences);
       return _react2['default'].createElement(
         'div',
         { className: 'row' },
@@ -63266,8 +63443,31 @@ var LeagueView = (function (_React$Component) {
       );
     }
   }, {
+    key: 'renderSortingOptions',
+    value: function renderSortingOptions() {
+      var options = _ordering.sortOptions.map(this.renderOptionLink);
+      return _react2['default'].createElement(
+        'div',
+        { className: 'sorting-options' },
+        options
+      );
+    }
+  }, {
+    key: 'renderOptionLink',
+    value: function renderOptionLink(option, i) {
+      var className = 'sorting-option ' + (option.order === this.state.order ? 'selected-option' : '');
+      return _react2['default'].createElement(
+        'a',
+        { key: i, className: className, onClick: this.setSortingOrder.bind(this, option.order) },
+        option.order
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var weekNumber = (0, _serverHelpers.getWeekNumber)();
+      var mapOne = _serverConstants.MAPS[weekNumber - 1];
+      var mapTwo = _serverConstants.MAPS[weekNumber];
       return _react2['default'].createElement(
         'div',
         { className: 'league-view container' },
@@ -63299,8 +63499,13 @@ var LeagueView = (function (_React$Component) {
           'h4',
           { className: 'week-banner' },
           'Week ',
-          (0, _serverHelpers.getWeekNumber)()
+          weekNumber,
+          ' - ',
+          mapOne,
+          ' / ',
+          mapTwo
         ),
+        this.renderSortingOptions(),
         _react2['default'].createElement(_componentsModal2['default'], {
           show: this.state.showModal,
           close: this.closeModal,
@@ -63317,11 +63522,179 @@ exports['default'] = LeagueView;
 module.exports = exports['default'];
 
 
-},{"./../../../server/helpers":481,"./../components/modal":474,"lodash":31,"react":472}],480:[function(require,module,exports){
+},{"./../../../server/constants":482,"./../../../server/helpers":483,"./../components/modal":474,"./../ordering":476,"lodash":31,"react":472}],481:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _jquery = require('jquery');
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var Streams = (function (_React$Component) {
+  _inherits(Streams, _React$Component);
+
+  function Streams(props) {
+    _classCallCheck(this, Streams);
+
+    _get(Object.getPrototypeOf(Streams.prototype), 'constructor', this).call(this, props);
+    this.state = { streamCode: '', authed: false, teamName: '', gameTime: '', streamLink: '', leagueType: '' };
+    this.checkCode = this.checkCode.bind(this);
+    this.setChange = this.setChange.bind(this);
+    this.addStream = this.addStream.bind(this);
+    this.authKeyDown = this.authKeyDown.bind(this);
+    this.formKeyDown = this.formKeyDown.bind(this);
+    this.renderAuthSection = this.renderAuthSection.bind(this);
+  }
+
+  _createClass(Streams, [{
+    key: 'setChange',
+    value: function setChange(stateId, e) {
+      this.setState(_defineProperty({}, stateId, e.target.value));
+    }
+  }, {
+    key: 'authKeyDown',
+    value: function authKeyDown(e) {
+      if (e.keyCode === 13) this.checkCode();
+    }
+  }, {
+    key: 'formKeyDown',
+    value: function formKeyDown(e) {
+      if (e.keyCode === 13) this.addStream();
+    }
+  }, {
+    key: 'checkCode',
+    value: function checkCode() {
+      var code = this.state.streamCode;
+      _jquery2['default'].ajax({ url: '/api/streams/auth', method: 'POST', data: { code: code } }).done((function (res) {
+        if (res === 200) this.setState({ authed: true });
+        if (res === 400) this.setState({ authed: false, attempted: true });
+      }).bind(this)).fail((function (err) {
+        this.setState({ authed: false, attempted: true });
+      }).bind(this));
+    }
+  }, {
+    key: 'addStream',
+    value: function addStream() {
+      var stream = {
+        team: this.state.teamName,
+        link: this.state.streamLink,
+        league: this.state.leagueType,
+        time: this.state.gameTime
+      };
+      _jquery2['default'].ajax({ url: '/api/streams', method: 'POST', data: stream }).done((function (res) {
+        if (res === 200) this.setState({ teamName: '', streamLink: '', leagueType: '', gameTime: '' });
+      }).bind(this)).fail((function (err) {
+        // do nothing
+      }).bind(this));
+    }
+  }, {
+    key: 'renderAuthSection',
+    value: function renderAuthSection() {
+      return _react2['default'].createElement(
+        'div',
+        null,
+        _react2['default'].createElement(
+          'p',
+          null,
+          'If you have access to add streams, enter the code here:'
+        ),
+        _react2['default'].createElement('input', { type: 'text', onKeyDown: this.authKeyDown, onChange: this.setChange.bind(this, 'streamCode'), value: this.state.streamCode }),
+        _react2['default'].createElement(
+          'button',
+          { onClick: this.checkCode },
+          'Check'
+        )
+      );
+    }
+  }, {
+    key: 'renderForm',
+    value: function renderForm() {
+      return _react2['default'].createElement(
+        'div',
+        { className: 'streams-form' },
+        _react2['default'].createElement(
+          'p',
+          null,
+          'Team name (should be MAJORS or MINORS specific)'
+        ),
+        _react2['default'].createElement('input', { type: 'text', onKeyDown: this.formKeyDown, onChange: this.setChange.bind(this, 'teamName'), value: this.state.teamName }),
+        _react2['default'].createElement(
+          'p',
+          null,
+          'Game time'
+        ),
+        _react2['default'].createElement('input', { type: 'text', onKeyDown: this.formKeyDown, onChange: this.setChange.bind(this, 'gameTime'), value: this.state.gameTime }),
+        _react2['default'].createElement(
+          'p',
+          null,
+          'Stream link (must lead with http://)'
+        ),
+        _react2['default'].createElement('input', { type: 'text', onKeyDown: this.formKeyDown, onChange: this.setChange.bind(this, 'streamLink'), value: this.state.streamLink }),
+        _react2['default'].createElement(
+          'p',
+          null,
+          'League type (either MAJORS or MINORS)'
+        ),
+        _react2['default'].createElement('input', { type: 'text', onKeyDown: this.formKeyDown, onChange: this.setChange.bind(this, 'leagueType'), value: this.state.leagueType }),
+        _react2['default'].createElement(
+          'button',
+          { onClick: this.addStream },
+          'Add Stream'
+        )
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'div',
+        { className: 'streams-container' },
+        _react2['default'].createElement(
+          'h1',
+          { className: 'page-title' },
+          _react2['default'].createElement(
+            'a',
+            { href: '/' },
+            'STREAMS'
+          )
+        ),
+        this.state.authed ? this.renderForm() : this.renderAuthSection()
+      );
+    }
+  }]);
+
+  return Streams;
+})(_react2['default'].Component);
+
+exports['default'] = Streams;
+module.exports = exports['default'];
+
+
+},{"jquery":30,"react":472}],482:[function(require,module,exports){
 'use strict';
 
 module.exports = {
   WEEKS_IN_SEASON: 10,
+  MAPS: ['Rush', 'Iron', 'Emerald', 'Velocity', 'Transilio', 'Smirk', 'Pilot', 'Constriction', 'Community', 'Wormy', 'Rush'],
   KEYS: ['s9abab', 's9abab_m', 's9bcbc', 's9bcbc_m', 's9cdcd', 's9cdcd_m', 's9dede', 's9dede_m', 's9efef', 's9efef_m', 's9fgfg', 's9fgfg_m', 's9ghgh', 's9ghgh_m', 's9hihi', 's9hihi_m', 's9ijij', 's9ijij_m', 's9jkjk', 's9jkjk_m', 's9klkl', 's9klkl_m', 's9lmlm', 's9lmlm_m', 's9mnmn', 's9mnmn_m', 's9nono', 's9nono_m', 's9opop', 's9opop_m', 's9pqpq', 's9pqpq_m'],
   MLTP_TEAMS: [{
     name: "Ghostboosters",
@@ -63471,7 +63844,7 @@ module.exports = {
 };
 
 
-},{}],481:[function(require,module,exports){
+},{}],483:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -63529,4 +63902,4 @@ module.exports = {
 
 
 }).call(this,require("buffer").Buffer)
-},{"./constants":480,"buffer":2,"lodash":31}]},{},[475])
+},{"./constants":482,"buffer":2,"lodash":31}]},{},[475])

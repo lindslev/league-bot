@@ -1,5 +1,6 @@
 module.exports = {
   WEEKS_IN_SEASON: 10,
+  MAPS: ['Rush', 'Iron', 'Emerald', 'Velocity', 'Transilio', 'Smirk', 'Pilot', 'Constriction', 'Community', 'Wormy', 'Rush'],
   KEYS: ['s9abab',
   's9abab_m',
   's9bcbc',
@@ -105,7 +106,7 @@ module.exports = {
   	},
   	{
   		name: "Base Gods",
-  		minorsName: "Base Gods",
+  		minorsName: "The Pack",
   		key: "s9hihi",
   		captain: "Raven",
   		roster: ['Mr.Gone','bdl','jj\'s pool','fuckingtank','Armbranch','iAaronK','Punster','odawg','MrJoeHobo','derds','canniba||','Gyaraderp'],
@@ -125,7 +126,7 @@ module.exports = {
   	},
   	{
   		name: "Tears",
-  		minorsName: "Tears",
+  		minorsName: "Orzaballs",
   		key: "s9jkjk",
   		captain: "TroBall",
   		roster: ['Fatal', 'AnnaKendrick','DudeMcGuy','mathnasium','Frozty','fucking owen','coys','NEUhusky','wabi-sabi','JBaayBaay','mahatma','Jet2','alchemist'],
@@ -145,7 +146,7 @@ module.exports = {
   	},
   	{
   		name: "BMX2: Electric Ballaloo",
-  		minorsName: "BMX2: Electric Ballaloo",
+  		minorsName: "EZ ees",
   		key: "s9lmlm",
   		captain: "BAllstar",
   		roster: ['lukemoo','eee','bad','F2PDynasty','quibble','ASS CANNON','saundy','Kimba','superdiglett','Esoog','Micaso','WowSuchPro'],

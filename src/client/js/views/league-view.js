@@ -1,16 +1,23 @@
 import React from 'react';
 import _ from 'lodash';
+import { MAPS } from './../../../server/constants';
 import { getWeekNumber } from './../../../server/helpers';
+import { getTeamConferences, sortOptions } from './../ordering';
 
 import ModalContainer from './../components/modal';
 
 class LeagueView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { showModal: false, modalGame: null };
+    this.state = { showModal: false, modalGame: null, order: 'alphabetical' };
+    this.teamConferences = getTeamConferences(props.route.path);
     this.leagueType = props.route.path.toUpperCase();
     this.otherLeague = props.route.path === 'majors' ? 'minors' : 'majors';
     this.renderGameScoreboard = this.renderGameScoreboard.bind(this);
+    this.renderSortingOptions = this.renderSortingOptions.bind(this);
+    this.renderOptionLink = this.renderOptionLink.bind(this);
+    this.setSortingOrder = this.setSortingOrder.bind(this);
+    this.getOrderingFxn = this.getOrderingFxn.bind(this);
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
@@ -61,8 +68,14 @@ class LeagueView extends React.Component {
     });
   }
 
-  orderGamesAlphabetically(games) {
-    return _.sortBy(games, (g) => g.TEAMS[0]);
+  getOrderingFxn() {
+    return _.find(sortOptions, (o) => {
+      return o.order === this.state.order;
+    }).fxn;
+  }
+
+  setSortingOrder(order) {
+    this.setState({ order });
   }
 
   renderGameScoreboard(game, idx) {
@@ -109,7 +122,8 @@ class LeagueView extends React.Component {
   }
 
   renderGames() {
-    const games = this.orderGamesAlphabetically(this.props[this.leagueType]);
+    const orderingFxn = this.getOrderingFxn();
+    const games = orderingFxn(this.props[this.leagueType], this.teamConferences);
     return (
       <div className="row">
         {games.map(this.renderGameScoreboard)}
@@ -117,12 +131,30 @@ class LeagueView extends React.Component {
     )
   }
 
+  renderSortingOptions() {
+    const options = sortOptions.map(this.renderOptionLink);
+    return (
+      <div className="sorting-options">
+        {options}
+      </div>
+    );
+  }
+
+  renderOptionLink(option, i) {
+    let className = `sorting-option ${option.order === this.state.order ? 'selected-option' : ''}`;
+    return <a key={i} className={className} onClick={this.setSortingOrder.bind(this, option.order)}>{option.order}</a>;
+  }
+
   render() {
+    const weekNumber = getWeekNumber();
+    const mapOne = MAPS[weekNumber - 1];
+    const mapTwo = MAPS[weekNumber];
     return (
       <div className="league-view container">
         <h1 className="page-title"><a href={`${this.leagueType.toLowerCase()}`}>{this.leagueType}</a></h1>
         <p className="page-subtitle"><a href="/">home</a> | <a href={`/${this.otherLeague}`}>{this.otherLeague}</a></p>
-        <h4 className="week-banner">Week {getWeekNumber()}</h4>
+        <h4 className="week-banner">Week {weekNumber} - {mapOne} / {mapTwo}</h4>
+        {this.renderSortingOptions()}
         <ModalContainer
           show={this.state.showModal}
           close={this.closeModal}

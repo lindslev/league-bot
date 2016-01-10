@@ -66,6 +66,20 @@ class ModalContainer extends React.Component {
       }
     }
 
+    renderStream(stream) {
+      return <a className="stream-link" href={stream.link}>REC <span className="stream-rec">&bull;</span> {stream.time}</a>;
+    }
+
+    renderModalFooter(game) {
+      const { STREAM } = game;
+      return (
+        <div>
+          {STREAM ? this.renderStream(STREAM) : <span />}
+          <button onClick={this.props.close}>Close</button>
+        </div>
+      );
+    }
+
     renderStatsModal(game) {
       return (
         <div className="modal-container">
@@ -80,7 +94,7 @@ class ModalContainer extends React.Component {
               {this.renderStats(game)}
             </Modal.Body>
             <Modal.Footer>
-              <button onClick={this.props.close}>Close</button>
+              {this.renderModalFooter(game)}
             </Modal.Footer>
           </Modal>
         </div>
