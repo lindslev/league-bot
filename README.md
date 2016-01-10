@@ -1,3 +1,5 @@
-## league bot version 2
+## league bot
 
-a rewrite of [github.com/lindslev/league-bot](https://github.com/lindslev/league-bot)
+viewable at [mltp.info](http://mltp.info)
+
+![Imgur](http://i.imgur.com/uYyKQ0k.jpg)
