@@ -71,7 +71,10 @@ function mandrillTSVs(res, PAYLOAD, team) {
 		var TSVs = buildTSVs(stats);
 		var message = { subject: 'Week ' + getWeekNumber() + ': ' + teamName + ' (' + LEAGUE + ')',
 										from_email: 'geminycrickett@gmail.com', from_name: 'Gem_BOT',
-										to: [{ email: 'geminycrickett@gmail.com', name: 'Gem'}],
+										to: [{ email: 'geminycrickett@gmail.com', name: 'Gem' },
+												 { email: 'jackjwalton@gmail.com', name: 'Ash' },
+												 { email: 'mrgone92@gmail.com', name: 'Mr.Gone' }
+												],
 										important: false, track_opens: true, auto_html: false, preserve_recipients: true,
 										merge: false, attachments: TSVs };
 		mandrill_client.messages.send({ message: message, async: false, ip_pool: 'Main Pool' }, function(result) {
