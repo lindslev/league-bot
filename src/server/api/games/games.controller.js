@@ -18,11 +18,14 @@ var makeTSV = helpers.makeTSV;
 
 exports.index = function(req, res) {
 	var PAYLOAD = req.body;
+	var KEY = PAYLOAD.userkey;
+	var IS_MAJORS = isMajors(KEY);
+	KEY = IS_MAJORS ? KEY : KEY.split('_m')[0];
 	if ( !isValidKey(PAYLOAD.userkey) ) res.json(400);
 	db.connect
 		.then(updateTeamInDB.bind(this, PAYLOAD))
 		.then(function() {
-			return db.collection('teams_s9').findOne({ key: PAYLOAD.userkey });
+			return db.collection('teams_s9').findOne({ key: KEY });
 		}).then(mandrillTSVs.bind(this, res, PAYLOAD));
 };
 
