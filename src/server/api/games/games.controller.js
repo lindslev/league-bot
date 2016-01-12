@@ -41,9 +41,11 @@ function getTeamsDocuments(res) {
 
 function updateTeamInDB(PAYLOAD) {
 	var KEY = PAYLOAD.userkey;
+	var IS_MAJORS = isMajors(KEY);
+	KEY = IS_MAJORS ? KEY : KEY.split('_m')[0];
 	return db.collection('teams_s9').findOne({ key: KEY })
 	.then(function (team) {
-		if ( !team ) return res.json(400);
+		if ( !team ) return;
 		var teamWeeks = team.WEEKS;
 		var LEAGUE = isMajors(KEY) ? 'MAJORS' : 'MINORS';
 		var GAME_NUM = getGameNumber(PAYLOAD.game);
