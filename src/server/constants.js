@@ -146,7 +146,7 @@ module.exports = {
   	},
   	{
   		name: "BMX2: Electric Ballaloo",
-  		minorsName: "EZ ees",
+  		minorsName: "EZ eees",
   		key: "s9lmlm",
   		captain: "BAllstar",
   		roster: ['lukemoo','eee','bad','F2PDynasty','quibble','ASS CANNON','saundy','Kimba','superdiglett','Esoog','Micaso','WowSuchPro'],
