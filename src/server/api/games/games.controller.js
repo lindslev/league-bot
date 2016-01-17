@@ -45,18 +45,18 @@ function getTeamsDocuments(res) {
 function updateTeamInDB(PAYLOAD) {
 	var KEY = PAYLOAD.userkey;
 	var IS_MAJORS = isMajors(KEY);
-	KEY = IS_MAJORS ? KEY : KEY.split('_m')[0];
-	return db.collection('teams_s9').findOne({ key: KEY })
+	FIND_BY_KEY = IS_MAJORS ? KEY : KEY.split('_m')[0];
+	return db.collection('teams_s9').findOne({ key: FIND_BY_KEY })
 	.then(function (team) {
 		if ( !team ) return;
 		var teamWeeks = team.WEEKS;
-		var LEAGUE = isMajors(KEY) ? 'MAJORS' : 'MINORS';
+		var LEAGUE = isMajors(PAYLOAD.userkey) ? 'MAJORS' : 'MINORS';
 		var GAME_NUM = getGameNumber(PAYLOAD.game);
 		var HALF_NUM = getHalfNumber(PAYLOAD.half);
 		var weekToUpdate = teamWeeks[getWeekNumber() - 1];
 		weekToUpdate[LEAGUE][GAME_NUM][HALF_NUM].push(PAYLOAD.stats);
 		teamWeeks[getWeekNumber() - 1] = weekToUpdate;
-		return db.collection('teams_s9').findOne({ key: KEY }).set('WEEKS', teamWeeks);
+		return db.collection('teams_s9').findOne({ key: FIND_BY_KEY }).set('WEEKS', teamWeeks);
 	});
 }
 
