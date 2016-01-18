@@ -58,7 +58,7 @@ function updateLiveDocument(PAYLOAD) {
 		PAYLOAD.score[TEAM_NAME] = thisTeamScore;
 		PAYLOAD.score[OPPONENT] = otherTeamScore;
 		PAYLOAD.LAST_UPDATE = {
-			time: moment().format('hh:mmA'),
+			time: moment().subtract(5, 'h').format('hh:mmA'),
 			game: PAYLOAD.game,
 			half: PAYLOAD.half
 		};
@@ -91,7 +91,7 @@ function getUpdatedGame(week, PAYLOAD, IS_MAJORS, LEAGUE_TYPE) {
 	scoreToUpdate[OPPONENT] = PAYLOAD.score.otherTeamScore;
 	gameToUpdate.RECENT_STATS = PAYLOAD.stats;
 	gameToUpdate.LAST_UPDATE = {
-		time: moment().format('hh:mmA'),
+		time: moment().subtract(5, 'h').format('hh:mmA'),
 		game: PAYLOAD.game,
 		half: PAYLOAD.half
 	};
