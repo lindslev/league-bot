@@ -62561,11 +62561,25 @@ var ModalContainer = (function (_React$Component) {
     value: function renderStats(game) {
       var RECENT_STATS = game.RECENT_STATS;
       var LAST_UPDATE = game.LAST_UPDATE;
+      var individualHalfStats = game.individualHalfStats;
 
       var sortedStats = (0, _lodash.sortBy)(RECENT_STATS, function (p) {
         return - +p.score;
       });
       var thereAreStats = sortedStats.length > 0;
+      var indHalfStats = undefined;
+      var half = this.props.half;
+
+      if (typeof half === 'string') {
+        indHalfStats = individualHalfStats ? individualHalfStats[half] : null;
+        if (indHalfStats) {
+          sortedStats = (0, _lodash.sortBy)(indHalfStats, function (p) {
+            return - +p.score;
+          });
+        } else {
+          thereAreStats = false;
+        }
+      }
       if (thereAreStats) {
         return _react2['default'].createElement(
           'div',
@@ -62648,7 +62662,7 @@ var ModalContainer = (function (_React$Component) {
               sortedStats.map(this.renderPlayerRow)
             )
           ),
-          _react2['default'].createElement(
+          indHalfStats ? null : _react2['default'].createElement(
             'p',
             { className: 'stats-timestamp' },
             'Last updated: ',
@@ -63077,6 +63091,7 @@ function updateState(PAYLOAD) {
     if (gameToUpdate) {
       game.RECENT_STATS = PAYLOAD.stats;
       game.LAST_UPDATE = PAYLOAD.LAST_UPDATE;
+      game.individualHalfStats = PAYLOAD.individualHalfStats;
       game[(0, _serverHelpers.getGameNumber)(PAYLOAD.game)][(0, _serverHelpers.getHalfNumber)(PAYLOAD.half)] = PAYLOAD.score;
       thisUpdate = game;
       scoreboardUpdates.push(_lodash2['default'].assign({}, game, {
@@ -63238,13 +63253,13 @@ var LeagueView = (function (_React$Component) {
 
   _createClass(LeagueView, [{
     key: 'openModal',
-    value: function openModal(game) {
-      this.setState({ showModal: true, modalGame: game });
+    value: function openModal(game, half) {
+      this.setState({ showModal: true, modalGame: game, individualHalf: half });
     }
   }, {
     key: 'closeModal',
     value: function closeModal() {
-      this.setState({ showModal: false, modalGame: null });
+      this.setState({ showModal: false, modalGame: null, individualHalf: null });
     }
   }, {
     key: 'getTableClass',
@@ -63336,12 +63351,12 @@ var LeagueView = (function (_React$Component) {
               ),
               _react2['default'].createElement(
                 'td',
-                { className: this.getHighlightClass(game, 1, 1) },
+                { className: this.getHighlightClass(game, 1, 1) + ' halfTitle', onClick: this.openModal.bind(this, game, 'G1H1') },
                 'G1H1'
               ),
               _react2['default'].createElement(
                 'td',
-                { className: this.getHighlightClass(game, 1, 2) },
+                { className: this.getHighlightClass(game, 1, 2) + ' halfTitle', onClick: this.openModal.bind(this, game, 'G1H2') },
                 'G1H2'
               ),
               _react2['default'].createElement(
@@ -63351,12 +63366,12 @@ var LeagueView = (function (_React$Component) {
               ),
               _react2['default'].createElement(
                 'td',
-                { className: this.getHighlightClass(game, 2, 1) },
+                { className: this.getHighlightClass(game, 2, 1) + ' halfTitle', onClick: this.openModal.bind(this, game, 'G2H1') },
                 'G2H1'
               ),
               _react2['default'].createElement(
                 'td',
-                { className: this.getHighlightClass(game, 2, 2) },
+                { className: this.getHighlightClass(game, 2, 2) + ' halfTitle', onClick: this.openModal.bind(this, game, 'G2H2') },
                 'G2H2'
               ),
               _react2['default'].createElement(
@@ -63525,6 +63540,7 @@ var LeagueView = (function (_React$Component) {
         _react2['default'].createElement(_componentsModal2['default'], {
           show: this.state.showModal,
           close: this.closeModal,
+          half: this.state.individualHalf,
           game: this.state.modalGame }),
         this.renderGames()
       );
@@ -63813,7 +63829,7 @@ module.exports = {
     division: "Central"
   }, {
     name: "BMX2: Electric Ballaloo",
-    minorsName: "EZ ees",
+    minorsName: "EZ eees",
     key: "s9lmlm",
     captain: "BAllstar",
     roster: ['lukemoo', 'eee', 'bad', 'F2PDynasty', 'quibble', 'ASS CANNON', 'saundy', 'Kimba', 'superdiglett', 'Esoog', 'Micaso', 'WowSuchPro'],

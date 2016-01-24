@@ -90,6 +90,8 @@ h1 {
     .league-view .game-board .td-highlight {
       background: yellow;
       color: #000; }
+    .league-view .game-board .halfTitle {
+      cursor: pointer; }
   .league-view .board-navy {
     background: #29337b; }
   .league-view .board-maroon {

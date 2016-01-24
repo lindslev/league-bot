@@ -47,7 +47,9 @@ function updateLiveDocument(PAYLOAD) {
 		var LEAGUE_TYPE = IS_MAJORS ? 'MAJORS' : 'MINORS';
 		var week = getUpdatedWeek(week, PAYLOAD, IS_MAJORS);
 		return db.collection('live').findOne({ WEEK_NUMBER: getWeekNumber() }).set(LEAGUE_TYPE, week[LEAGUE_TYPE]);
-	}).then(function (qak) {
+	}).then(function(qak) {
+		return db.collection('live').findOne({ WEEK_NUMBER: getWeekNumber() });
+	}).then(function (week) {
 		var THIS_TEAM = getTeam(PAYLOAD.userkey);
 		var TEAM_NAME = IS_MAJORS ? THIS_TEAM.name : THIS_TEAM.minorsName;
 		var OPPONENT_MAJORS_NAME = THIS_TEAM.schedule[getWeekNumber() - 1];
@@ -62,6 +64,9 @@ function updateLiveDocument(PAYLOAD) {
 			game: PAYLOAD.game,
 			half: PAYLOAD.half
 		};
+		var leagueType = IS_MAJORS ? 'MAJORS' : 'MINORS';
+		var individualHalfStats = getStatsFromWeek(week, leagueType, TEAM_NAME);
+		PAYLOAD.individualHalfStats = individualHalfStats;
 		var LIVE_OBJ = _.assign({}, PAYLOAD, { teams: [TEAM_NAME, OPPONENT], majors: IS_MAJORS });
 		if ( isGameOver(PAYLOAD) ) LIVE_OBJ.GAME_OVER = true;
 		socket.emit('live', LIVE_OBJ);
@@ -95,6 +100,12 @@ function getUpdatedGame(week, PAYLOAD, IS_MAJORS, LEAGUE_TYPE) {
 		game: PAYLOAD.game,
 		half: PAYLOAD.half
 	};
+	if ( +PAYLOAD.state === 2 ) { // update individual half stats
+		var stats = gameToUpdate.individualHalfStats || { G1H1: null, G1H2: null, G2H1: null, G2H2: null };
+		var halfString = 'G' + PAYLOAD.game + 'H' + PAYLOAD.half;
+		stats[halfString] = PAYLOAD.stats;
+		gameToUpdate.individualHalfStats = stats;
+	}
 	if ( isGameOver(PAYLOAD) ) gameToUpdate.GAME_OVER = true;
 	return gameToUpdate;
 }
@@ -105,4 +116,11 @@ function replaceGameInWeek(week, LEAGUE_TYPE, TEAM_NAME, gameToUpdate) {
 	});
 	week[LEAGUE_TYPE].push(gameToUpdate);
 	return week;
+}
+
+function getStatsFromWeek(week, league, team) {
+	var game = _.find(week[league], function(game) {
+		return game.TEAMS.indexOf(team) > -1;
+	}) || {};
+	return game.individualHalfStats;
 }

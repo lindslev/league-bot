@@ -22,12 +22,12 @@ class LeagueView extends React.Component {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  openModal(game) {
-    this.setState({ showModal: true, modalGame: game });
+  openModal(game, half) {
+    this.setState({ showModal: true, modalGame: game, individualHalf: half });
   }
 
   closeModal() {
-    this.setState({ showModal : false, modalGame: null });
+    this.setState({ showModal : false, modalGame: null, individualHalf: null });
   }
 
   getTableClass(i) {
@@ -90,11 +90,11 @@ class LeagueView extends React.Component {
           <tbody>
             <tr>
               <td className="left-aligned">Team</td>
-              <td className={this.getHighlightClass(game, 1,1)}>G1H1</td>
-              <td className={this.getHighlightClass(game, 1,2)}>G1H2</td>
+              <td className={`${this.getHighlightClass(game, 1,1)} halfTitle`} onClick={this.openModal.bind(this, game, 'G1H1')}>G1H1</td>
+              <td className={`${this.getHighlightClass(game, 1,2)} halfTitle`} onClick={this.openModal.bind(this, game, 'G1H2')}>G1H2</td>
               <td>Game 1</td>
-              <td className={this.getHighlightClass(game, 2,1)}>G2H1</td>
-              <td className={this.getHighlightClass(game, 2,2)}>G2H2</td>
+              <td className={`${this.getHighlightClass(game, 2,1)} halfTitle`} onClick={this.openModal.bind(this, game, 'G2H1')}>G2H1</td>
+              <td className={`${this.getHighlightClass(game, 2,2)} halfTitle`} onClick={this.openModal.bind(this, game, 'G2H2')}>G2H2</td>
               <td>Game 2</td>
             </tr>
             <tr className="padded-bottom">
@@ -158,6 +158,7 @@ class LeagueView extends React.Component {
         <ModalContainer
           show={this.state.showModal}
           close={this.closeModal}
+          half={this.state.individualHalf}
           game={this.state.modalGame} />
         {this.renderGames()}
       </div>

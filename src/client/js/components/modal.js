@@ -31,9 +31,19 @@ class ModalContainer extends React.Component {
     }
 
     renderStats(game) {
-      const { RECENT_STATS, LAST_UPDATE } = game;
-      const sortedStats = sortBy(RECENT_STATS, (p) => -(+p.score));
-      const thereAreStats = sortedStats.length > 0;
+      const { RECENT_STATS, LAST_UPDATE, individualHalfStats } = game;
+      let sortedStats = sortBy(RECENT_STATS, (p) => -(+p.score));
+      let thereAreStats = sortedStats.length > 0;
+      let indHalfStats;
+      const { half } = this.props;
+      if ( typeof half === 'string' ) {
+        indHalfStats = individualHalfStats ? individualHalfStats[half] : null;
+        if ( indHalfStats ) {
+          sortedStats = sortBy(indHalfStats, (p) => -(+p.score));
+        } else {
+          thereAreStats = false;
+        }
+      }
       if ( thereAreStats ) {
         return (
           <div>
@@ -57,7 +67,7 @@ class ModalContainer extends React.Component {
               {sortedStats.map(this.renderPlayerRow)}
             </tbody>
           </table>
-          <p className="stats-timestamp">Last updated: {LAST_UPDATE.time}, G{LAST_UPDATE.game}H{LAST_UPDATE.half}</p>
+          { indHalfStats ? null : <p className="stats-timestamp">Last updated: {LAST_UPDATE.time}, G{LAST_UPDATE.game}H{LAST_UPDATE.half}</p> }
           </div>
         );
       } else {
